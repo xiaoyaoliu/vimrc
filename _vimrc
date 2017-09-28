@@ -10,17 +10,17 @@ call vundle#rc(path)
 
 """""""""""""""""""""""""install packages""""""""""""""""""
 Bundle 'gmarik/vundle'
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
+Bundle 'L9'
+Bundle 'FuzzyFinder'
 
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
-"Bundle 'mattn/emmet-vim'
-"Bundle 'motemen/git-vim'
-"Bundle 'kien/tabman.vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'motemen/git-vim'
+Bundle 'kien/tabman.vim'
 "Bundle 'vim-airline/vim-airline-themes'
 "Bundle 'rosenfeld/conque-term'
 "Bundle 'fisadev/FixedTaskList.vim'
