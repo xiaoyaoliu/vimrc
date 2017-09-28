@@ -21,8 +21,8 @@ Bundle 'fisadev/vim-ctrlp-cmdpalette'
 Bundle 'mattn/emmet-vim'
 Bundle 'motemen/git-vim'
 Bundle 'kien/tabman.vim'
-"Bundle 'vim-airline/vim-airline-themes'
-"Bundle 'rosenfeld/conque-term'
+Bundle 'vim-airline/vim-airline-themes'
+Bundle 'rosenfeld/conque-term'
 "Bundle 'fisadev/FixedTaskList.vim'
 "Bundle 'tpope/vim-surround'
 "Bundle 'michaeljsmith/vim-indent-object'
@@ -232,6 +232,9 @@ let g:tabman_focus  = 'tf'
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'light'
 let g:airline#extensions#whitespace#enabled = 1
+
+" ConqueTerm
+map ,ps :ConqueTermTab powershell.exe<CR>
 
 " markdown
 let g:vim_markdown_folding_disabled=1
