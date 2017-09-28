@@ -27,11 +27,11 @@ Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'davidhalter/jedi-vim'
-"Bundle 'MarcWeber/vim-addon-mw-utils'
-"Bundle 'tomtom/tlib_vim'
-"Bundle 'honza/vim-snippets'
-"Bundle 'garbas/vim-snipmate'
-"Bundle 'airblade/vim-gitgutter'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'honza/vim-snippets'
+Bundle 'garbas/vim-snipmate'
+Bundle 'airblade/vim-gitgutter'
 "Bundle 'vim-scripts/indentpython.vim--nianyang'
 Bundle 'nvie/vim-flake8'
 "Bundle 'fs111/pydoc.vim'
@@ -222,7 +222,7 @@ let g:jedi#show_call_signatures = "1"
 nmap ,D :tab split<CR>,d
 
 " Change snipmate binding, to avoid problems with jedi-vim
-"imap <C-i> <Plug>snipMateNextOrTrigger
+imap <C-i> <Plug>snipMateNextOrTrigger
 
 " tabman shortcuts
 let g:tabman_toggle = 'tl'
