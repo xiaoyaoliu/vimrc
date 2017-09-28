@@ -17,7 +17,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
-"Bundle 'fisadev/vim-ctrlp-cmdpalette'
+Bundle 'fisadev/vim-ctrlp-cmdpalette'
 "Bundle 'mattn/emmet-vim'
 "Bundle 'motemen/git-vim'
 "Bundle 'kien/tabman.vim'
@@ -206,8 +206,8 @@ set statusline+=%*
 "syntastic Recommended settings
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
 
 " jedi-vim customizations
 let g:jedi#popup_on_dot = 0
