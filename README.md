@@ -3,6 +3,14 @@
 my custom _vimrc for windows
 https://github.com/suprsvn/_vimrc
 
+### 安装vundle
+linux vundle的安装：https://github.com/VundleVim/Vundle.vim
+
+windows vundle的安装：https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows
+
+### BundleInstall
+打开vim(或gVim)，COMMAND MODE下输入:BundleInstall并回车即可安装全部插件
+
 ## python取消用4个空格缩进的方法
 背景：由于公司编码规范是用tab来缩进，而不是标准的4个空格
 

@@ -2,6 +2,7 @@
 """      My site  : http://0nly.me      "
 """      My email : suprsvn@gmail.com   "
 """""""""""""""""""""""""""""""""""""""""
+set nocompatible
 filetype off
 """""""""""""""""""""""""vundle setting""""""""""""""""""""
 set rtp+=$HOME/.vim/bundle/Vundle.vim/
@@ -32,7 +33,7 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
 Bundle 'garbas/vim-snipmate'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'vim-scripts/indentpython.vim--nianyang'
+"Bundle 'vim-scripts/indentpython.vim--nianyang'
 Bundle 'nvie/vim-flake8'
 "Bundle 'fs111/pydoc.vim'
 Bundle 'AutoComplPop'
@@ -49,8 +50,7 @@ Bundle 'rainbow_parentheses.vim'
 "Bundle 'Yggdroot/indentLine'
 
 """""""""""""""""""""""""basic setting"""""""""""""""""""""
-"filetype plugin indent on
-filetype plugin on
+filetype plugin indent on
 let g:python_recommended_style = 0
 
 syntax on
