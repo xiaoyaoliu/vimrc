@@ -1,5 +1,4 @@
 """""""""""""""""""""""""""""""""""""""""
-"""      My site  : http://0nly.me      "
 """      My email : suprsvn@gmail.com   "
 """""""""""""""""""""""""""""""""""""""""
 filetype off
@@ -21,7 +20,7 @@ Bundle 'fisadev/vim-ctrlp-cmdpalette'
 Bundle 'mattn/emmet-vim'
 Bundle 'motemen/git-vim'
 Bundle 'kien/tabman.vim'
-"Bundle 'vim-airline/vim-airline-themes'
+Bundle 'vim-airline/vim-airline-themes'
 Bundle 'rosenfeld/conque-term'
 Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'tpope/vim-surround'
@@ -44,7 +43,6 @@ Bundle 'YankRing.vim'
 Bundle 'xptemplate'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'chriskempson/base16-vim'
-Bundle 'lsdr/monokai'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
 
@@ -82,7 +80,6 @@ set softtabstop=4
 "set shiftwidth=4
 set clipboard+=unnamed
 autocmd! bufwritepost .vimrc source $HOME/.vimrc
-"colorscheme monokai
 "set guifont=Courier_New:h12:cANSI
 "set guifontwide=YaHei\ Consolas\ Hybrid:h12
 "set guifont=YaHei\ Consolas\ Hybrid:h12
@@ -239,24 +236,24 @@ map ,ps :ConqueTermTab bash<CR>
 let g:vim_markdown_folding_disabled=1
 
 " Better Rainbow Parentheses
-"let g:rbpt_colorpairs = [
-    "\ ['brown',       'RoyalBlue3'],
-    "\ ['Darkblue',    'SeaGreen3'],
-    "\ ['darkgray',    'DarkOrchid3'],
-    "\ ['darkgreen',   'firebrick3'],
-    "\ ['darkcyan',    'RoyalBlue3'],
-    "\ ['darkred',     'SeaGreen3'],
-    "\ ['darkmagenta', 'DarkOrchid3'],
-    "\ ['brown',       'firebrick3'],
-    "\ ['gray',        'RoyalBlue3'],
-    "\ ['black',       'SeaGreen3'],
-    "\ ['darkmagenta', 'DarkOrchid3'],
-    "\ ['Darkblue',    'firebrick3'],
-    "\ ['darkgreen',   'RoyalBlue3'],
-    "\ ['darkcyan',    'SeaGreen3'],
-    "\ ['darkred',     'DarkOrchid3'],
-    "\ ['red',         'firebrick3'],
-    "\ ]
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 au VimEnter * RainbowParenthesesToggle

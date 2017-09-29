@@ -1,6 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""
-"""      My site  : http://0nly.me      "
-"""      My email : suprsvn@gmail.com   "
+"""      My email : zhangxukim@gmail.com   "
 """""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
