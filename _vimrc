@@ -42,11 +42,11 @@ Bundle 'IndexedSearch'
 "Bundle 'Wombat'
 "Bundle 'YankRing.vim'
 "Bundle 'xptemplate'
-"Bundle 'plasticboy/vim-markdown'
-"Bundle 'chriskempson/base16-vim'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'chriskempson/base16-vim'
 Bundle 'lsdr/monokai'
 Bundle 'rainbow_parentheses.vim'
-"Bundle 'Yggdroot/indentLine'
+Bundle 'Yggdroot/indentLine'
 
 """""""""""""""""""""""""basic setting"""""""""""""""""""""
 filetype plugin indent on

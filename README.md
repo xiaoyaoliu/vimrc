@@ -40,3 +40,10 @@ windows vundle的安装：https://github.com/VundleVim/Vundle.vim/wiki/Vundle-fo
 
 ## conque-term 主要用于在vim中启动各种外部程序，例如shell
 参见：https://code.google.com/archive/p/conque/
+
+## secureCRT中vim的颜色设置
+
+- 在标签页的标题上右键菜单选择Session Options
+- Terminal -> Emulation 中的ANSI Color一定要勾上
+
+monokai颜色插件在ubuntu下不work，删掉即可，.vimrc里已经去掉了。
