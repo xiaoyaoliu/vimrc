@@ -1,5 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""
-"""      My email : suprsvn@gmail.com   "
+"""      My email : zhangxukim@gmail.com   "
 """""""""""""""""""""""""""""""""""""""""
 filetype off
 """""""""""""""""""""""""vundle setting""""""""""""""""""""
@@ -58,11 +58,6 @@ set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set langmenu=zh_CN.UTF-8
 language message zh_CN.UTF-8
 set helplang=cn
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-"source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
 set nocompatible
 set nobackup
 set ignorecase 
