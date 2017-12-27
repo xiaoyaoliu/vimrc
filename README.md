@@ -35,6 +35,22 @@ windows vundle的安装：https://github.com/VundleVim/Vundle.vim/wiki/Vundle-fo
 可以查找定义，查找所有引用点，查找所有赋值点
 
 ##	ctrlp 是查找文件的神器 
+参考：https://github.com/kien/ctrlp.vim
+
+_vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
+
+### 使用ctrlp，有时候搜不到特定文件的原因（看help文件分析出来的）
+* ctrlp限制了最大文件数ctrlp_max_files，默认为10000
+* ctrlp限制了一次检索的返回结果的最大数量ctrlp_match_window，默认为10
+* ctrlp有工作目录模式ctrlp_working_path_mode，所搜文件并不在状态栏右侧的文件夹中
+* 要搜的文件，其格式可能加入了ctrlp的忽略名单ctrlp_custom_ignore
+
+### ctrlp的优势
+* 很好的搜索文件的工具，例如 :CtrlP, :CtrlPMixed
+* 适合搜索当前打开的文件(file in buffer)里的内容，例如 :CtrlPLine, :CtrlPBufTagAll
+
+### ctrlp的不足
+搜索特定关键词时，无法针对工程目录所有文件，即没有类似grep的功能
 
 ##  tabman 就是tab manager的缩写，管理tab的神器
 

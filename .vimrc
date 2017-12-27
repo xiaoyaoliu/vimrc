@@ -171,12 +171,14 @@ nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
 nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
 nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
 nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
-" Don't change working directory
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_by_filename = 1
+let g:ctrlp_lazy_update = 1
+let g:ctrlp_max_files = 20000
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 " Ignore files on fuzzy finder
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn)$',
-  \ 'file': '\.pyc$\|\.pyo$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
+  \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
   \ }
 
 " Ignore files on NERDTree
