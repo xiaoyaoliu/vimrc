@@ -137,6 +137,8 @@ windows下安装: choco install ack
 
 ### 查看vimrc文件，熟练使用已安装的插件
 
+### 在linux系统中进行验证，维护更新\.vimrc
+
 ### 小需求汇总
 
 * 不同的项目 使用不同的vimrc，公司内使用公司内的，其他地方使用flake8标准的
