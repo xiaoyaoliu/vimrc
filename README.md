@@ -69,6 +69,8 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 
 这样的话，jediHTTP服务器就可以找到工程下的py文件了。
 
+在project_config中可以找到：我的client工程，server工程对应的vimrc.py文件
+
 ##	ctrlp 是查找文件的神器 
 参考：https://github.com/kien/ctrlp.vim
 
