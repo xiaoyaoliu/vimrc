@@ -26,7 +26,7 @@ Bundle 'rosenfeld/conque-term'
 Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'davidhalter/jedi-vim'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
@@ -42,6 +42,7 @@ Bundle 'IndexedSearch'
 "Bundle 'Wombat'
 "Bundle 'YankRing.vim'
 "Bundle 'xptemplate'
+Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'chriskempson/base16-vim'
 Bundle 'lsdr/monokai'
@@ -56,6 +57,7 @@ syntax on
 set bsdir=buffer
 set autochdir
 set enc=utf-8
+set encoding=utf-8
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set langmenu=zh_CN.UTF-8
 language message zh_CN.UTF-8
@@ -215,17 +217,15 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 
-" jedi-vim customizations
-let g:jedi#popup_on_dot = 0
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#goto_assignments_command = ",a"
-let g:jedi#goto_definitions_command = ",d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = ",o"
-let g:jedi#completions_command = "<C-m>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "1"
+" YouCompleteMe customizations
+nmap ,d :YcmCompleter GoTo<CR>
+nmap K :YcmCompleter GetDoc<CR>
+nmap ,o :YcmCompleter GoToReferences<CR>
 nmap ,D :tab split<CR>,d
+let g:ycm_key_invoke_completion = '<C-m>'
+
+"let g:jedi#rename_command = "<leader>r"
+"let g:jedi#show_call_signatures = "0"
 
 " Change snipmate binding, to avoid problems with jedi-vim
 imap <C-i> <Plug>snipMateNextOrTrigger
