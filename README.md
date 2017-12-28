@@ -108,3 +108,5 @@ _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
 #### [conque-term](https://code.google.com/archive/p/conque/)主要用于在vim中启动各种外部程序，例如shell
 
+#### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
+
