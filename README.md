@@ -47,6 +47,8 @@ windows vundle的安装：https://github.com/VundleVim/Vundle.vim/wiki/Vundle-fo
 
 注意根据自己本地的vs版本，设置好命令行参数--msvc 
 
+注意当YCM没有正常工作时，使用如下命令查看log: YcmToggleLogs
+
 ### [YCM] python自动补全的大致流程
 
 YcmCompleter [GoTo|GetDoc|RestartServer|...]
