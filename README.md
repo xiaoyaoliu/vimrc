@@ -102,6 +102,25 @@ _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 #### vim-ctrlp-cmdpalette
 :CtrlPCmdPalette 使用关键词搜索vim的命令行
 
+### [ack](https://github.com/mileszs/ack.vim) 比grep更好用的代码搜索工具
+
+#### 需要先[安装ack](https://beyondgrep.com/install/)
+
+windows下安装: choco install ack
+
+注意，由于ack依赖[perl](https://www.perl.org/get.html),
+用choco安装的时候会先装[Strawberry Perl](http://strawberryperl.com/) ,
+但是strawberryperl的下载速度非常慢，无法忍受。。
+
+所以，可以先everything一下是否已经安装了perl.exe，如果未安装，可以下载安装[ActiveState Perl](https://www.activestate.com/activeperl/downloads)；
+如果已有perl.exe，则将其所在目录加入到path环境变量。最后打开cmd或powershell，验证perl安装成功: perl -v
+
+如果已经成功安装了perl，则执行choco install ack的时候，询问是否下载 strawberryperl的请选择No。
+
+安装完毕ack后，再执行:BundleInstall, 则安装ack.vim完毕
+
+#### [ack.vim](https://github.com/mileszs/ack.vim)
+
 ### 小插件简介
 
 ####  tabman 就是tab manager的缩写，管理tab的神器

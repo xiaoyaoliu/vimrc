@@ -18,16 +18,20 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'godlygeek/tabular'
+Bundle 'plasticboy/vim-markdown'
 Bundle 'mattn/emmet-vim'
 Bundle 'motemen/git-vim'
 Bundle 'kien/tabman.vim'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
+Bundle 'mileszs/ack.vim'
+Bundle 'lsdr/monokai'
 Bundle 'rosenfeld/conque-term'
 Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
@@ -43,10 +47,7 @@ Bundle 'IndexedSearch'
 "Bundle 'Wombat'
 "Bundle 'YankRing.vim'
 "Bundle 'xptemplate'
-Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
 Bundle 'chriskempson/base16-vim'
-Bundle 'lsdr/monokai'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
 
@@ -199,14 +200,6 @@ let g:ctrlp_custom_ignore = {
 
 " Ignore files on NERDTree
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.lnk$']
-
-" simple recursive grep
-command! -nargs=1 RecurGrep lvimgrep /<args>/gj ./**/*.* | lopen | set nowrap
-command! -nargs=1 RecurGrepFast silent exec 'lgrep! <q-args> ./**/*.*' | lopen
-nmap ,R :RecurGrep 
-nmap ,r :RecurGrepFast 
-nmap ,wR :RecurGrep <cword><CR>
-nmap ,wr :RecurGrepFast <cword><CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
