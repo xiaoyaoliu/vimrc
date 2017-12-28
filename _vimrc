@@ -163,6 +163,12 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 " insert ipdb breakpoint with \b
 nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
+" ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
+nmap ,rr :Ack! 
+nmap ,ra :AckAdd 
+nmap ,rf :AckFile 
+nmap ,rp :Ack --python 
+
 " CtrlP (new fuzzy finder)
 let g:ctrlp_map = ',e'
 nmap ,g :CtrlPBufTag<CR>
