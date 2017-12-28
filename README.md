@@ -115,7 +115,7 @@ windows下安装: choco install ack
 所以，可以先everything一下是否已经安装了perl.exe，如果未安装，可以下载安装[ActiveState Perl](https://www.activestate.com/activeperl/downloads)；
 如果已有perl.exe，则将其所在目录加入到path环境变量。最后打开cmd或powershell，验证perl安装成功: perl -v
 
-如果已经成功安装了perl，则执行choco install ack的时候，询问是否下载 strawberryperl的请选择No。
+如果已经成功安装了perl，则执行choco install ack的时候，询问是否下载 strawberryperl的建议选择No。
 
 安装完毕ack后，再执行:BundleInstall, 则安装ack.vim完毕
 
@@ -129,3 +129,20 @@ windows下安装: choco install ack
 
 #### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
 
+## 未来与展望
+
+### 关注业界[最流行的vim插件](https://github.com/search?l=Vim+script&o=desc&p=1&q=vim&s=stars&type=Repositories)
+
+将适合我的插件加进来
+
+### 查看vimrc文件，熟练使用已安装的插件
+
+### 小需求汇总
+
+* 不同的项目 使用不同的vimrc，公司内使用公司内的，其他地方使用flake8标准的
+* svn 相关的插件
+
+### todolist
+
+* 学习[amix/vimrc](https://github.com/amix/vimrc), 寻找更好用的插件
+* 学习[spf13/spf13-vim](https://github.com/spf13/spf13-vim), 寻找更好用的插件
