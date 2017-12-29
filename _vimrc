@@ -99,20 +99,23 @@ set ls=2
 """"""""""""""""""""""""""""""""""""package settings"""""""""""""""
 
 "run python
-nnoremap <silent> <F5> :!python %<CR>
+nnoremap <silent> ,5 :!python %<CR>
 
 " toggle Tagbar display
-map <F4> :TagbarToggle<CR>
+nmap ,4 :TagbarToggle<CR>
 " autofocus on Tagbar open
 let g:tagbar_autofocus = 1
 
 " NERDTree (better file browser) toggle
-map <F3> :NERDTreeToggle<CR>
+nmap ,3 :NERDTreeToggle<CR>
+
+" show pending tasks list
+map ,2 :TaskList<CR>
 
 " tab navigation
 map tn :tabn<CR>
 map tp :tabp<CR>
-map tm :tabm 
+map tm :tabmove
 map tt :tabnew 
 map ts :tab split<CR>
 map <C-S-Right> :tabn<CR>
@@ -141,8 +144,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " old autocomplete keyboard shortcut
 imap <C-J> <C-X><C-O>
 
-" show pending tasks list
-map <F2> :TaskList<CR>
 
 " removes trailing spaces of python files
 " (and restores cursor position)
@@ -164,26 +165,28 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
 " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
-nmap ,rr :Ack! 
-nmap ,ra :AckAdd 
-nmap ,rf :AckFile 
-nmap ,rp :Ack --python 
+nmap ,rr :Ack! -i 
+nmap ,rw :Ack! -w
+nmap ,ra :AckAdd -i 
+nmap ,rf :AckFile -i 
+nmap ,rp :Ack! --python -i 
+nmap ,wr :Ack! -i <cword><CR>
 
 " CtrlP (new fuzzy finder)
 let g:ctrlp_map = ',e'
-nmap ,g :CtrlPBufTag<CR>
-nmap ,G :CtrlPBufTagAll<CR>
-nmap ,f :CtrlPLine<CR>
-nmap ,m :CtrlPMRUFiles<CR>
-nmap ,c :CtrlPCmdPalette<CR>
+nmap ,fG :CtrlPBufTag<CR>
+nmap ,fg :CtrlPBufTagAll<CR>
+nmap ,ff :CtrlPLine<CR>
+nmap ,fm :CtrlPMRUFiles<CR>
+nmap ,fc :CtrlPCmdPalette<CR>
 " to be able to call CtrlP with default search text
 function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     execute ':CtrlP' . a:ctrlp_command_end
     call feedkeys(a:search_text)
 endfunction
 " CtrlP with default text
-nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
+nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
+nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
 nmap ,wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
 nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
 nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
