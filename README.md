@@ -62,7 +62,7 @@ monokai颜色插件在ubuntu下不work，删掉即可，.vimrc里已经去掉了
 
 YcmCompleter [GoTo|GetDoc|RestartServer|...]
 
-YcmCompleter的Subcommands的入口函数都在: jedi_completer.py
+YcmCompleter的入口def GetSubcommandsMap在: jedi_completer.py
 
 ycmd只是作为客户端，具体的py文件的解析定位等都在服务端jediHTTP中
 
