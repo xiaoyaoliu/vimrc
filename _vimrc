@@ -100,6 +100,7 @@ set ls=2
 
 "run python
 nnoremap <silent> ,5 :!python %<CR>
+nnoremap <silent> ,6 :!py -3 %<CR>
 
 " toggle Tagbar display
 nmap ,4 :TagbarToggle<CR>
@@ -166,7 +167,7 @@ nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
 " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
 nmap ,rr :Ack! -i 
-nmap ,rw :Ack! -w
+nmap ,rw :Ack! -w 
 nmap ,ra :AckAdd -i 
 nmap ,rf :AckFile -i 
 nmap ,rp :Ack! --python -i 

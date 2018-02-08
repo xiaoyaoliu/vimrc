@@ -88,6 +88,7 @@ set ls=2
 
 "run python
 nnoremap <silent> <F5> :!python %<CR>
+nnoremap <silent> ,6 :!py -3 %<CR>
 
 " toggle Tagbar display
 map <F4> :TagbarToggle<CR>
