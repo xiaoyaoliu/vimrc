@@ -167,7 +167,7 @@ nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
 " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
 nmap ,rr :Ack! -i 
-nmap ,rw :Ack! -w <cword> .
+nmap ,rw :Ack! -w 
 nmap ,rss :Ack! --ignore-dir=cdata,data,cdata_beta -i 
 nmap ,rsw :Ack! --ignore-dir=cdata,data,cdata_beta -w <cword> ..
 nmap ,rll :AckWindow! 
@@ -175,7 +175,7 @@ nmap ,rlw :AckWindow! -w <cword><CR>
 nmap ,ra :AckAdd -i 
 nmap ,rf :AckFile -i 
 nmap ,rp :Ack! --python -i 
-nmap ,wr :Ack! -w <cword><CR>
+nmap ,wr :Ack! -w <cword> .
 
 " CtrlP (new fuzzy finder)
 let g:ctrlp_map = ',e'
