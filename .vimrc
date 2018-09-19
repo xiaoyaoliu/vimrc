@@ -20,8 +20,10 @@ Bundle 'fisadev/vim-ctrlp-cmdpalette'
 Bundle 'mattn/emmet-vim'
 Bundle 'motemen/git-vim'
 Bundle 'kien/tabman.vim'
+Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
-Bundle 'rosenfeld/conque-term'
+Bundle 'mileszs/ack.vim'
+"Bundle 'rosenfeld/conque-term'
 Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'michaeljsmith/vim-indent-object'
@@ -58,6 +60,8 @@ set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set langmenu=zh_CN.UTF-8
 language message zh_CN.UTF-8
 set helplang=cn
+"source /etc/vim/vimrc.local
+"source $VIMRUNTIME/debian.vim
 set nocompatible
 set nobackup
 set ignorecase 
@@ -88,15 +92,14 @@ set ls=2
 
 "run python
 nnoremap <silent> <F5> :!python %<CR>
-nnoremap <silent> ,6 :!py -3 %<CR>
 
 " toggle Tagbar display
-map <F4> :TagbarToggle<CR>
+map ,4 :TagbarToggle<CR>
 " autofocus on Tagbar open
 let g:tagbar_autofocus = 1
 
 " NERDTree (better file browser) toggle
-map <F3> :NERDTreeToggle<CR>
+map ,3 :NERDTreeToggle<CR>
 
 " tab navigation
 map tn :tabn<CR>
@@ -172,14 +175,12 @@ nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
 nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
 nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
 nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
-let g:ctrlp_by_filename = 1
-let g:ctrlp_lazy_update = 1
-let g:ctrlp_max_files = 20000
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+" Don't change working directory
+let g:ctrlp_working_path_mode = 0
 " Ignore files on fuzzy finder
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
-  \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn)$',
+  \ 'file': '\.pyc$\|\.pyo$',
   \ }
 
 " Ignore files on NERDTree
@@ -189,9 +190,10 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 command! -nargs=1 RecurGrep lvimgrep /<args>/gj ./**/*.* | lopen | set nowrap
 command! -nargs=1 RecurGrepFast silent exec 'lgrep! <q-args> ./**/*.*' | lopen
 nmap ,R :RecurGrep 
-nmap ,r :RecurGrepFast 
+nmap ,rr :RecurGrepFast 
 nmap ,wR :RecurGrep <cword><CR>
 nmap ,wr :RecurGrepFast <cword><CR>
+nmap ,rw :Ack! -w 
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
