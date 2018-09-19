@@ -23,6 +23,7 @@ Bundle 'kien/tabman.vim'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
 "Bundle 'rosenfeld/conque-term'
 Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'tpope/vim-surround'
@@ -187,13 +188,17 @@ let g:ctrlp_custom_ignore = {
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
 " simple recursive grep
-command! -nargs=1 RecurGrep lvimgrep /<args>/gj ./**/*.* | lopen | set nowrap
-command! -nargs=1 RecurGrepFast silent exec 'lgrep! <q-args> ./**/*.*' | lopen
-nmap ,R :RecurGrep 
-nmap ,rr :RecurGrepFast 
-nmap ,wR :RecurGrep <cword><CR>
-nmap ,wr :RecurGrepFast <cword><CR>
+let g:ackprg = 'ag --column'
+nmap ,rr :Ack! -i 
 nmap ,rw :Ack! -w 
+nmap ,rss :Ack! --ignore-dir=cdata,data,cdata_beta -i 
+nmap ,rsw :Ack! --ignore-dir=cdata,data,cdata_beta -w <cword> ..
+nmap ,rll :AckWindow! 
+nmap ,rlw :AckWindow! -w <cword><CR>
+nmap ,ra :AckAdd -i 
+nmap ,rf :AckFile -i 
+nmap ,rp :Ack! --python -i 
+nmap ,wr :Ack! -w <cword> .
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
