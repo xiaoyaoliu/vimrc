@@ -27,6 +27,7 @@ Bundle 'kien/tabman.vim'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
 Bundle 'lsdr/monokai'
 Bundle 'rosenfeld/conque-term'
 Bundle 'fisadev/FixedTaskList.vim'
@@ -166,6 +167,8 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
 " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
+" https://github.com/ggreer/the_silver_searcher
+let g:ackprg = 'ag --column'
 nmap ,rr :Ack! -i 
 nmap ,rw :Ack! -w 
 nmap ,rss :Ack! --ignore-dir=cdata,data,cdata_beta -i 

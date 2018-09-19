@@ -102,9 +102,17 @@ _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 #### vim-ctrlp-cmdpalette
 :CtrlPCmdPalette 使用关键词搜索vim的命令行
 
-### [ack](https://github.com/mileszs/ack.vim) 比grep更好用的代码搜索工具
+### 全文检索工具 
 
-#### 需要先[安装ack](https://beyondgrep.com/install/)
+***推荐 [the_silver_searcher]https://github.com/ggreer/the_silver_searcher ***
+
+检索速度： [the_silver_searcher](https://github.com/ggreer/the_silver_searcher) > ack
+
+#### [ag.vim](https://github.com/rking/ag.vim)
+
+#### [ack](https://github.com/mileszs/ack.vim) 比grep更好用的代码搜索工具
+
+##### 需要先[安装ack](https://beyondgrep.com/install/)
 
 windows下安装: choco install ack
 
@@ -119,7 +127,7 @@ windows下安装: choco install ack
 
 安装完毕ack后，再执行:BundleInstall, 则安装ack.vim完毕
 
-#### [ack.vim](https://github.com/mileszs/ack.vim)
+##### [ack.vim](https://github.com/mileszs/ack.vim)
 
 ### 小插件简介
 
