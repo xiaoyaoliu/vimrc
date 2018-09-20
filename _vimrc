@@ -115,15 +115,11 @@ nmap ,3 :NERDTreeToggle<CR>
 map ,2 :TaskList<CR>
 
 " tab navigation
-map tn :tabn<CR>
-map tp :tabp<CR>
-map tm :tabmove
+map K :tabn<CR>
+map J :tabp<CR>
+map tm :tabmove 
 map tt :tabnew 
 map ts :tab split<CR>
-map <C-S-Right> :tabn<CR>
-imap <C-S-Right> <ESC>:tabn<CR>
-map <C-S-Left> :tabp<CR>
-imap <C-S-Left> <ESC>:tabp<CR>
 
 " navigate windows with meta+arrows
 map <M-Right> <c-w>l
@@ -230,7 +226,7 @@ let g:syntastic_check_on_wq = 1
 
 " YouCompleteMe customizations
 nmap ,d :YcmCompleter GoTo<CR>
-nmap K :YcmCompleter GetDoc<CR>
+nmap ,k :YcmCompleter GetDoc<CR>
 nmap ,o :YcmCompleter GoToReferences<CR>
 nmap ,D :tab split<CR>,d
 let g:ycm_key_invoke_completion = '<C-m>'

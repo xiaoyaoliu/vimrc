@@ -137,6 +137,12 @@ windows下安装: choco install ack
 
 #### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
 
+## 被我忽略的非常有用的命令
+
+### jumps相关，Ctrl + i, Ctrl + o
+
+Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
+
 ## 未来与展望
 
 ### 关注业界[最流行的vim插件](https://github.com/search?l=Vim+script&o=desc&p=1&q=vim&s=stars&type=Repositories)
@@ -156,3 +162,5 @@ windows下安装: choco install ack
 
 * 学习[amix/vimrc](https://github.com/amix/vimrc), 寻找更好用的插件
 * 学习[spf13/spf13-vim](https://github.com/spf13/spf13-vim), 寻找更好用的插件
+* vim 与 svn git的结合 尤其是blame 查log 以及日常提交
+* vim和工程更好的结合
