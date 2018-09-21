@@ -82,6 +82,12 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 
 在project_config中可以找到：我的client工程，server工程对应的vimrc.py文件
 
+### 工程管理
+
+#### [MattesGroeger/vim-bookmarks](https://github.com/MattesGroeger/vim-bookmarks)
+
+使用mi指令将各个工程的某文件加入到标签列表，启动vim后就可以通过ma指令搜索想打开的工程
+
 ### [ctrlp](https://github.com/kien/ctrlp.vim) 是查找文件的神器 
 
 _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
@@ -104,7 +110,7 @@ _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
 ### 全文检索工具 
 
-***推荐 [the_silver_searcher]https://github.com/ggreer/the_silver_searcher ***
+***推荐 [the_silver_searcher](https://github.com/ggreer/the_silver_searcher) ***
 
 检索速度： [the_silver_searcher](https://github.com/ggreer/the_silver_searcher) > ack
 
@@ -131,9 +137,21 @@ windows下安装: choco install ack
 
 ### 小插件简介
 
+#### md文件的编辑插件
+
+vim-markdown 编辑
+
+[iamcco/markdown-preview.vim](https://github.com/iamcco/markdown-preview.vim) 用于预览 快捷键: ,8
+
+#### tyru/open-browser.vim 可以比较方便地打开浏览器，或者进行搜索
+
 ####  tabman 就是tab manager的缩写，管理tab的神器
 
 #### [conque-term](https://code.google.com/archive/p/conque/)主要用于在vim中启动各种外部程序，例如shell
+
+启动外部工具，可以vim自带的, 例如
+
+:!cd <path>
 
 #### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
 

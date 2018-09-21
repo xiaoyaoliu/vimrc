@@ -23,6 +23,8 @@ Bundle 'fisadev/vim-ctrlp-cmdpalette'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
+Bundle 'iamcco/markdown-preview.vim'
+Bundle 'MattesGroeger/vim-bookmarks'
 Bundle 'mattn/emmet-vim'
 Bundle 'motemen/git-vim'
 Bundle 'kien/tabman.vim'
@@ -55,6 +57,8 @@ Bundle 'vim-scripts/xptemplate'
 Bundle 'chriskempson/base16-vim'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
+Bundle 'tyru/open-browser.vim'
+Bundle 'haya14busa/vim-open-googletranslate'
 
 """""""""""""""""""""""""basic setting"""""""""""""""""""""
 filetype plugin indent on
@@ -104,8 +108,8 @@ set ls=2
 """"""""""""""""""""""""""""""""""""package settings"""""""""""""""
 
 "run python
-nnoremap <silent> ,5 :!python %<CR>
-nnoremap <silent> ,6 :!py -3 %<CR>
+nnoremap <silent> ,52 :!python %<CR>
+nnoremap <silent> ,53 :!py -3 %<CR>
 
 " toggle Tagbar display
 nmap ,4 :TagbarToggle<CR>
@@ -117,6 +121,8 @@ nmap ,3 :NERDTreeToggle<CR>
 
 " show pending tasks list
 map ,2 :TaskList<CR>
+
+nmap <silent> ,8 <Plug>MarkdownPreview<CR>
 
 " tab navigation
 map K :tabn<CR>
@@ -252,6 +258,9 @@ let g:airline#extensions#whitespace#enabled = 1
 
 map ,ge :silent !explorer .<CR>
 map ,gs :silent !powershell<CR>
+map ,ggg :OpenBrowser google.com<CR>
+map ,ggb :OpenBrowser baidu.com<CR>
+map ,ggs :OpenBrowserSmartSearch 
 " ConqueTerm
 map ,gp :silent ConqueTermTab powershell.exe<CR>
 
