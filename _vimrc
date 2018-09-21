@@ -250,9 +250,9 @@ let g:airline_powerline_fonts = 0
 let g:airline_theme = 'light'
 let g:airline#extensions#whitespace#enabled = 1
 
-map ,ge :!explorer .<CR>
+map ,ge :silent !explorer .<CR>
 " ConqueTerm
-map ,gs :ConqueTermTab powershell.exe<CR>
+map ,gs :silent ConqueTermTab powershell.exe<CR>
 
 " markdown
 let g:vim_markdown_folding_disabled=1
