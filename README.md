@@ -137,6 +137,14 @@ windows下安装: choco install ack
 
 #### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
 
+### svn插件[juneedahamed/svnj.vim](https://github.com/juneedahamed/svnj.vim)
+
+svn 最佳使用方式: [Is there a nice subversion plugin for Vim?](https://stackoverflow.com/questions/6905297/is-there-a-nice-subversion-plugin-for-vim)
+
+例如:
+
+:!svn log %
+
 ## 被我忽略的非常有用的命令
 
 ### jumps相关，Ctrl + i, Ctrl + o
