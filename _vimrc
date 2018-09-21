@@ -9,6 +9,8 @@ let path='$HOME/.vim/bundle'
 call vundle#rc(path)
 
 """""""""""""""""""""""""install packages""""""""""""""""""
+" avoid bundle is deleted by BundleClean
+Bundle 'VundleVim/Vundle.vim'
 Bundle 'gmarik/vundle'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
