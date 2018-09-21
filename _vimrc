@@ -9,7 +9,7 @@ let path='$HOME/.vim/bundle'
 call vundle#rc(path)
 
 """""""""""""""""""""""""install packages""""""""""""""""""
-" avoid bundle is deleted by BundleClean
+" avoid bundle is clean up by BundleClean
 Bundle 'VundleVim/Vundle.vim'
 Bundle 'gmarik/vundle'
 Bundle 'L9'
@@ -251,7 +251,9 @@ let g:airline_theme = 'light'
 let g:airline#extensions#whitespace#enabled = 1
 
 " ConqueTerm
-map ,ps :ConqueTermTab powershell.exe<CR>
+"map ,ps :ConqueTermTab powershell.exe<CR>
+set shell=powershell
+set shellcmdflag=-command
 
 " markdown
 let g:vim_markdown_folding_disabled=1
