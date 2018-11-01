@@ -256,7 +256,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_theme = 'light'
 let g:airline#extensions#whitespace#enabled = 1
 
-map ,ge :silent !explorer /select,%<CR>
+map ,ge :silent !start explorer /select,%<CR>
 map ,gs :silent !start powershell<CR>
 map ,ggg :OpenBrowser google.com<CR>
 map ,ggb :OpenBrowser baidu.com<CR>
