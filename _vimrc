@@ -59,6 +59,7 @@ Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'tyru/open-browser.vim'
 Bundle 'haya14busa/vim-open-googletranslate'
+Bundle 'airblade/vim-rooter'
 
 """""""""""""""""""""""""basic setting"""""""""""""""""""""
 filetype plugin indent on
@@ -125,8 +126,8 @@ map ,2 :TaskList<CR>
 nmap <silent> ,8 <Plug>MarkdownPreview<CR>
 
 " tab navigation
-map K :tabn<CR>
-map J :tabp<CR>
+map tn :tabn<CR>
+map tp :tabp<CR>
 map tm :tabmove 
 map tt :tabnew 
 map ts :tab split<CR>
