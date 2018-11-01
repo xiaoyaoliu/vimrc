@@ -52,6 +52,8 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'airblade/vim-rooter'
+Bundle 'MattesGroeger/vim-bookmarks'
+
 
 """""""""""""""""""""""""basic setting"""""""""""""""""""""
 filetype plugin indent on
