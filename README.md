@@ -82,7 +82,13 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 
 在project_config中可以找到：我的client工程，server工程对应的vimrc.py文件
 
-### 工程管理
+## 工程管理
+
+### airblade/vim-rooter
+
+这个插件会把当前的工程目录设置为working path
+
+可以在一个文件夹里新建文件".git", 从而vim-rooter将这个文件夹识别为工程目录
 
 #### [MattesGroeger/vim-bookmarks](https://github.com/MattesGroeger/vim-bookmarks)
 
