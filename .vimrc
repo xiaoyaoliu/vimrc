@@ -8,6 +8,7 @@ let path='$HOME/.vim/bundle'
 call vundle#rc(path)
 
 """""""""""""""""""""""""install packages""""""""""""""""""
+Bundle 'VundleVim/Vundle.vim'
 Bundle 'gmarik/vundle'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
@@ -19,6 +20,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
 Bundle 'mattn/emmet-vim'
 Bundle 'motemen/git-vim'
+Bundle 'juneedahamed/svnj.vim'
+Bundle 'tpope/vim-fugitive'
 Bundle 'kien/tabman.vim'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
@@ -48,6 +51,7 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'chriskempson/base16-vim'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
+Bundle 'airblade/vim-rooter'
 
 """""""""""""""""""""""""basic setting"""""""""""""""""""""
 filetype plugin indent on
