@@ -183,12 +183,19 @@ nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
 nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
 nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
 nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
-" Don't change working directory
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_clear_cache_on_exit = 0
+" 默认进入文件模式，可以使用<C-d>切换
+let g:ctrlp_by_filename = 1
+" 延迟搜索，提升搜索时的输入体验
+let g:ctrlp_lazy_update = 1
+" 给更多的文件建索引，避免有些文件搜不到
+let g:ctrlp_max_files = 20000
+" 将返回的搜索结果提升为50，改善搜到却不显示的情况
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
 " Ignore files on fuzzy finder
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn)$',
-  \ 'file': '\.pyc$\|\.pyo$',
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
+  \ 'file': '\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
   \ }
 
 " Ignore files on NERDTree
