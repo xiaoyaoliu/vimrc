@@ -214,8 +214,8 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_lazy_update = 1
 " 给更多的文件建索引，避免有些文件搜不到
 let g:ctrlp_max_files = 20000
-" 将返回的搜索结果提升为20，改善搜到却不显示的情况
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+" 将返回的搜索结果提升为50，改善搜到却不显示的情况
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
 " Ignore files on fuzzy finder
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
@@ -235,15 +235,30 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 
+
 " YouCompleteMe customizations
 nmap ,d :YcmCompleter GoTo<CR>
 nmap ,k :YcmCompleter GetDoc<CR>
 nmap ,o :YcmCompleter GoToReferences<CR>
 nmap ,D :tab split<CR>,d
 let g:ycm_key_invoke_completion = '<C-m>'
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_filetype_whitelist = { 
+			\ "c":1,
+			\ "cpp":1, 
+			\ "objc":1,
+			\ "sh":1,
+			\ "zsh":1,
+			\ "zimbu":1,
+			\ "py":1,
+			\ "def":1,
+			\ "bat":1,
+			\ }
 
-"let g:jedi#rename_command = "<leader>r"
-"let g:jedi#show_call_signatures = "0"
 
 " Change snipmate binding, to avoid problems with jedi-vim
 imap <C-i> <Plug>snipMateNextOrTrigger
