@@ -275,8 +275,8 @@ let g:airline#extensions#whitespace#enabled = 1
 
 map ,ge :silent !start explorer /select,%<CR>
 map ,gs :silent !start powershell<CR>
-map ,ggg :OpenBrowser google.com<CR>
-map ,ggb :OpenBrowser baidu.com<CR>
+map ,ggg :silent !start GitExtensions<CR>
+map ,ggb :OpenBrowser google.com<CR>
 map ,ggs :OpenBrowserSmartSearch 
 " ConqueTerm
 map ,gp :silent ConqueTermTab powershell.exe<CR>
