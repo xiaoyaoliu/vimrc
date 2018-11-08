@@ -27,7 +27,8 @@ Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'mileszs/ack.vim'
 Bundle 'rking/ag.vim'
-"Bundle 'rosenfeld/conque-term'
+Bundle 'rosenfeld/conque-term'
+"Bundle 'vim-scripts/Conque-Shell'
 Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'michaeljsmith/vim-indent-object'
@@ -241,7 +242,7 @@ let g:airline_theme = 'light'
 let g:airline#extensions#whitespace#enabled = 1
 
 " ConqueTerm
-map ,ps :ConqueTermTab bash<CR>
+map ,gs :ConqueTermTab bash<CR>
 
 " markdown
 let g:vim_markdown_folding_disabled=1
