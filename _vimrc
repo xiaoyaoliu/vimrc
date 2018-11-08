@@ -208,6 +208,7 @@ nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
 nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
 nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " 善于使用help命令查看官方解释，例如:help ctrlp_working_path_mode  
+let g:ctrlp_clear_cache_on_exit = 0
 " 默认进入文件模式，可以使用<C-d>切换
 let g:ctrlp_by_filename = 1
 " 延迟搜索，提升搜索时的输入体验
