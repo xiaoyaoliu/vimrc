@@ -65,6 +65,9 @@ Bundle 'airblade/vim-rooter'
 filetype plugin indent on
 let g:python_recommended_style = 0
 
+set hlsearch
+nnoremap<silent> <C-l> :<C-u>nohlsearch<CR><C-l>`
+
 syntax on
 set bsdir=buffer
 set autochdir
