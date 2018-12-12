@@ -192,7 +192,7 @@ nmap ,rll :AckWindow!
 nmap ,rlw :AckWindow! -w <cword><CR>
 nmap ,ra :AckAdd -i 
 nmap ,rf :AckFile -i 
-nmap ,rp :Ack! --python -i 
+nmap ,rn :tnext
 nmap ,rg :tag 
 nmap ,rj :tjump 
 nmap ,wr :Ack! -w <cword> .
