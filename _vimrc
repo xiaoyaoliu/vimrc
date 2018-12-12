@@ -183,11 +183,11 @@ nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
 " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
 " https://github.com/ggreer/the_silver_searcher
-let g:ackprg = 'ag --column'
-nmap ,rr :Ack! -i 
-nmap ,rw :Ack! -w 
-nmap ,rss :Ack! --ignore-dir=cdata,data,cdata_beta -i 
-nmap ,rsw :Ack! --ignore-dir=cdata,data,cdata_beta -w <cword> ..
+let g:ackprg = 'ag'
+nmap ,rr :Ack! --ignore=tags -i 
+nmap ,rw :Ack! --ignore=tags -w 
+nmap ,rss :Ack! --ignore=tags,cdata,data,cdata_beta -i 
+nmap ,rsw :Ack! --ignore=tags,cdata,data,cdata_beta -w <cword> ..
 nmap ,rll :AckWindow! 
 nmap ,rlw :AckWindow! -w <cword><CR>
 nmap ,ra :AckAdd -i 
