@@ -127,7 +127,7 @@ nmap ,3 :NERDTreeToggle<CR>
 map ,2 :TaskList<CR>
 
 " refesh ctags
-:nnoremap <silent> ,6 :!start ctags -R<CR>
+:nnoremap <silent> ,6 :!start ctags -R .<CR>
 
 nmap <silent> ,8 <Plug>MarkdownPreview<CR>
 
