@@ -39,6 +39,13 @@ monokai颜色插件在ubuntu下不work，删掉即可，.vimrc里已经去掉了
 
 ### 自动补全，Goto功能
 
+### ctags（最重要的goto功能）
+
+* (c-])		跳到第一个定义	
+* g(c-])	跳到所有的定义
+* :tnext	跳到下一个定义	
+* ,6		刷新当前工程的ctags的索引
+
 #### [jedi-vim](https://github.com/davidhalter/jedi-vim) pk [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 
 两者都是基于[jedi](https://github.com/davidhalter/jedi)的
