@@ -99,7 +99,7 @@ set ls=2
 """"""""""""""""""""""""""""""""""""package settings"""""""""""""""
 
 "run python
-nnoremap <silent> <F5> :!python %<CR>
+nnoremap <silent> ,5 :!python %<CR>
 
 " toggle Tagbar display
 map ,4 :TagbarToggle<CR>
@@ -108,6 +108,13 @@ let g:tagbar_autofocus = 1
 
 " NERDTree (better file browser) toggle
 map ,3 :NERDTreeToggle<CR>
+
+" show pending tasks list
+map ,2 :TaskList<CR>
+
+" refesh ctags
+:nnoremap <silent> ,6 :!ctags -R > /dev/null 2>&1 &<CR>
+
 
 " tab navigation
 map tn :tabn<CR>
@@ -212,6 +219,8 @@ nmap ,rlw :AckWindow! -w <cword><CR>
 nmap ,ra :AckAdd -i 
 nmap ,rf :AckFile -i 
 nmap ,rp :Ack! --python -i 
+nmap ,rg :tag 
+nmap ,rj :tjump 
 nmap ,wr :Ack! -w <cword> .
 
 set statusline+=%#warningmsg#
