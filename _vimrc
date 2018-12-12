@@ -126,6 +126,9 @@ nmap ,3 :NERDTreeToggle<CR>
 " show pending tasks list
 map ,2 :TaskList<CR>
 
+" refesh ctags
+:nnoremap <silent> ,6 :!start ctags -R<CR>
+
 nmap <silent> ,8 <Plug>MarkdownPreview<CR>
 
 " tab navigation
@@ -133,6 +136,8 @@ map tn :tabn<CR>
 map tp :tabp<CR>
 map tm :tabmove 
 map tt :tabnew 
+map tc :tabclose<CR>
+map to :tabonly<CR>
 map ts :tab split<CR>
 
 " navigate windows with meta+arrows
@@ -188,6 +193,8 @@ nmap ,rlw :AckWindow! -w <cword><CR>
 nmap ,ra :AckAdd -i 
 nmap ,rf :AckFile -i 
 nmap ,rp :Ack! --python -i 
+nmap ,rg :tag 
+nmap ,rj :tjump 
 nmap ,wr :Ack! -w <cword> .
 
 " CtrlP (new fuzzy finder)
@@ -203,8 +210,8 @@ function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     call feedkeys(a:search_text)
 endfunction
 " CtrlP with default text
-nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
 nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
+nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
 nmap ,wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
 nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
 nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
