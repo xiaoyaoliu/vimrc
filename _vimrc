@@ -237,11 +237,12 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+let g:syntastic_python_checkers = ['flake8']
 "syntastic Recommended settings
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_wq = 0
 
 
 " YouCompleteMe customizations
@@ -250,7 +251,7 @@ nmap ,k :YcmCompleter GetDoc<CR>
 nmap ,o :YcmCompleter GoToReferences<CR>
 nmap ,D :tab split<CR>,d
 let g:ycm_key_invoke_completion = '<C-m>'
-let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_min_num_identifier_candidate_chars = 2
