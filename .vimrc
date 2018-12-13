@@ -32,7 +32,6 @@ Bundle 'rosenfeld/conque-term'
 Bundle 'fisadev/FixedTaskList.vim'
 Bundle 'tpope/vim-surround'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'davidhalter/jedi-vim'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
@@ -41,7 +40,7 @@ Bundle 'airblade/vim-gitgutter'
 "Bundle 'vim-scripts/indentpython.vim--nianyang'
 Bundle 'nvie/vim-flake8'
 "Bundle 'fs111/pydoc.vim'
-Bundle 'AutoComplPop'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'vim-syntastic/syntastic'
 Bundle 'IndexedSearch'
 Bundle 'matchit.zip'
@@ -233,17 +232,29 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
-" jedi-vim customizations
-let g:jedi#popup_on_dot = 0
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#goto_assignments_command = ",a"
-let g:jedi#goto_definitions_command = ",d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = ",o"
-let g:jedi#completions_command = "<C-m>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "1"
+" YouCompleteMe customizations
+nmap ,d :YcmCompleter GoTo<CR>
+nmap ,k :YcmCompleter GetDoc<CR>
+nmap ,o :YcmCompleter GoToReferences<CR>
 nmap ,D :tab split<CR>,d
+let g:ycm_key_invoke_completion = '<C-m>'
+let g:ycm_seed_identifiers_with_syntax = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_min_num_identifier_candidate_chars = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_filetype_whitelist = { 
+			\ "c":1,
+			\ "cpp":1, 
+			\ "objc":1,
+			\ "sh":1,
+			\ "zsh":1,
+			\ "zimbu":1,
+			\ "py":1,
+			\ "def":1,
+			\ "bat":1,
+			\ }
+
 
 " Change snipmate binding, to avoid problems with jedi-vim
 imap <C-i> <Plug>snipMateNextOrTrigger
