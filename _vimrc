@@ -107,6 +107,7 @@ set guifont=Ubuntu\ Mono:h12
 set scrolloff=3
 set wildmode=list:longest
 set ls=2
+set ffs=dos,unix,mac
 
 """"""""""""""""""""""""""""""""""""package settings"""""""""""""""
 
