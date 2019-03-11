@@ -56,20 +56,20 @@ Bundle 'haya14busa/vim-open-googletranslate'
 Bundle 'airblade/vim-rooter'
 
 " toggle Tagbar display
-nmap ,4 :TagbarToggle<CR>
+nmap <leader>4 :TagbarToggle<CR>
 " autofocus on Tagbar open
 let g:tagbar_autofocus = 1
 
 " NERDTree (better file browser) toggle
-nmap ,3 :NERDTreeToggle<CR>
+nmap <leader>3 :NERDTreeToggle<CR>
 
 " show pending tasks list
-map ,2 :TaskList<CR>
+map <leader>2 :TaskList<CR>
 
 " refesh ctags
-:nnoremap <silent> ,6 :!start ctags -R .<CR>
+:nnoremap <silent> <leader>6 :!start ctags -R .<CR>
 
-nmap <silent> ,8 <Plug>MarkdownPreview<CR>
+nmap <silent> <leader>8 <Plug>MarkdownPreview<CR>
 
 " fix some problems with gitgutter and jedi-vim
 let g:gitgutter_eager = 0
@@ -102,36 +102,36 @@ nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
 " https://github.com/ggreer/the_silver_searcher
 let g:ackprg = 'ag'
-nmap ,rr :Ack! --ignore=tags -i 
-nmap ,rw :Ack! --ignore=tags -w 
-nmap ,rss :Ack! --ignore=tags,cdata,data,cdata_beta -i 
-nmap ,rsw :Ack! --ignore=tags,cdata,data,cdata_beta -w <cword> ..
-nmap ,rll :AckWindow! 
-nmap ,rlw :AckWindow! -w <cword><CR>
-nmap ,ra :AckAdd -i 
-nmap ,rf :AckFile -i 
-nmap ,wr :Ack! -w <cword> .
+nmap <leader>rr :Ack! --ignore=tags -i 
+nmap <leader>rw :Ack! --ignore=tags -w 
+nmap <leader>rss :Ack! --ignore=tags,cdata,data,cdata_beta -i 
+nmap <leader>rsw :Ack! --ignore=tags,cdata,data,cdata_beta -w <cword> ..
+nmap <leader>rll :AckWindow! 
+nmap <leader>rlw :AckWindow! -w <cword><CR>
+nmap <leader>ra :AckAdd -i 
+nmap <leader>rf :AckFile -i 
+nmap <leader>wr :Ack! -w <cword> .
 
 " CtrlP (new fuzzy finder)
-let g:ctrlp_map = ',e'
-nmap ,fG :CtrlPBufTag<CR>
-nmap ,fg :CtrlPBufTagAll<CR>
-nmap ,ff :CtrlPLine<CR>
-nmap ,fm :CtrlPMRUFiles<CR>
-nmap ,fc :CtrlPCmdPalette<CR>
+let g:ctrlp_map = '<leader>ee'
+nmap <leader>eG :CtrlPBufTag<CR>
+nmap <leader>eg :CtrlPBufTagAll<CR>
+nmap <leader>ef :CtrlPLine<CR>
+nmap <leader>em :CtrlPMRUFiles<CR>
+nmap <leader>ec :CtrlPCmdPalette<CR>
 " to be able to call CtrlP with default search text
 function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     execute ':CtrlP' . a:ctrlp_command_end
     call feedkeys(a:search_text)
 endfunction
 " CtrlP with default text
-nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-nmap ,wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
-nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+nmap <leader>wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
+nmap <leader>wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
+nmap <leader>wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
+nmap <leader>we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
+nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
+nmap <leader>wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
+nmap <leader>wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " 善于使用help命令查看官方解释，例如:help ctrlp_working_path_mode  
 let g:ctrlp_clear_cache_on_exit = 0
 " 默认进入文件模式，可以使用<C-d>切换
@@ -160,10 +160,9 @@ let g:syntastic_check_on_wq = 0
 
 
 " YouCompleteMe customizations
-nmap ,d :YcmCompleter GoTo<CR>
-nmap ,k :YcmCompleter GetDoc<CR>
-nmap ,o :YcmCompleter GoToReferences<CR>
-nmap ,D :tab split<CR>,d
+nmap <leader>k :YcmCompleter GetDoc<CR>
+nmap <leader>o :YcmCompleter GoToReferences<CR>
+nmap <leader>D :tab split<CR><C-]>
 let g:ycm_key_invoke_completion = '<C-m>'
 let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_show_diagnostics_ui = 0
@@ -195,13 +194,12 @@ let g:airline_powerline_fonts = 0
 let g:airline_theme = 'light'
 let g:airline#extensions#whitespace#enabled = 1
 
-map ,ge :silent !start explorer /select,%<CR>
-map ,gs :silent !start powershell<CR>
-map ,ggg :silent !start GitExtensions<CR>
-map ,ggb :OpenBrowser google.com<CR>
-map ,ggs :OpenBrowserSmartSearch 
+map <leader>fe :silent !start explorer /select,%<CR>
+map <leader>fs :silent !start powershell<CR>
+map <leader>fgg :silent !start GitExtensions<CR>
+map <leader>fgb :OpenBrowser google.com<CR>
 " ConqueTerm
-map ,gp :silent ConqueTermTab powershell.exe<CR>
+map <leader>fp :silent ConqueTermTab powershell.exe<CR>
 
 " markdown
 let g:vim_markdown_folding_disabled=1
