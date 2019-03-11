@@ -1,0 +1,2 @@
+source ~/vimrc/basic.vim
+source ~/vimrc/life.vim
