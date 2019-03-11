@@ -57,6 +57,22 @@ command W w !sudo tee % > /dev/null
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
+" Avoid garbled characters in Chinese language windows OS
+"let $LANG='en' 
+"set langmenu=en
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+language message zh_CN.UTF-8
+set helplang=cn
+set langmenu=zh_CN.UTF-8
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+if has("win16") || has("win32")
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+endif
+
 " Turn on the Wild menu
 set wildmenu
 
@@ -125,6 +141,7 @@ set foldcolumn=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable 
+"syntax on
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
@@ -150,7 +167,8 @@ endif
 set encoding=utf8
 
 " Use Unix as the standard file type
-set ffs=unix,dos,mac
+"set ffs=unix,dos,mac
+set ffs=dos,unix,mac
 
 
 
@@ -158,7 +176,10 @@ set ffs=unix,dos,mac
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-set expandtab
+"set expandtab
+
+" Use tabs instead of spaces
+set noexpandtab
 
 " Be smart when using tabs ;)
 set smarttab
@@ -194,6 +215,7 @@ map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
+nnoremap<silent> <C-l> :<C-u>nohlsearch<CR><C-l>`
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -380,46 +402,24 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+
 """""""""""""""""""""""""""""""""""""""""
 """      My email : zhangxukim@gmail.com   "
 """""""""""""""""""""""""""""""""""""""""
 set nocompatible
 
 """""""""""""""""""""""""basic setting"""""""""""""""""""""
-filetype plugin indent on
 let g:python_recommended_style = 0
 
-set hlsearch
-nnoremap<silent> <C-l> :<C-u>nohlsearch<CR><C-l>`
-
-syntax on
 set bsdir=buffer
 set autochdir
-set enc=utf-8
-set encoding=utf-8
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-set langmenu=zh_CN.UTF-8
-language message zh_CN.UTF-8
-set helplang=cn
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 "source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
 set nobackup
-set ignorecase 
-set incsearch
 set gdefault
 set nu!
-set ruler
 set autoindent
-set noexpandtab
 "set noautoindent
-"set expandtab
-set shiftwidth=4
-set tabstop=4
 set softtabstop=4
-"set shiftwidth=4
 set clipboard+=unnamed
 autocmd! bufwritepost _vimrc source $HOME/_vimrc
 "colorscheme monokai
@@ -431,11 +431,8 @@ set guifont=Ubuntu\ Mono:h12
 set scrolloff=3
 set wildmode=list:longest
 set ls=2
-set ffs=dos,unix,mac
 
 """"""""""""""""""""""""""""""""""""package settings"""""""""""""""
-
 "run python
 nnoremap <silent> <leader>52 :!python %<CR>
 nnoremap <silent> <leader>53 :!py -3 %<CR>
-
