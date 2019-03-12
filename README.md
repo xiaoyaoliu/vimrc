@@ -12,13 +12,10 @@ edit from my custom [_vimrc](https://github.com/suprsvn/_vimrc) for windows
 打开vim(或gVim)，COMMAND MODE下输入:BundleInstall并回车即可安装全部插件
 
 ### python取消用4个空格缩进的方法
+
 背景：由于公司编码规范是用tab来缩进，而不是标准的4个空格
-
-参考[这篇](https://vi.stackexchange.com/questions/10124/what-is-the-difference-between-filetype-plugin-indent-on-and-filetype-indent)
-
-1. 在vim中执行：:help :filetype-overview
-2. 然后查找py文件的一些help信息：let g:python_recommended_style = 0
-3. 在_vimrc中添加这行命令即可
+1. let g:python_recommended_style = 0
+2. set noexpandtab
 
 ### secureCRT中vim的颜色设置
 
@@ -154,7 +151,7 @@ windows下安装: choco install ack
 
 vim-markdown 编辑
 
-[iamcco/markdown-preview.vim](https://github.com/iamcco/markdown-preview.vim) 用于预览 快捷键: ,8
+[previm/previm](https://github.com/previm/previm) 用于预览 快捷键: ,8
 
 #### tyru/open-browser.vim 可以比较方便地打开浏览器，或者进行搜索
 

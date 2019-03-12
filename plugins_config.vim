@@ -18,7 +18,12 @@ Bundle 'fisadev/vim-ctrlp-cmdpalette'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'iamcco/markdown-preview.vim'
+Bundle 'tyru/open-browser.vim'
+Bundle 'previm/previm'
+" 按照文档装完之后打不开，所以废弃
+"Bundle 'suan/vim-instant-markdown'
+" 容易卡死，所以废弃
+"Bundle 'iamcco/markdown-preview.vim'
 Bundle 'MattesGroeger/vim-bookmarks'
 Bundle 'mattn/emmet-vim'
 Bundle 'motemen/git-vim'
@@ -51,7 +56,6 @@ Bundle 'vim-scripts/xptemplate'
 Bundle 'chriskempson/base16-vim'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
-Bundle 'tyru/open-browser.vim'
 Bundle 'haya14busa/vim-open-googletranslate'
 Bundle 'airblade/vim-rooter'
 
@@ -69,7 +73,21 @@ map <leader>2 :TaskList<CR>
 " refesh ctags
 :nnoremap <silent> <leader>6 :!start ctags -R .<CR>
 
-nmap <silent> <leader>8 <Plug>MarkdownPreview<CR>
+" Begin markdown
+" 暂不适应markdown的折叠功能，在这里关掉
+let g:vim_markdown_folding_disabled=1
+"previm
+" markdown预览快捷键的设置
+nmap <silent> <leader>8 :PrevimOpen<CR>
+
+" markdown-preview OBSOLETE
+"nmap <silent> <leader>8 <Plug>MarkdownPreview<CR>
+
+" vim-instant-markdown OBSOLETE
+"let g:instant_markdown_autostart = 0
+"nmap <silent> <leader>8 :InstantMarkdownPreview<CR>
+
+" END markdown 
 
 " fix some problems with gitgutter and jedi-vim
 let g:gitgutter_eager = 0
@@ -200,9 +218,6 @@ map <leader>fgg :silent !start GitExtensions<CR>
 map <leader>fgb :OpenBrowser google.com<CR>
 " ConqueTerm
 map <leader>fp :silent ConqueTermTab powershell.exe<CR>
-
-" markdown
-let g:vim_markdown_folding_disabled=1
 
 " Better Rainbow Parentheses
 let g:rbpt_colorpairs = [

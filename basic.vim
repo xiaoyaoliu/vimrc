@@ -171,6 +171,16 @@ set encoding=utf8
 set ffs=dos,unix,mac
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+set directory=$TEMP,c:\tmp,c:\temp
+set backupdir=$TEMP,c:\tmp,c:\temp
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
