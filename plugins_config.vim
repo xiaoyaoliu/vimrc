@@ -131,7 +131,7 @@ nmap <leader>rf :AckFile -i
 nmap <leader>wr :Ack! -w <cword> .
 
 " CtrlP (new fuzzy finder)
-let g:ctrlp_map = '<leader>ee'
+let g:ctrlp_map = '<leader>e'
 nmap <leader>eG :CtrlPBufTag<CR>
 nmap <leader>eg :CtrlPBufTagAll<CR>
 nmap <leader>ef :CtrlPLine<CR>
