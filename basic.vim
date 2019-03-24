@@ -186,10 +186,10 @@ set backupdir=$TEMP,c:\tmp,c:\temp
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-"set expandtab
+set expandtab
 
 " Use tabs instead of spaces
-set noexpandtab
+"set noexpandtab
 
 " Be smart when using tabs ;)
 set smarttab
@@ -420,7 +420,6 @@ endfunction
 set nocompatible
 
 """""""""""""""""""""""""basic setting"""""""""""""""""""""
-let g:python_recommended_style = 0
 
 set bsdir=buffer
 set autochdir
@@ -432,7 +431,6 @@ set autoindent
 "set noautoindent
 set softtabstop=4
 set clipboard+=unnamed
-autocmd! bufwritepost _vimrc source $HOME/_vimrc
 "colorscheme monokai
 "set guifont=Courier_New:h12:cANSI
 "set guifontwide=YaHei\ Consolas\ Hybrid:h12

@@ -101,10 +101,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 imap <C-J> <C-X><C-O>
 
 
-" removes trailing spaces of python files
-" (and restores cursor position)
-autocmd BufWritePre *.py mark z | %s/\s\+$//e | 'z
-
 " store yankring history file hidden
 let g:yankring_history_file = '.yankring_history'
 
@@ -169,7 +165,6 @@ let g:ctrlp_custom_ignore = {
 " Ignore files on NERDTree
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.lnk$']
 
-let g:syntastic_python_checkers = ['flake8']
 "syntastic Recommended settings
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -216,8 +211,6 @@ map <leader>fe :silent !start explorer /select,%<CR>
 map <leader>fs :silent !start powershell<CR>
 map <leader>fgg :silent !start GitExtensions<CR>
 map <leader>fgb :OpenBrowser google.com<CR>
-" ConqueTerm
-map <leader>fp :silent ConqueTermTab powershell.exe<CR>
 
 " Better Rainbow Parentheses
 let g:rbpt_colorpairs = [
