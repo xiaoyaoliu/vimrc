@@ -1,6 +1,3 @@
-Bundle 'fs111/pydoc.vim'
-Bundle 'fisadev/vim-isort'
-Bundle 'vim-scripts/indentpython.vim'
 
 " removes trailing spaces of python files
 " (and restores cursor position)

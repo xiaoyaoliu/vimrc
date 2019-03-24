@@ -1,10 +1,14 @@
 """""""""""""""""""""""""vundle setting""""""""""""""""""""
+set nocompatible  " 去除VI一致性,vundle必须
+filetype off                  " 必须
+
+" 设置包括vundle和初始化相关的runtime path
 set rtp+=$HOME/.vim/bundle/Vundle.vim/
 let path='$HOME/.vim/bundle'
 call vundle#rc(path)
 
 """""""""""""""""""""""""install packages""""""""""""""""""
-" avoid bundle is clean up by BundleClean
+" avoid bundle is clean up by BundleClean, 让vundle管理插件版本,必须
 Bundle 'VundleVim/Vundle.vim'
 Bundle 'gmarik/vundle'
 Bundle 'L9'
@@ -57,6 +61,16 @@ Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'haya14busa/vim-open-googletranslate'
 Bundle 'airblade/vim-rooter'
+
+" python plugins
+Bundle 'fs111/pydoc.vim'
+Bundle 'fisadev/vim-isort'
+Bundle 'vim-scripts/indentpython.vim'
+
+" 你的所有插件需要在下面这行之前
+call vundle#end()            " 必须
+" Enable filetype plugins
+filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
 
 " toggle Tagbar display
 nmap <leader>4 :TagbarToggle<CR>
