@@ -99,7 +99,7 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 使用mi指令将各个工程的某文件加入到标签列表，启动vim后就可以通过ma指令搜索想打开的工程
 
 ###  查找文件
-[ctrlp](https://github.com/kien/ctrlp.vim) vs [Leaderf](https://github.com/Yggdroot/LeaderF)
+[ctrlp](https://github.com/kien/ctrlp.vim) vs [Leaderf](https://github.com/Yggdroot/LeaderF) vs [fzf](https://github.com/junegunn/fzf.vim)
 
 _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
