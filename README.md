@@ -127,7 +127,7 @@ _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
 rg的[优势](https://ruby-china.org/topics/38001): 速度最快, 支持中文, 异步搜素, 功能最全
 
-windows下安装: choco install riggrep
+windows下安装: choco install ripgrep
 
 ### 小插件简介
 
