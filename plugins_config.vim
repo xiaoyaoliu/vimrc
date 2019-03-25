@@ -18,6 +18,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
+Bundle 'Yggdroot/LeaderF'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
@@ -34,8 +35,6 @@ Bundle 'motemen/git-vim'
 Bundle 'kien/tabman.vim'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
-Bundle 'mileszs/ack.vim'
-Bundle 'rking/ag.vim'
 Bundle 'lsdr/monokai'
 Bundle 'rosenfeld/conque-term'
 Bundle 'fisadev/FixedTaskList.vim'
@@ -54,8 +53,8 @@ Bundle 'IndexedSearch'
 Bundle 'matchit.zip'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'vim-scripts/xptemplate'
-Bundle 'vim-scripts/AutoComplPop'
-Bundle 'vim-scripts/Wombat'
+"Bundle 'vim-scripts/AutoComplPop'
+"Bundle 'vim-scripts/Wombat'
 Bundle 'chriskempson/base16-vim'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
@@ -63,8 +62,8 @@ Bundle 'haya14busa/vim-open-googletranslate'
 Bundle 'airblade/vim-rooter'
 
 " python plugins
-Bundle 'fs111/pydoc.vim'
-Bundle 'fisadev/vim-isort'
+"Bundle 'fs111/pydoc.vim'
+"Bundle 'fisadev/vim-isort'
 Bundle 'vim-scripts/indentpython.vim'
 
 " 你的所有插件需要在下面这行之前
@@ -126,18 +125,17 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 " insert ipdb breakpoint with \b
 nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
-" ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
-" https://github.com/ggreer/the_silver_searcher
-let g:ackprg = 'ag'
-nmap <leader>rr :Ack! --ignore=tags -i 
-nmap <leader>rw :Ack! --ignore=tags -w 
-nmap <leader>rss :Ack! --ignore=tags,cdata,data,cdata_beta -i 
-nmap <leader>rsw :Ack! --ignore=tags,cdata,data,cdata_beta -w <cword> ..
-nmap <leader>rll :AckWindow! 
-nmap <leader>rlw :AckWindow! -w <cword><CR>
-nmap <leader>ra :AckAdd -i 
-nmap <leader>rf :AckFile -i 
-nmap <leader>wr :Ack! -w <cword> .
+" https://github.com/BurntSushi/ripgrep
+"let g:ackprg = 'Leaderf! rg'
+nmap <leader>rr :Leaderf! rg --ignore-file=tags -e 
+nmap <leader>rw :Leaderf! rg --ignore-file=tags -w -e 
+nmap <leader>ri :Leaderf! rg --ignore-file=tags -i -e 
+nmap <leader>ra :Leaderf! rg --ignore-file=tags --append -e 
+nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
+nmap <leader>rc :Leaderf! rg -F --current-buffer -e 
+" search word under cursor, the pattern is treated as regex, and enter normal mode directly
+"noremap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+nmap <leader>wr :Leaderf! rg -e <cword> 
 
 " CtrlP (new fuzzy finder)
 let g:ctrlp_map = '<leader>e'
