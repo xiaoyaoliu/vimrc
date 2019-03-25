@@ -62,8 +62,6 @@ Bundle 'airblade/vim-rooter'
 
 " python plugins
 "Bundle 'fs111/pydoc.vim'
-"Bundle 'fisadev/vim-isort'
-"Bundle 'vim-scripts/indentpython.vim'
 
 " 你的所有插件需要在下面这行之前
 call vundle#end()            " 必须
