@@ -19,8 +19,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
 Bundle 'Yggdroot/LeaderF'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'tyru/open-browser.vim'
@@ -64,7 +63,7 @@ Bundle 'airblade/vim-rooter'
 " python plugins
 "Bundle 'fs111/pydoc.vim'
 "Bundle 'fisadev/vim-isort'
-Bundle 'vim-scripts/indentpython.vim'
+"Bundle 'vim-scripts/indentpython.vim'
 
 " 你的所有插件需要在下面这行之前
 call vundle#end()            " 必须
