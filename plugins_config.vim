@@ -123,7 +123,8 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 "let g:ackprg = 'Leaderf! rg'
 nmap <leader>ra :Leaderf! rg -g !tags --append -e 
 nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
-nmap <leader>rc :Leaderf! rg -F --current-buffer -e 
+nmap <leader>rB :Leaderf! rg -F --current-buffer -e 
+nmap <leader>rd :LeaderfTagPattern 
 nmap <leader>ri :Leaderf! rg -g !tags -i -e 
 nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
 nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
@@ -131,7 +132,19 @@ nmap <Leader>rp :Leaderf! rg -g *.h -t py -e
 nmap <leader>rr :Leaderf! rg -g !tags -e 
 nmap <leader>rw :Leaderf! rg -g !tags -w -e 
 " search word under cursor, the pattern is treated as regex, and enter normal mode directly
-nmap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -g !tags -e %s ", expand("<cword>"))<CR>
+nmap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -g !tags -e %s", expand("<cword>"))<CR>
+
+nmap <leader>wf :LeaderfFileCword<CR>
+
+nmap <leader>wd :LeaderfTagCword<CR>
+
+nmap <leader>wt :LeaderfBufTagAllCword<CR>
+nmap <leader>wT :LeaderfBufTagCword<CR>
+
+nmap <leader>wm :LeaderfMruCword<CR>
+
+nmap <leader>wb :<C-U><C-R>=printf("Leaderf! rg -F --all-buffer -e %s", expand("<cword>"))<CR>
+nmap <leader>wB :LeaderfLineCword<CR>
 
 " CtrlP (new fuzzy finder)
 let g:ctrlp_map = '<leader>e'
@@ -146,13 +159,8 @@ function! CtrlPWithSearchText(search_text, ctrlp_command_end)
     call feedkeys(a:search_text)
 endfunction
 " CtrlP with default text
-nmap <leader>wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-nmap <leader>wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-nmap <leader>wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-nmap <leader>we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
 nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap <leader>wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-nmap <leader>wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+nmap <leader>wh :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 " 善于使用help命令查看官方解释，例如:help ctrlp_working_path_mode  
 let g:ctrlp_clear_cache_on_exit = 0
 " 默认进入文件模式，可以使用<C-d>切换
