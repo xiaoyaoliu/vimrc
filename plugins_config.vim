@@ -134,7 +134,7 @@ nmap <Leader>rp :Leaderf! rg -g *.h -t py -e
 nmap <leader>rr :Leaderf! rg -g !tags -e 
 nmap <leader>rw :Leaderf! rg -g !tags -w -e 
 " search word under cursor, the pattern is treated as regex, and enter normal mode directly
-nmap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+nmap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -g !tags -e %s ", expand("<cword>"))<CR>
 
 " CtrlP (new fuzzy finder)
 let g:ctrlp_map = '<leader>e'
