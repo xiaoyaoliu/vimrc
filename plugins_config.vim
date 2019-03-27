@@ -119,9 +119,6 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 " highlight PmenuSbar ctermbg=7 guibg=DarkGray
 " highlight PmenuThumb guibg=Black
 
-" insert ipdb breakpoint with \b
-nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
-
 " https://github.com/BurntSushi/ripgrep
 "let g:ackprg = 'Leaderf! rg'
 nmap <leader>ra :Leaderf! rg -g !tags --append -e 

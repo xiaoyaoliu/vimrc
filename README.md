@@ -103,6 +103,10 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 
 _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
+#### fzf
+
+对Windows不友好，是弹出来一个cmd窗口进行文件的搜索，无法搜索中文
+
 #### 使用ctrlp，有时候搜不到特定文件的原因（看help文件分析出来的）
 * ctrlp限制了最大文件数ctrlp_max_files，默认为10000
 * ctrlp限制了一次检索的返回结果的最大数量ctrlp_match_window，默认为10
