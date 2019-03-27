@@ -126,15 +126,15 @@ nmap <leader>b Oimport ipdb;ipdb.set_trace()<ESC>
 
 " https://github.com/BurntSushi/ripgrep
 "let g:ackprg = 'Leaderf! rg'
-nmap <leader>ra :Leaderf! rg --ignore-file=tags --append -e 
+nmap <leader>ra :Leaderf! rg -g !tags --append -e 
 nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
 nmap <leader>rc :Leaderf! rg -F --current-buffer -e 
-nmap <leader>ri :Leaderf! rg --ignore-file=tags -i -e 
+nmap <leader>ri :Leaderf! rg -g !tags -i -e 
 nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
 nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
 nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
-nmap <leader>rr :Leaderf! rg --ignore-file=tags -e 
-nmap <leader>rw :Leaderf! rg --ignore-file=tags -w -e 
+nmap <leader>rr :Leaderf! rg -g !tags -e 
+nmap <leader>rw :Leaderf! rg -g !tags -w -e 
 " search word under cursor, the pattern is treated as regex, and enter normal mode directly
 "noremap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 nmap <leader>wr :Leaderf! rg -e <cword> 
