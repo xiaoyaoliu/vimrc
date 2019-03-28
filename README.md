@@ -3,7 +3,18 @@
 
 edit from my custom [_vimrc](https://github.com/suprsvn/_vimrc) for windows
 
+### vim的安装
+
+linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
+
+要求vim 7.4以上, 支持python
+
+在和他人共用的机器上，建议使用: [Linuxbrew](https://github.com/Linuxbrew/brew)
+
+在自己的机器上，直接root权限升级
+
 ### 安装vundle
+
 [linux vundle的安装](https://github.com/VundleVim/Vundle.vim)
 
 [windows vundle的安装](https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows)
@@ -132,6 +143,15 @@ _vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 rg的[优势](https://ruby-china.org/topics/38001): 速度最快, 支持中文, 异步搜素, 功能最全
 
 windows下安装: choco install ripgrep
+
+#### linux下的手动安装
+
+尽量自动安装, 以下是权宜之计
+
+安装Ruby
+
+* curl https://sh.rustup.rs -sSf | sh
+* source ~/.profile
 
 ### 小插件简介
 
