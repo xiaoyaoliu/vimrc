@@ -79,9 +79,6 @@ nmap <leader>3 :NERDTreeToggle<CR>
 " show pending tasks list
 map <leader>2 :TaskList<CR>
 
-" refesh ctags
-:nnoremap <silent> <leader>6 :!start ctags -R .<CR>
-
 " Begin markdown
 " 暂不适应markdown的折叠功能，在这里关掉
 let g:vim_markdown_folding_disabled=1
