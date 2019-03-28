@@ -58,7 +58,6 @@ set so=7
 "set langmenu=en
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-language message zh_CN.UTF-8
 set helplang=cn
 set langmenu=zh_CN.UTF-8
 source $VIMRUNTIME/delmenu.vim

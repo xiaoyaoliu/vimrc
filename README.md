@@ -9,9 +9,17 @@ linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 
 要求vim 7.4以上, 支持python
 
-在和他人共用的机器上，建议使用: [Linuxbrew](https://github.com/Linuxbrew/brew)
+#### 在和他人共用的机器上
 
-在自己的机器上，直接root权限升级
+建议使用: [Linuxbrew](https://github.com/Linuxbrew/brew)
+
+brew install vim
+
+#### 在自己的机器上，直接root权限升级
+
+yum install -y vim
+
+apt-get install vim
 
 ### 安装vundle
 
@@ -146,12 +154,9 @@ windows下安装: choco install ripgrep
 
 #### linux下的手动安装
 
-尽量自动安装, 以下是权宜之计
+使用 [Linuxbrew](https://github.com/Linuxbrew/brew)
 
-安装Ruby
-
-* curl https://sh.rustup.rs -sSf | sh
-* source ~/.profile
+brew install ripgrep
 
 ### 小插件简介
 
