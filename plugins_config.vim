@@ -256,3 +256,5 @@ au Syntax * RainbowParenthesesLoadBraces
 " IndentLine
 let g:indentLine_color_gui = '#A4E57E'
 
+" vim-rooter
+let g:rooter_patterns = ['Rakefile', '.git/', ".svn/", "_darcs"]
