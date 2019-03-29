@@ -58,7 +58,7 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
 Bundle 'haya14busa/vim-open-googletranslate'
-Bundle 'airblade/vim-rooter'
+Bundle 'xiaoyaoliu/vim-rooter'
 
 " python plugins
 "Bundle 'fs111/pydoc.vim'
@@ -252,6 +252,3 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " IndentLine
 let g:indentLine_color_gui = '#A4E57E'
-
-" vim-rooter
-let g:rooter_patterns = [".svn/", 'Rakefile', '.git/',  "_darcs"]
