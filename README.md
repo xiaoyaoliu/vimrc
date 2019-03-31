@@ -99,6 +99,31 @@ xmllint
 
 ## vim插件使用经验总结
 
+### syntastic插件
+
+各种语言的语法检查
+
+集中常见格式的支持(也是在syntastic-checkers.txt 里抄袭的)
+
+每种格式其实有多种工具可以检查语法，以下只列举其中一种，更多工具请:help syntastic-checkers
+
+* xml: xmllint(yum install -y libxml2)
+* python: pip install pep8
+* cmake: pip install cmakelint
+* yaml: pip install yamllint
+* cpp: pip install cppclean
+* sh: pip install bashate
+* json: npm install -g jsonlint
+* dockfile:  npm install -g dockerfile_lint
+* js: npm install -g jsxhint
+* css:  npm install -g csslint
+* coffee:  npm install -g coffee-jshint
+ 
+
+如需更多格式信息, 请查看如下help
+
+:help syntastic-checkers
+
 ### snippets插件的用法
 
 这个插件是否好用，输入一些特定的字母，点tab键就可以生成代码模板
