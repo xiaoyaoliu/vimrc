@@ -213,3 +213,11 @@ Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
 * 学习[spf13/spf13-vim](https://github.com/spf13/spf13-vim), 寻找更好用的插件
 * vim 与 svn git的结合 尤其是blame 查log 以及日常提交
 * vim和工程更好的结合
+
+## 插件黑名单
+
+* 'suan/vim-instant-markdown': 按照文档装完之后打不开，所以废弃
+* 'iamcco/markdown-preview.vim': 容易卡死，所以废弃
+* 'fisadev/vim-isort': 安装后，启动vim会报错
+* vim-scripts/indentpython.vim: 安装后，会导致python无法使用tab进行缩进
+* airblade/vim-gitgutter: 安装后，如果一个文件不在git中，直接打开这个文件的时候vim会卡死, 使用<C-c>可以临时解决这个问题
