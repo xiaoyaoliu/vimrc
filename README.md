@@ -85,6 +85,18 @@ sudo make install
 - 在标签页的标题上右键菜单选择Session Options
 - Terminal -> Emulation 中的ANSI Color一定要勾上
 
+### windows环境配置
+
+将$HOME/vimrc/bin/win32加入到环境变量Path
+
+* xmllint.exe syntastic插件用于xml格式的检查
+
+测试方法:
+
+Win+R cmd Enter
+
+xmllint
+
 ## vim插件使用经验总结
 
 ### snippets插件的用法
