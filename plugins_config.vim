@@ -27,8 +27,6 @@ endif
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
-Bundle 'tyru/open-browser.vim'
-Bundle 'previm/previm'
 Bundle 'MattesGroeger/vim-bookmarks'
 Bundle 'mattn/emmet-vim'
 Bundle 'motemen/git-vim'
@@ -57,9 +55,13 @@ Bundle 'vim-scripts/xptemplate'
 Bundle 'chriskempson/base16-vim'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'Yggdroot/indentLine'
-Bundle 'haya14busa/vim-open-googletranslate'
 Bundle 'xiaoyaoliu/vim-rooter'
 
+if has("win16") || has("win32")
+    Bundle 'previm/previm'
+    Bundle 'tyru/open-browser.vim'
+    Bundle 'haya14busa/vim-open-googletranslate'
+endif
 " python plugins
 "Bundle 'fs111/pydoc.vim'
 
@@ -82,17 +84,6 @@ map <leader>2 :TaskList<CR>
 " Begin markdown
 " 暂不适应markdown的折叠功能，在这里关掉
 let g:vim_markdown_folding_disabled=1
-"previm
-" markdown预览快捷键的设置
-nmap <silent> <leader>8 :PrevimOpen<CR>
-
-" markdown-preview OBSOLETE
-"nmap <silent> <leader>8 <Plug>MarkdownPreview<CR>
-
-" vim-instant-markdown OBSOLETE
-"let g:instant_markdown_autostart = 0
-"nmap <silent> <leader>8 :InstantMarkdownPreview<CR>
-
 " END markdown 
 
 " fix some problems with gitgutter and jedi-vim
@@ -233,11 +224,6 @@ let g:tabman_focus  = 'tf'
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'light'
 let g:airline#extensions#whitespace#enabled = 1
-
-map <leader>fe :silent !start explorer /select,%<CR>
-map <leader>fs :silent !start powershell<CR>
-map <leader>fgg :silent !start GitExtensions<CR>
-map <leader>fgb :OpenBrowser google.com<CR>
 
 " Better Rainbow Parentheses
 let g:rbpt_colorpairs = [
