@@ -13,9 +13,37 @@ linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 
 方式1: [直接用源码安装](https://vi.stackexchange.com/questions/11526/how-to-enable-python-feature-in-vim/17502)
 
+```
+# Prepare your system
+
+sudo apt install libncurses5-dev \
+python-dev \
+python3-dev git
+
+# The directory to install
+cd ~ && mkdir sbin
+
+# install: pay attention here check python directory and prefix directory correct
 cd /tmp && git clone https://github.com/vim/vim.git && cd vim
-./configure --enable-pythoninterp --prefix=/home/path/to/your/bin
-make && sudo make install
+
+ ./configure --enable-multibyte --enable-cscope --enable-farsi\
+ --enable-pythoninterp=yes \
+ --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/\
+ --enable-python3interp=yes \
+--with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu/ \
+ --prefix=/home/<username>/sbin
+
+make 
+
+make install
+
+#add to ~/.profile
+export PATH="$HOME/sbin/bin:$PATH" 
+
+source ~/.profile
+
+vim --version
+```
 
 方式2: 使用: [Linuxbrew](https://github.com/Linuxbrew/brew)
 
@@ -27,11 +55,11 @@ yum install -y vim
 
 apt-get install vim
 
-直接用源码安装
+直接用源码安装(只列举不同点)
 
-cd /tmp && git clone https://github.com/vim/vim.git && cd vim
-./configure --enable-pythoninterp --prefix=/usr
-make && sudo make install
+./configure --prefix=/usr
+
+sudo make install
 
 ### 安装vundle
 

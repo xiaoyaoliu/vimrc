@@ -108,13 +108,13 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 " highlight PmenuThumb guibg=Black
 
 if has('python') || has('python3')
-    " https://github.com/BurntSushi/ripgrep
-    "let g:ackprg = 'Leaderf! rg'
+    " rg https://github.com/BurntSushi/ripgrep
     nmap <leader>ra :Leaderf! rg -g !tags --append -e 
     nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
     nmap <leader>rB :Leaderf! rg -F --current-buffer -e 
     nmap <leader>rd :LeaderfTagPattern 
     nmap <leader>ri :Leaderf! rg -g !tags -i -e 
+    nmap <leader>rm :LeaderfMru<CR>
     nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
     nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
     nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
