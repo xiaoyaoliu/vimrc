@@ -146,7 +146,7 @@ else
     nmap <leader>rlw :AckWindow! -w <cword><CR>
     nmap <leader>ra :AckAdd -i 
     nmap <leader>rf :AckFile -i 
-    nmap <leader>wr :<C-U><C-R>=printf("Ack! -g !tags -e %s", expand("<cword>"))<CR>
+    nmap <leader>wr :<C-U><C-R>=printf("Ack! --ignore=tags %s", expand("<cword>"))<CR>
 endif
 
 " CtrlP (new fuzzy finder)
