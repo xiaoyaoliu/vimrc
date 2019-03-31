@@ -18,7 +18,12 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'majutsushi/tagbar'
 Bundle 'kien/ctrlp.vim'
 Bundle 'fisadev/vim-ctrlp-cmdpalette'
-Bundle 'Yggdroot/LeaderF'
+if has('python') || has('python3')
+    Bundle 'Yggdroot/LeaderF'
+else
+    Bundle 'mileszs/ack.vim'
+    Bundle 'rking/ag.vim'
+endif
 "Bundle 'Valloric/YouCompleteMe'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
@@ -111,32 +116,47 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 " highlight PmenuSbar ctermbg=7 guibg=DarkGray
 " highlight PmenuThumb guibg=Black
 
-" https://github.com/BurntSushi/ripgrep
-"let g:ackprg = 'Leaderf! rg'
-nmap <leader>ra :Leaderf! rg -g !tags --append -e 
-nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
-nmap <leader>rB :Leaderf! rg -F --current-buffer -e 
-nmap <leader>rd :LeaderfTagPattern 
-nmap <leader>ri :Leaderf! rg -g !tags -i -e 
-nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
-nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
-nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
-nmap <leader>rr :Leaderf! rg -g !tags -e 
-nmap <leader>rw :Leaderf! rg -g !tags -w -e 
-" search word under cursor, the pattern is treated as regex, and enter normal mode directly
-nmap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -g !tags -e %s", expand("<cword>"))<CR>
+if has('python') || has('python3')
+    " https://github.com/BurntSushi/ripgrep
+    "let g:ackprg = 'Leaderf! rg'
+    nmap <leader>ra :Leaderf! rg -g !tags --append -e 
+    nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
+    nmap <leader>rB :Leaderf! rg -F --current-buffer -e 
+    nmap <leader>rd :LeaderfTagPattern 
+    nmap <leader>ri :Leaderf! rg -g !tags -i -e 
+    nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
+    nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
+    nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
+    nmap <leader>rr :Leaderf! rg -g !tags -e 
+    nmap <leader>rw :Leaderf! rg -g !tags -w -e 
+    " search word under cursor, the pattern is treated as regex, and enter normal mode directly
+    nmap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -g !tags -e %s", expand("<cword>"))<CR>
 
-nmap <leader>wf :LeaderfFileCword<CR>
+    nmap <leader>wf :LeaderfFileCword<CR>
 
-nmap <leader>wd :LeaderfTagCword<CR>
+    nmap <leader>wd :LeaderfTagCword<CR>
 
-nmap <leader>wt :LeaderfBufTagAllCword<CR>
-nmap <leader>wT :LeaderfBufTagCword<CR>
+    nmap <leader>wt :LeaderfBufTagAllCword<CR>
+    nmap <leader>wT :LeaderfBufTagCword<CR>
 
-nmap <leader>wm :LeaderfMruCword<CR>
+    nmap <leader>wm :LeaderfMruCword<CR>
 
-nmap <leader>wb :<C-U><C-R>=printf("Leaderf! rg -F --all-buffer -e %s", expand("<cword>"))<CR>
-nmap <leader>wB :LeaderfLineCword<CR>
+    nmap <leader>wb :<C-U><C-R>=printf("Leaderf! rg -F --all-buffer -e %s", expand("<cword>"))<CR>
+    nmap <leader>wB :LeaderfLineCword<CR>
+else
+    " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
+    " https://github.com/ggreer/the_silver_searcher
+    let g:ackprg = 'ag'
+    nmap <leader>rr :Ack! --ignore=tags -i 
+    nmap <leader>rw :Ack! --ignore=tags -w 
+    nmap <leader>rss :Ack! --ignore=tags,cdata,data,cdata_beta -i 
+    nmap <leader>rsw :Ack! --ignore=tags,cdata,data,cdata_beta -w <cword> ..
+    nmap <leader>rll :AckWindow! 
+    nmap <leader>rlw :AckWindow! -w <cword><CR>
+    nmap <leader>ra :AckAdd -i 
+    nmap <leader>rf :AckFile -i 
+    nmap <leader>wr :<C-U><C-R>=printf("Ack! -g !tags -e %s", expand("<cword>"))<CR>
+endif
 
 " CtrlP (new fuzzy finder)
 let g:ctrlp_map = '<leader>e'
