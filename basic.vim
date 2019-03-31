@@ -397,10 +397,12 @@ function! VisualSelection(direction, extra_filter) range
 
     let l:pattern = escape(@", "\\/.*'$^~[]")
     let l:pattern = substitute(l:pattern, "\n$", "", "")
+    let l:rg_pattern = escape(@", "\\.*\"$^~[]")
+    let l:rg_pattern = substitute(l:rg_pattern, "\n$", "", "")
 
     if a:direction == 'gv'
         if has('python') || has('python3')
-            call CmdLine("Leaderf! rg -g !tags -e \"" . l:pattern . "\" " )
+            call CmdLine("Leaderf! rg -g !tags -e \"" . l:rg_pattern . "\" " )
         else
             call CmdLine("Ack '" . l:pattern . "' " )
         endif
