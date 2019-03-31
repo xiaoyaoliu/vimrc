@@ -13,6 +13,7 @@ linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 
 方式1: [直接用源码安装](https://vi.stackexchange.com/questions/11526/how-to-enable-python-feature-in-vim/17502)
 
+回头有时间将vim的安装整理为一个shell脚本
 ```
 # Prepare your system
 
@@ -74,14 +75,15 @@ sudo make install
 
 背景：由于公司编码规范是用tab来缩进，而不是标准的4个空格
 1. let g:python_recommended_style = 0
+1. 千万不要用这个插件: vim-scripts/indentpython.vim
 2. set noexpandtab
 
 ### secureCRT中vim的颜色设置
 
+个人电脑上建议用XShell, 比secureCRT更好用
+
 - 在标签页的标题上右键菜单选择Session Options
 - Terminal -> Emulation 中的ANSI Color一定要勾上
-
-monokai颜色插件在ubuntu下不work，删掉即可，.vimrc里已经去掉了。
 
 ## vim插件使用经验总结
 
@@ -194,9 +196,7 @@ windows下安装: choco install ripgrep
 
 #### linux下的手动安装
 
-使用 [Linuxbrew](https://github.com/Linuxbrew/brew)
-
-brew install ripgrep
+[rg](https://github.com/BurntSushi/ripgrep#building)
 
 ### 小插件简介
 
@@ -239,8 +239,6 @@ Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
 将适合我的插件加进来
 
 ### 查看vimrc文件，熟练使用已安装的插件
-
-### 在linux系统中进行验证，维护更新\.vimrc
 
 ### 小需求汇总
 
