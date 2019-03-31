@@ -137,8 +137,8 @@ if has('python') || has('python3')
 else
     " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
     " https://github.com/ggreer/the_silver_searcher
-    let g:ackprg = 'ag'
-    nmap <leader>rr :Ack! --ignore=tags -i 
+    let g:ackprg = 'ag --vimgrep --smart-case'
+    nmap <leader>rr :Ack! --ignore=tags 
     nmap <leader>rw :Ack! --ignore=tags -w 
     nmap <leader>rss :Ack! --ignore=tags,cdata,data,cdata_beta -i 
     nmap <leader>rsw :Ack! --ignore=tags,cdata,data,cdata_beta -w <cword> ..
@@ -148,6 +148,7 @@ else
     nmap <leader>rf :AckFile -i 
     nmap <leader>wr :<C-U><C-R>=printf("Ack! --ignore=tags %s", expand("<cword>"))<CR>
 endif
+vnoremap <silent> rr :call VisualSelection('gv', '')<CR>
 
 " CtrlP (new fuzzy finder)
 let g:ctrlp_map = '<leader>e'
