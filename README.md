@@ -11,7 +11,13 @@ linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 
 #### 在和他人共用的机器上
 
-建议使用: [Linuxbrew](https://github.com/Linuxbrew/brew)
+方式1: [直接用源码安装](https://vi.stackexchange.com/questions/11526/how-to-enable-python-feature-in-vim/17502)
+
+cd /tmp && git clone https://github.com/vim/vim.git && cd vim
+./configure --enable-pythoninterp --prefix=/home/path/to/your/bin
+make && sudo make install
+
+方式2: 使用: [Linuxbrew](https://github.com/Linuxbrew/brew)
 
 brew install vim
 
@@ -20,6 +26,12 @@ brew install vim
 yum install -y vim
 
 apt-get install vim
+
+直接用源码安装
+
+cd /tmp && git clone https://github.com/vim/vim.git && cd vim
+./configure --enable-pythoninterp --prefix=/usr
+make && sudo make install
 
 ### 安装vundle
 
