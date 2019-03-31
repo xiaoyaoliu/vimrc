@@ -12,8 +12,6 @@ linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 #### 在和他人共用的机器上
 
 方式1: [直接用源码安装](https://vi.stackexchange.com/questions/11526/how-to-enable-python-feature-in-vim/17502)
-
-回头有时间将vim的安装整理为一个shell脚本
 ```
 # Prepare your system
 
