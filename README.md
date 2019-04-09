@@ -286,6 +286,7 @@ Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
 * 学习[spf13/spf13-vim](https://github.com/spf13/spf13-vim), 寻找更好用的插件
 * vim 与 svn git的结合 尤其是blame 查log 以及日常提交
 * vim和工程更好的结合
+* https://juejin.im/entry/5bced0e1e51d457a1179de96 https://github.com/embear/vim-foldsearch
 
 ## 插件黑名单
 
