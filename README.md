@@ -1,4 +1,8 @@
 # vimrc
+## vim 2018
+
+Vim 8 下 C/C++ 开发环境搭建: http://www.skywind.me/blog/archives/2084
+
 ## Introduction && Install
 
 edit from my custom [_vimrc](https://github.com/suprsvn/_vimrc) for windows

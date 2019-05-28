@@ -7,3 +7,5 @@ au BufNewFile,BufRead *.animationlist set filetype=xml
 au BufNewFile,BufRead *.gim set filetype=xml
 au BufNewFile,BufRead *.col set filetype=xml
 au BufNewFile,BufRead *.blt set filetype=xml
+au BufNewFile,BufRead *.uplugin set filetype=json
+au BufNewFile,BufRead *.uproject set filetype=json
