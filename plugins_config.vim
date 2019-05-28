@@ -25,6 +25,7 @@ else
     Bundle 'rking/ag.vim'
 endif
 "Bundle 'Valloric/YouCompleteMe'
+Bundle 'ludovicchabant/vim-gutentags'
 Bundle 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'MattesGroeger/vim-bookmarks'
@@ -254,3 +255,19 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " IndentLine
 let g:indentLine_color_gui = '#A4E57E'
+
+" ctags
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录. 以下配置导致卡死，所以取消
+"let s:vim_tags = expand('~/.cache/tags')
+"let g:gutentags_cache_dir = s:vim_tags
+
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
