@@ -287,7 +287,7 @@ set laststatus=2
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -460,3 +460,6 @@ set ls=2
 nnoremap <silent> <leader>52 :!python %<CR>
 nnoremap <silent> <leader>53 :!py -3 %<CR>
 
+" http://www.skywind.me/blog/archives/2084
+set tags=./.tags;,.tags
+"set tags=.tags

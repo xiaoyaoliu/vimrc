@@ -1,4 +1,8 @@
 # vimrc
+## vim 2018
+
+Vim 8 下 C/C++ 开发环境搭建: http://www.skywind.me/blog/archives/2084
+
 ## Introduction && Install
 
 edit from my custom [_vimrc](https://github.com/suprsvn/_vimrc) for windows
@@ -99,6 +103,8 @@ xmllint
 
 ### syntastic插件
 
+[Vim 8 下 C/C++ 开发环境搭建](http://www.skywind.me/blog/archives/2084) :代码检查是个好东西，让你在编辑文字的同时就帮你把潜在错误标注出来，不用等到编译或者运行了才发现。我很奇怪 2018 年了，为啥网上还在到处介绍老旧的 syntastic，但凡见到介绍这个插件的文章基本都可以不看了。老的 syntastic 基本没法用，不能实时检查，一保存文件就运行检查器并且等待半天，所以请用实时 linting 工具 [ALE](https://github.com/w0rp/ale)：https://github.com/w0rp/ale
+
 各种语言的语法检查
 
 集中常见格式的支持(也是在syntastic-checkers.txt 里抄袭的)
@@ -121,6 +127,18 @@ xmllint
 如需更多格式信息, 请查看如下help
 
 :help syntastic-checkers
+
+
+### ALE插件
+
+#### python配置过程中遇到的问题
+
+* 使用ALEInfoToClipboard，查看ALE的错误信息
+  * flake8 failed to load plugin "pycodestyle.break_around_binary_operator" due to 'module' object has no attribute 'break_around_binary_operator'
+* pip check
+  * 得到 flake8 3.3.0 has requirement pycodestyle<2.4.0,>=2.0.0, but you have pycodestyle 2.5.0
+* flake8版本过高导致，降低版本
+  * pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
 
 ### snippets插件的用法
 
