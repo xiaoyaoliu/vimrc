@@ -20,3 +20,31 @@ root用户的crontab文件地址: /var/spool/cron/crontabs/root
 
 yum search ifconfig
 
+## mail 发不出去的问题
+
+[Configure Postfix to Send Mail Using Gmail and Google Apps on Debian or Ubuntu](https://www.linode.com/docs/email/postfix/configure-postfix-to-send-mail-using-gmail-and-google-apps-on-debian-or-ubuntu/)
+
+### 重启(systemctl restart postfix)失败的解决方法
+
+注意监听log
+
+* tail -f /var/log/syslog
+* tail -f /var/log/mail.log
+
+log中发现:
+
+postfix/master[13486]: fatal: bind 0.0.0.0 port 25: Address already in use
+
+查看25端口占用情况:
+
+lsof -i -P -n | grep 25
+
+### 防火墙的设置
+
+iptables详解与概念: https://www.zsythink.net/archives/1199
+
+iptables开启特定端口: https://github.com/judasn/Linux-Tutorial
+
+例如:
+* iptables -A OUTPUT -p tcp --sport 587 -j ACCEPT
+* iptables -A OUTPUT -p tcp --sport 25 -j ACCEPT
