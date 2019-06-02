@@ -75,7 +75,7 @@ call plug#end()
 filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
 
 " toggle Tagbar display
-nmap <leader>4 :TagbarToggle<CR>
+nmap <leader>4 :TagbarToggle<CR><c-w>h:LeaderfFunction<CR>
 " autofocus on Tagbar open
 let g:tagbar_autofocus = 1
 
