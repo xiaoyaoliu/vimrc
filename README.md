@@ -1,9 +1,8 @@
 # vimrc
-## vim 2018
 
-Vim 8 下 C/C++ 开发环境搭建: http://www.skywind.me/blog/archives/2084
+## vim准备
 
-## Introduction && Install
+### Introduction && Install
 
 edit from my custom [_vimrc](https://github.com/suprsvn/_vimrc) for windows
 
@@ -64,14 +63,15 @@ apt-get install vim
 
 sudo make install
 
-### 安装vundle
+### 安装或更新vim-plug
 
-[linux vundle的安装](https://github.com/VundleVim/Vundle.vim)
+https://github.com/junegunn/vim-plug
 
-[windows vundle的安装](https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows)
+Vundle已废弃。因为vim-plug支持异步，且有人维护
 
-#### BundleInstall
-打开vim(或gVim)，COMMAND MODE下输入:BundleInstall并回车即可安装全部插件
+### PlugInstall
+
+打开vim(或gVim)，COMMAND MODE下输入:PlugInstall并回车即可安装全部插件
 
 ### python取消用4个空格缩进的方法
 
@@ -99,11 +99,13 @@ Win+R cmd Enter
 
 xmllint
 
-## vim插件使用经验总结
+## vim语法检查
 
-### syntastic插件
+### syntastic插件[已废弃]
 
-[Vim 8 下 C/C++ 开发环境搭建](http://www.skywind.me/blog/archives/2084) :代码检查是个好东西，让你在编辑文字的同时就帮你把潜在错误标注出来，不用等到编译或者运行了才发现。我很奇怪 2018 年了，为啥网上还在到处介绍老旧的 syntastic，但凡见到介绍这个插件的文章基本都可以不看了。老的 syntastic 基本没法用，不能实时检查，一保存文件就运行检查器并且等待半天，所以请用实时 linting 工具 [ALE](https://github.com/w0rp/ale)：https://github.com/w0rp/ale
+[Vim 8 下 C/C++ 开发环境搭建](http://www.skywind.me/blog/archives/2084) :代码检查是个好东西，让你在编辑文字的同时就帮你把潜在错误标注出来，不用等到编译或者运行了才发现。我很奇怪 2018 年了，为啥网上还在到处介绍老旧的 syntastic，但凡见到介绍这个插件的文章基本都可以不看了。
+
+老的 syntastic 基本没法用，不能实时检查，一保存文件就运行检查器并且等待半天，所以请用实时 linting 工具 [ALE](https://github.com/w0rp/ale)：https://github.com/w0rp/ale
 
 各种语言的语法检查
 
@@ -128,7 +130,6 @@ xmllint
 
 :help syntastic-checkers
 
-
 ### ALE插件
 
 #### python配置过程中遇到的问题
@@ -138,7 +139,10 @@ xmllint
 * pip check
   * 得到 flake8 3.3.0 has requirement pycodestyle<2.4.0,>=2.0.0, but you have pycodestyle 2.5.0
 * flake8版本过高导致，降低版本
-  * pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
+```
+pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
+```
+## 自动补全，Goto功能
 
 ### snippets插件的用法
 
@@ -148,25 +152,21 @@ xmllint
 
 例如python的话就是在python.snippets中定义，查看这个文件可以学到一些技巧。
 
-### 自动补全，Goto功能
-
 ### ctags（最重要的goto功能）
 
+[Universal Ctags](https://ctags.io/): https://ctags.io/
+
+自动建索引插件[vim-gutentags](https://github.com/ludovicchabant/vim-gutentags): https://github.com/ludovicchabant/vim-gutentags
+
+* (c-w)]	查看函数定义
 * (c-])		跳到第一个定义	
 * g(c-])	跳到所有的定义
 * :tnext	跳到下一个定义	
 * ,6		刷新当前工程的ctags的索引
 
-#### [jedi-vim](https://github.com/davidhalter/jedi-vim) pk [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+#### [[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 
-两者都是基于[jedi](https://github.com/davidhalter/jedi)的
 可以查找定义，查找所有引用点，查找所有赋值点
-
-* 前者只支持Python; 后者支持更多的语言
-* 前者是同步查找，速度慢; 后者架构为client-server，速度快些
-* 前者只支持简单补全; 后者可以称为智能补全
-* 前者的Goto分为goto_assignment和goto_definition; 后者将goto_declaration和goto_definition合并为了goto_，更加方便
-* 前者的安装比较简单; 后者的安装稍为复杂，见[官方文档](https://github.com/Valloric/YouCompleteMe#installation)
 
 所以，最终我还是把jedi-vim替换成了YCM
 
@@ -200,7 +200,7 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 
 在project_config中可以找到：我的client工程，server工程对应的vimrc.py文件
 
-## 工程管理
+## 工程管理，文件管理，全文检索
 
 ### airblade/vim-rooter
 
@@ -251,25 +251,25 @@ windows下安装: choco install ripgrep
 
 [rg](https://github.com/BurntSushi/ripgrep#building)
 
-### 小插件简介
+## 小插件简介
 
-#### md文件的编辑插件
+### md文件的编辑插件
 
 vim-markdown 编辑
 
 [previm/previm](https://github.com/previm/previm) 用于预览 快捷键: ,8
 
-#### tyru/open-browser.vim 可以比较方便地打开浏览器，或者进行搜索
+### tyru/open-browser.vim 可以比较方便地打开浏览器，或者进行搜索
 
-####  tabman 就是tab manager的缩写，管理tab的神器
+###  tabman 就是tab manager的缩写，管理tab的神器
 
-#### [conque-term](https://code.google.com/archive/p/conque/)主要用于在vim中启动各种外部程序，例如shell
+### [conque-term](https://code.google.com/archive/p/conque/)主要用于在vim中启动各种外部程序，例如shell
 
 启动外部工具，可以vim自带的, 例如
 
 :!cd <path>
 
-#### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
+### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
 
 ### svn插件[juneedahamed/svnj.vim](https://github.com/juneedahamed/svnj.vim)
 
@@ -313,3 +313,6 @@ Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
 * 'fisadev/vim-isort': 安装后，启动vim会报错
 * vim-scripts/indentpython.vim: 安装后，会导致python无法使用tab进行缩进
 * airblade/vim-gitgutter: 安装后，如果一个文件不在git中，直接打开这个文件的时候vim会卡死, 使用<C-c>可以临时解决这个问题
+
+## 扩展阅读
+* Vim 8 下 C/C++ 开发环境搭建: http://www.skywind.me/blog/archives/2084
