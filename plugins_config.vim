@@ -2,73 +2,77 @@
 set nocompatible  " 去除VI一致性,vundle必须
 filetype off                  " 必须
 
-" 设置包括vundle和初始化相关的runtime path
-set rtp+=$HOME/.vim/bundle/Vundle.vim/
-let path='$HOME/.vim/bundle'
-call vundle#rc(path)
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
 
 """""""""""""""""""""""""install packages""""""""""""""""""
-" avoid bundle is clean up by BundleClean, 让vundle管理插件版本,必须
-Bundle 'VundleVim/Vundle.vim'
-Bundle 'gmarik/vundle'
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'majutsushi/tagbar'
-Bundle 'kien/ctrlp.vim'
-Bundle 'fisadev/vim-ctrlp-cmdpalette'
+"Plug 'VundleVim/Vundle.vim'
+"Plug 'gmarik/vundle'
+Plug 'junegunn/vim-plug'
+Plug 'junegunn/vim-easy-align'
+Plug 'vim-scripts/L9'
+Plug 'vim-scripts/FuzzyFinder'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
+Plug 'kien/ctrlp.vim'
+Plug 'fisadev/vim-ctrlp-cmdpalette'
 if has('python') || has('python3')
-    Bundle 'Yggdroot/LeaderF'
+    Plug 'Yggdroot/LeaderF'
 else
-    Bundle 'mileszs/ack.vim'
-    Bundle 'rking/ag.vim'
+    Plug 'mileszs/ack.vim'
+    Plug 'rking/ag.vim'
 endif
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'ludovicchabant/vim-gutentags'
-Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'MattesGroeger/vim-bookmarks'
-Bundle 'mattn/emmet-vim'
-Bundle 'mhinz/vim-signify'
-Bundle 'motemen/git-vim'
-Bundle 'kien/tabman.vim'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'rosenfeld/conque-term'
-Bundle 'fisadev/FixedTaskList.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/vim-snippets'
-Bundle 'garbas/vim-snipmate'
-Bundle 'tpope/vim-fugitive'
-Bundle 'juneedahamed/svnj.vim'
-Bundle 'nvie/vim-flake8'
-Bundle 'w0rp/ale'
-Bundle 'IndexedSearch'
-Bundle 'matchit.zip'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'vim-scripts/xptemplate'
-"Bundle 'vim-scripts/AutoComplPop'
-"Bundle 'vim-scripts/Wombat'
-Bundle 'chriskempson/base16-vim'
-Bundle 'rainbow_parentheses.vim'
-Bundle 'Yggdroot/indentLine'
-Bundle 'xiaoyaoliu/vim-rooter'
+Plug 'Valloric/YouCompleteMe'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-signify'
+Plug 'motemen/git-vim'
+Plug 'kien/tabman.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'rosenfeld/conque-term'
+Plug 'fisadev/FixedTaskList.vim'
+Plug 'tpope/vim-surround'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'honza/vim-snippets'
+Plug 'garbas/vim-snipmate'
+Plug 'tpope/vim-fugitive'
+Plug 'juneedahamed/svnj.vim'
+Plug 'nvie/vim-flake8'
+Plug 'w0rp/ale'
+Plug 'vim-scripts/IndexedSearch'
+Plug 'vim-scripts/matchit.zip'
+Plug 'vim-scripts/YankRing.vim'
+Plug 'vim-scripts/xptemplate'
+"Plug 'vim-scripts/AutoComplPop'
+"Plug 'vim-scripts/Wombat'
+Plug 'chriskempson/base16-vim'
+Plug 'vim-scripts/rainbow_parentheses.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'xiaoyaoliu/vim-rooter'
 
 if has("win16") || has("win32")
-    Bundle 'lsdr/monokai'
-    Bundle 'previm/previm'
-    Bundle 'tyru/open-browser.vim'
-    Bundle 'haya14busa/vim-open-googletranslate'
+    Plug 'lsdr/monokai'
+    Plug 'previm/previm'
+    Plug 'tyru/open-browser.vim'
+    Plug 'haya14busa/vim-open-googletranslate'
 endif
 " python plugins
-"Bundle 'fs111/pydoc.vim'
+"Plug 'fs111/pydoc.vim'
 
 " 你的所有插件需要在下面这行之前
-call vundle#end()            " 必须
+" Initialize plugin system
+call plug#end()
 " Enable filetype plugins
 filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
 
