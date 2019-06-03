@@ -22,9 +22,13 @@ def _to_abs_path(folder, work_folder=None):
 	return folder if os.path.isdir(folder) else None
 
 
-def on_start_jedihttp():
+def Settings(**kwargs):
 	work_folder = os.path.realpath(os.path.dirname(__file__))
+	result = []
 	for folder in py_folders:
-		sys.path.insert(0, _to_abs_path(folder, work_folder))
+		result.append(_to_abs_path(folder, work_folder))
 	for folder in post_folders:
-		sys.path.append(_to_abs_path(folder, work_folder))
+		result.append(_to_abs_path(folder, work_folder))
+	return {
+		'sys_path': result
+	}

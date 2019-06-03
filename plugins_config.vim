@@ -221,13 +221,16 @@ let g:ale_fixers = {
 \}
 
 " YouCompleteMe customizations
-nmap <leader>k :YcmCompleter GetDoc<CR>
-nmap <leader>o :YcmCompleter GoToReferences<CR>
-nmap <leader>D :tab split<CR><C-]>
+nmap <leader>jk :YcmCompleter GetDoc<CR>
+nmap <leader>jo :YcmCompleter GoToReferences<CR>
+nmap <leader>jt :split<CR><c-]>
+nmap <leader>jj :tab split<CR><C-]>
+nmap <leader>jd :split<CR>:YcmCompleter GoTo<CR>
+nmap <leader>J :tab split<CR>:YcmCompleter GoTo<CR>
 let g:ycm_key_invoke_completion = '<c-m>'
 "let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_show_diagnostics_ui = 0
-"let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_min_num_identifier_candidate_chars = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
@@ -251,6 +254,8 @@ let g:ycm_filetype_whitelist = {
 			\ "vim":1,
 			\ }
 
+" 加载项目配置的ycm的时候，不弹出确认窗口
+let g:ycm_confirm_extra_conf = 0
 "let g:ycm_semantic_triggers =  {
 			"\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
 			"\ 'cs,lua,javascript': ['re!\w{2}'],
