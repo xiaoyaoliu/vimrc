@@ -343,10 +343,10 @@ map <leader>s? z=
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
-map <leader>q :tabnew ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
-map <leader>x :tabnew ~/buffer.md<cr>
+map <leader>xx :tabnew ~/buffer.md<cr>
+map <leader>xq :tabnew ~/buffer<cr>
 
 
 " Toggle paste mode on and off

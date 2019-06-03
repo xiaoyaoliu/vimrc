@@ -164,9 +164,9 @@ pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
 * :tnext	跳到下一个定义	
 * ,6		刷新当前工程的ctags的索引
 
-#### [[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+### [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 
-可以查找定义，查找所有引用点，查找所有赋值点
+可以查找定义，查找所有引用点，查找所有赋值点。其实主要用他的自动补全
 
 所以，最终我还是把jedi-vim替换成了YCM
 
@@ -200,6 +200,14 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 
 在project_config中可以找到：我的client工程，server工程对应的vimrc.py文件
 
+#### 注意配置ycm_filetype_whitelist的时候，要填python，不要用py
+
+ycm_filetype_whitelist里是filetype不是文件的后缀名。
+
+filetype具体是什么名字，打开对应文件，执行
+```
+set filetype?
+```
 ## 工程管理，文件管理，全文检索
 
 ### airblade/vim-rooter
@@ -215,7 +223,7 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 ###  查找文件
 [ctrlp](https://github.com/kien/ctrlp.vim) vs [Leaderf](https://github.com/Yggdroot/LeaderF) vs [fzf](https://github.com/junegunn/fzf.vim)
 
-_vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
+vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
 #### fzf
 

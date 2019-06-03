@@ -25,6 +25,7 @@ else
     Plug 'mileszs/ack.vim'
     Plug 'rking/ag.vim'
 endif
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'Valloric/YouCompleteMe'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'godlygeek/tabular'
@@ -58,6 +59,9 @@ Plug 'chriskempson/base16-vim'
 Plug 'vim-scripts/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'xiaoyaoliu/vim-rooter'
+"Plug 'vim-scripts/LogViewer'
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-LogViewer'
 
 if has("win16") || has("win32")
     Plug 'lsdr/monokai'
@@ -220,11 +224,12 @@ let g:ale_fixers = {
 nmap <leader>k :YcmCompleter GetDoc<CR>
 nmap <leader>o :YcmCompleter GoToReferences<CR>
 nmap <leader>D :tab split<CR><C-]>
-let g:ycm_key_invoke_completion = '<C-m>'
-let g:ycm_seed_identifiers_with_syntax = 0
+let g:ycm_key_invoke_completion = '<c-m>'
+"let g:ycm_seed_identifiers_with_syntax = 0
 let g:ycm_show_diagnostics_ui = 0
-let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_min_num_identifier_candidate_chars = 1
+let g:ycm_complete_in_strings=1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_filetype_whitelist = {
 			\ "c":1,
@@ -233,10 +238,23 @@ let g:ycm_filetype_whitelist = {
 			\ "sh":1,
 			\ "zsh":1,
 			\ "zimbu":1,
-			\ "py":1,
+			\ "python":1,
+			\ "java":1,
+			\ "go":1,
+			\ "erlang":1,
+			\ "perl":1,
 			\ "def":1,
-			\ "bat":1,
+			\ "lua":1,
+			\ "cs":1,
+			\ "javascript":1,
+			\ "dosbatch":1,
+			\ "vim":1,
 			\ }
+
+"let g:ycm_semantic_triggers =  {
+			"\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			"\ 'cs,lua,javascript': ['re!\w{2}'],
+			"\ }
 
 
 " Change snipmate binding, to avoid problems with jedi-vim
@@ -295,3 +313,8 @@ let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+" log viewer
+let g:LogViewer_SyncUpdate = 'CursorMoved'
+"let g:LogViewer_SyncUpdate = 'CursorHold'
+let g:LogViewer_Filetypes = 'log4j,syslog,log,txt'
