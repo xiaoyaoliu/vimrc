@@ -29,3 +29,6 @@ nmap <silent> <leader>8 :PrevimOpen<CR>
 " vim-instant-markdown OBSOLETE
 "let g:instant_markdown_autostart = 0
 "nmap <silent> <leader>8 :InstantMarkdownPreview<CR>
+"
+set pythonthreehome=~/vimrc/bin/win32/python37
+set pythonthreedll=~/vimrc/bin/win32/python37/python37.dll
