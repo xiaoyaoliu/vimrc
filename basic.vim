@@ -463,3 +463,6 @@ nnoremap <silent> <leader>53 :!py -3 %<CR>
 " http://www.skywind.me/blog/archives/2084
 set tags=./.tags;,.tags
 "set tags=.tags
+
+"open terminal
+map <leader>fs :terminal<CR>

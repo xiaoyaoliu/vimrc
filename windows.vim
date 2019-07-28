@@ -1,6 +1,5 @@
 language message zh_CN.UTF-8
-" ConqueTerm
-map <leader>fp :silent ConqueTermTab powershell.exe<CR>
+map <leader>fp :term powershell<CR>
 
 " auto source vimrc
 autocmd! bufwritepost _vimrc source $HOME/_vimrc
@@ -15,7 +14,6 @@ nmap <leader>cf :<C-U>setlocal nobomb<CR>:set fileencoding=utf-8<CR>:set ff=dos<
 
 "open extern tool
 map <leader>fe :silent !start explorer /select,%<CR>
-map <leader>fs :silent !start powershell<CR>
 map <leader>fgg :silent !start GitExtensions<CR>
 map <leader>fgb :OpenBrowser google.com<CR>
 
