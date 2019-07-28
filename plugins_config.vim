@@ -62,6 +62,7 @@ Plug 'xiaoyaoliu/vim-rooter'
 "Plug 'vim-scripts/LogViewer'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-LogViewer'
+Plug 'skywind3000/asyncrun.vim'
 
 if has("win16") || has("win32")
     Plug 'lsdr/monokai'
@@ -77,6 +78,15 @@ endif
 call plug#end()
 " Enable filetype plugins
 filetype plugin indent on    " 必须 加载vim自带和插件相应的语法和文件类型相关脚本
+
+" 自动打开 quickfix window ，高度为 6
+let g:asyncrun_open = 6
+
+" 任务结束时候响铃提醒
+let g:asyncrun_bell = 1
+
+" 设置 F10 打开/关闭 Quickfix 窗口
+nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " toggle Tagbar display
 nmap <leader>4 :TagbarOpen<CR><c-w>h:LeaderfFunction<CR>

@@ -1,12 +1,8 @@
 # vimrc
 
-## vim准备
+## linux系统下vim的环境准备
 
-### Introduction && Install
-
-edit from my custom [_vimrc](https://github.com/suprsvn/_vimrc) for windows
-
-### vim的安装
+### 安装vim
 
 linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 
@@ -57,35 +53,36 @@ yum install -y vim
 
 apt-get install vim
 
-直接用源码安装(只列举不同点)
+也可以直接用源码安装(只列举不同点)
 
 ./configure --prefix=/usr
 
 sudo make install
 
-### 安装或更新vim-plug
+### 安装
+```bash
+# 下载本项目
+cd ~
+git clone https://github.com/xiaoyaoliu/vimrc.git
+# 使用本项目的vimrc
+cp ~/vimrc/default.vimrc ~/.vimrc
+# 安装vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
+# 打开vim
+vim
+# reload .vimrc in vim
+:source ~/.vimrc
+# 在vim中下载安装所有插件
+:PlugInstall
+```
+## windows系统下vim的环境准备
 
-https://github.com/junegunn/vim-plug
+### vim的安装
 
-Vundle已废弃。因为vim-plug支持异步，且有人维护
+本文不打算支持32位的windows，所以请直接安装64位的vim
 
-### PlugInstall
-
-打开vim(或gVim)，COMMAND MODE下输入:PlugInstall并回车即可安装全部插件
-
-### python取消用4个空格缩进的方法
-
-背景：由于公司编码规范是用tab来缩进，而不是标准的4个空格
-1. let g:python_recommended_style = 0
-1. 千万不要用这个插件: vim-scripts/indentpython.vim
-2. set noexpandtab
-
-### secureCRT中vim的颜色设置
-
-个人电脑上建议用XShell, 比secureCRT更好用
-
-- 在标签页的标题上右键菜单选择Session Options
-- Terminal -> Emulation 中的ANSI Color一定要勾上
+下载地址: https://github.com/vim/vim-win32-installer/releases
 
 ### windows环境配置
 
@@ -98,6 +95,25 @@ Vundle已废弃。因为vim-plug支持异步，且有人维护
 Win+R cmd Enter
 
 xmllint
+
+### 安装vim-plug
+
+https://github.com/junegunn/vim-plug
+
+Vundle已废弃。因为vim-plug支持异步，且有人维护
+
+### 下载工程
+```
+cd ~
+git clone https://github.com/xiaoyaoliu/vimrc.git
+# 使用本项目的vimrc
+cp ~/vimrc/default.vimrc ~/_vimrc
+```
+
+### 安装插件
+
+打开vim(或gVim)，COMMAND MODE下输入:PlugInstall并回车即可安装全部插件
+
 
 ## vim语法检查
 
@@ -287,11 +303,35 @@ svn 最佳使用方式: [Is there a nice subversion plugin for Vim?](https://sta
 
 :!svn log %
 
-## 被我忽略的非常有用的命令
+## vim小知识集合
+
+### 命令行中，输入<C-D>查看可能的补全结果
+
+例如:
+
+:e <C-D>
+
+### :diffsplit
+
+vim自带的比较文件差异的功能
 
 ### jumps相关，Ctrl + i, Ctrl + o
 
 Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
+
+### python取消用4个空格缩进的方法
+
+背景：由于公司编码规范是用tab来缩进，而不是标准的4个空格
+1. let g:python_recommended_style = 0
+1. 千万不要用这个插件: vim-scripts/indentpython.vim
+2. set noexpandtab
+
+### secureCRT中vim的颜色设置
+
+个人电脑上建议用XShell, 比secureCRT更好用
+
+- 在标签页的标题上右键菜单选择Session Options
+- Terminal -> Emulation 中的ANSI Color一定要勾上
 
 ## 未来与展望
 
