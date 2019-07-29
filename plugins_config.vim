@@ -27,6 +27,8 @@ else
 endif
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'Valloric/YouCompleteMe'
+"https://tabnine.com/install
+Plug 'zxqfl/tabnine-vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
