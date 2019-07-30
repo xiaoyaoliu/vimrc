@@ -1,12 +1,20 @@
 # vimrc
 
+## 坚持学vim的理由
+
+1. 可以ssh直连server改代码。	尤其对于服务端C++程序员而言，vim8的gdb调试很方便。
+1.  一次学好，终身受益。		支持几乎所有类型编程语言，换公司也不用从头捣鼓编辑器。
+1. 好用的宏录制。				q键可以自定义宏操作，可以节省很多的编辑时间。
+1. 句号大法好。					"."可以重复上一个操作，熟练使用后很方便
+1. 天花板高，学无止境。			扩展性好，插件库丰富。 配置方式是脚本，对程序员友好。
+
 ## linux系统下vim的环境准备
 
 ### 安装vim
 
 linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 
-要求vim 7.4以上, 支持python
+要求vim 8.0以上, 支持python
 
 #### 在和他人共用的机器上
 
@@ -84,18 +92,6 @@ vim
 
 下载地址: https://github.com/vim/vim-win32-installer/releases
 
-### windows环境配置
-
-将$HOME/vimrc/bin/win32加入到环境变量Path
-
-* xmllint.exe syntastic插件用于xml格式的检查
-
-测试方法:
-
-Win+R cmd Enter
-
-xmllint
-
 ### 安装vim-plug
 
 https://github.com/junegunn/vim-plug
@@ -114,6 +110,18 @@ cp ~/vimrc/default.vimrc ~/_vimrc
 
 打开vim(或gVim)，COMMAND MODE下输入:PlugInstall并回车即可安装全部插件
 
+
+### windows环境配置
+
+将$HOME/vimrc/bin/win32加入到环境变量Path
+
+* xmllint.exe syntastic插件用于xml格式的检查
+
+测试方法:
+
+Win+R cmd Enter
+
+xmllint
 
 ## vim语法检查
 
@@ -305,11 +313,11 @@ svn 最佳使用方式: [Is there a nice subversion plugin for Vim?](https://sta
 
 ## vim小知识集合
 
-### 命令行中，输入<C-D>查看可能的补全结果
+### 命令行中，输入\<C-D\>查看可能的补全结果
 
 例如:
 
-:e <C-D>
+:e \<C-D\>
 
 ### :diffsplit
 
