@@ -287,7 +287,7 @@ set laststatus=2
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -343,10 +343,10 @@ map <leader>s? z=
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
-map <leader>q :tabnew ~/buffer<cr>
 
 " Quickly open a markdown buffer for scribble
-map <leader>x :tabnew ~/buffer.md<cr>
+map <leader>xx :tabnew ~/buffer.md<cr>
+map <leader>xq :tabnew ~/buffer<cr>
 
 
 " Toggle paste mode on and off
@@ -461,3 +461,9 @@ set ls=2
 nnoremap <silent> <leader>52 :!python %<CR>
 nnoremap <silent> <leader>53 :!py -3 %<CR>
 
+" http://www.skywind.me/blog/archives/2084
+set tags=./.tags;,.tags
+"set tags=.tags
+
+"open terminal
+map <leader>fs :terminal<CR>

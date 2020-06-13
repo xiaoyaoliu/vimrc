@@ -1,12 +1,11 @@
 language message zh_CN.UTF-8
-" ConqueTerm
-map <leader>fp :silent ConqueTermTab powershell.exe<CR>
+map <leader>fp :term powershell<CR>
 
 " auto source vimrc
 autocmd! bufwritepost _vimrc source $HOME/_vimrc
 
 " refesh ctags
-:nnoremap <silent> <leader>6 :!start ctags -R .<CR>
+:nnoremap <silent> <leader>6 :!start ctags --output-format=e-ctags -f .tags -R .<CR>
 
 nmap <leader>ww :<C-U><C-R>=printf("!start FileLocatorPro -d %s -f %s", shellescape(fnamemodify('.', ':p:h:h:p'), 1), expand("<cword>"))<CR><CR>
 
@@ -15,7 +14,6 @@ nmap <leader>cf :<C-U>setlocal nobomb<CR>:set fileencoding=utf-8<CR>:set ff=dos<
 
 "open extern tool
 map <leader>fe :silent !start explorer /select,%<CR>
-map <leader>fs :silent !start powershell<CR>
 map <leader>fgg :silent !start GitExtensions<CR>
 map <leader>fgb :OpenBrowser google.com<CR>
 
@@ -29,3 +27,6 @@ nmap <silent> <leader>8 :PrevimOpen<CR>
 " vim-instant-markdown OBSOLETE
 "let g:instant_markdown_autostart = 0
 "nmap <silent> <leader>8 :InstantMarkdownPreview<CR>
+"
+set pythonthreehome=~/vimrc/bin/win32/python37
+set pythonthreedll=~/vimrc/bin/win32/python37/python37.dll

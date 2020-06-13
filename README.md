@@ -1,13 +1,20 @@
 # vimrc
-## Introduction && Install
 
-edit from my custom [_vimrc](https://github.com/suprsvn/_vimrc) for windows
+## 坚持学vim的理由
 
-### vim的安装
+1. 可以ssh直连server改代码。	尤其对于服务端C++程序员而言，vim8的gdb调试很方便。
+1.  一次学好，终身受益。		支持几乎所有类型编程语言，换公司也不用从头捣鼓编辑器。
+1. 好用的宏录制。				q键可以自定义宏操作，可以节省很多的编辑时间。
+1. 句号大法好。					"."可以重复上一个操作，熟练使用后很方便
+1. 天花板高，学无止境。			扩展性好，插件库丰富。 配置方式是脚本，对程序员友好。
+
+## linux系统下vim的环境准备
+
+### 安装vim
 
 linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 
-要求vim 7.4以上, 支持python
+要求vim 8.0以上, 支持python
 
 #### 在和他人共用的机器上
 
@@ -54,34 +61,55 @@ yum install -y vim
 
 apt-get install vim
 
-直接用源码安装(只列举不同点)
+也可以直接用源码安装(只列举不同点)
 
 ./configure --prefix=/usr
 
 sudo make install
 
-### 安装vundle
+### 安装
+```bash
+# 下载本项目
+cd ~
+git clone https://github.com/xiaoyaoliu/vimrc.git
+# 使用本项目的vimrc
+cp ~/vimrc/default.vimrc ~/.vimrc
+# 安装vim-plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
+# 打开vim
+vim
+# reload .vimrc in vim
+:source ~/.vimrc
+# 在vim中下载安装所有插件
+:PlugInstall
+```
+## windows系统下vim的环境准备
 
-[linux vundle的安装](https://github.com/VundleVim/Vundle.vim)
+### vim的安装
 
-[windows vundle的安装](https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows)
+本文不打算支持32位的windows，所以请直接安装64位的vim
 
-#### BundleInstall
-打开vim(或gVim)，COMMAND MODE下输入:BundleInstall并回车即可安装全部插件
+下载地址: https://github.com/vim/vim-win32-installer/releases
 
-### python取消用4个空格缩进的方法
+### 安装vim-plug
 
-背景：由于公司编码规范是用tab来缩进，而不是标准的4个空格
-1. let g:python_recommended_style = 0
-1. 千万不要用这个插件: vim-scripts/indentpython.vim
-2. set noexpandtab
+https://github.com/junegunn/vim-plug
 
-### secureCRT中vim的颜色设置
+Vundle已废弃。因为vim-plug支持异步，且有人维护
 
-个人电脑上建议用XShell, 比secureCRT更好用
+### 下载工程
+```
+cd ~
+git clone https://github.com/xiaoyaoliu/vimrc.git
+# 使用本项目的vimrc
+cp ~/vimrc/default.vimrc ~/_vimrc
+```
 
-- 在标签页的标题上右键菜单选择Session Options
-- Terminal -> Emulation 中的ANSI Color一定要勾上
+### 安装插件
+
+打开vim(或gVim)，COMMAND MODE下输入:PlugInstall并回车即可安装全部插件
+
 
 ### windows环境配置
 
@@ -95,9 +123,13 @@ Win+R cmd Enter
 
 xmllint
 
-## vim插件使用经验总结
+## vim语法检查
 
-### syntastic插件
+### syntastic插件[已废弃]
+
+[Vim 8 下 C/C++ 开发环境搭建](http://www.skywind.me/blog/archives/2084) :代码检查是个好东西，让你在编辑文字的同时就帮你把潜在错误标注出来，不用等到编译或者运行了才发现。我很奇怪 2018 年了，为啥网上还在到处介绍老旧的 syntastic，但凡见到介绍这个插件的文章基本都可以不看了。
+
+老的 syntastic 基本没法用，不能实时检查，一保存文件就运行检查器并且等待半天，所以请用实时 linting 工具 [ALE](https://github.com/w0rp/ale)：https://github.com/w0rp/ale
 
 各种语言的语法检查
 
@@ -122,6 +154,20 @@ xmllint
 
 :help syntastic-checkers
 
+### ALE插件
+
+#### python配置过程中遇到的问题
+
+* 使用ALEInfoToClipboard，查看ALE的错误信息
+  * flake8 failed to load plugin "pycodestyle.break_around_binary_operator" due to 'module' object has no attribute 'break_around_binary_operator'
+* pip check
+  * 得到 flake8 3.3.0 has requirement pycodestyle<2.4.0,>=2.0.0, but you have pycodestyle 2.5.0
+* flake8版本过高导致，降低版本
+```
+pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
+```
+## 自动补全，Goto功能
+
 ### snippets插件的用法
 
 这个插件是否好用，输入一些特定的字母，点tab键就可以生成代码模板
@@ -130,25 +176,21 @@ xmllint
 
 例如python的话就是在python.snippets中定义，查看这个文件可以学到一些技巧。
 
-### 自动补全，Goto功能
-
 ### ctags（最重要的goto功能）
 
+[Universal Ctags](https://ctags.io/): https://ctags.io/
+
+自动建索引插件[vim-gutentags](https://github.com/ludovicchabant/vim-gutentags): https://github.com/ludovicchabant/vim-gutentags
+
+* (c-w)]	查看函数定义
 * (c-])		跳到第一个定义	
 * g(c-])	跳到所有的定义
 * :tnext	跳到下一个定义	
 * ,6		刷新当前工程的ctags的索引
 
-#### [jedi-vim](https://github.com/davidhalter/jedi-vim) pk [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
+### [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 
-两者都是基于[jedi](https://github.com/davidhalter/jedi)的
-可以查找定义，查找所有引用点，查找所有赋值点
-
-* 前者只支持Python; 后者支持更多的语言
-* 前者是同步查找，速度慢; 后者架构为client-server，速度快些
-* 前者只支持简单补全; 后者可以称为智能补全
-* 前者的Goto分为goto_assignment和goto_definition; 后者将goto_declaration和goto_definition合并为了goto_，更加方便
-* 前者的安装比较简单; 后者的安装稍为复杂，见[官方文档](https://github.com/Valloric/YouCompleteMe#installation)
+可以查找定义，查找所有引用点，查找所有赋值点。其实主要用他的自动补全
 
 所以，最终我还是把jedi-vim替换成了YCM
 
@@ -182,7 +224,15 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 
 在project_config中可以找到：我的client工程，server工程对应的vimrc.py文件
 
-## 工程管理
+#### 注意配置ycm_filetype_whitelist的时候，要填python，不要用py
+
+ycm_filetype_whitelist里是filetype不是文件的后缀名。
+
+filetype具体是什么名字，打开对应文件，执行
+```
+set filetype?
+```
+## 工程管理，文件管理，全文检索
 
 ### airblade/vim-rooter
 
@@ -197,7 +247,7 @@ ycmd只是作为客户端，具体的py文件的解析定位等都在服务端je
 ###  查找文件
 [ctrlp](https://github.com/kien/ctrlp.vim) vs [Leaderf](https://github.com/Yggdroot/LeaderF) vs [fzf](https://github.com/junegunn/fzf.vim)
 
-_vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
+vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
 #### fzf
 
@@ -233,25 +283,25 @@ windows下安装: choco install ripgrep
 
 [rg](https://github.com/BurntSushi/ripgrep#building)
 
-### 小插件简介
+## 小插件简介
 
-#### md文件的编辑插件
+### md文件的编辑插件
 
 vim-markdown 编辑
 
 [previm/previm](https://github.com/previm/previm) 用于预览 快捷键: ,8
 
-#### tyru/open-browser.vim 可以比较方便地打开浏览器，或者进行搜索
+### tyru/open-browser.vim 可以比较方便地打开浏览器，或者进行搜索
 
-####  tabman 就是tab manager的缩写，管理tab的神器
+###  tabman 就是tab manager的缩写，管理tab的神器
 
-#### [conque-term](https://code.google.com/archive/p/conque/)主要用于在vim中启动各种外部程序，例如shell
+### [conque-term](https://code.google.com/archive/p/conque/)主要用于在vim中启动各种外部程序，例如shell
 
 启动外部工具，可以vim自带的, 例如
 
 :!cd <path>
 
-#### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
+### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
 
 ### svn插件[juneedahamed/svnj.vim](https://github.com/juneedahamed/svnj.vim)
 
@@ -261,11 +311,35 @@ svn 最佳使用方式: [Is there a nice subversion plugin for Vim?](https://sta
 
 :!svn log %
 
-## 被我忽略的非常有用的命令
+## vim小知识集合
+
+### 命令行中，输入\<C-D\>查看可能的补全结果
+
+例如:
+
+:e \<C-D\>
+
+### :diffsplit
+
+vim自带的比较文件差异的功能
 
 ### jumps相关，Ctrl + i, Ctrl + o
 
 Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
+
+### python取消用4个空格缩进的方法
+
+背景：由于公司编码规范是用tab来缩进，而不是标准的4个空格
+1. let g:python_recommended_style = 0
+1. 千万不要用这个插件: vim-scripts/indentpython.vim
+2. set noexpandtab
+
+### secureCRT中vim的颜色设置
+
+个人电脑上建议用XShell, 比secureCRT更好用
+
+- 在标签页的标题上右键菜单选择Session Options
+- Terminal -> Emulation 中的ANSI Color一定要勾上
 
 ## 未来与展望
 
@@ -295,3 +369,6 @@ Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
 * 'fisadev/vim-isort': 安装后，启动vim会报错
 * vim-scripts/indentpython.vim: 安装后，会导致python无法使用tab进行缩进
 * airblade/vim-gitgutter: 安装后，如果一个文件不在git中，直接打开这个文件的时候vim会卡死, 使用<C-c>可以临时解决这个问题
+
+## 扩展阅读
+* Vim 8 下 C/C++ 开发环境搭建: http://www.skywind.me/blog/archives/2084
