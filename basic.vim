@@ -397,6 +397,7 @@ function! VisualSelection(direction, extra_filter) range
 
     let l:pattern = escape(@", "\\/.*'$^~[]")
     let l:pattern = substitute(l:pattern, "\n$", "", "")
+    "rg == ripgrep
     let l:rg_pattern = escape(@", "\\.*\"$^~[]")
     let l:rg_pattern = substitute(l:rg_pattern, "\n$", "", "")
 
