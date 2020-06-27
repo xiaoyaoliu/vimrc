@@ -116,6 +116,8 @@ apt-cache policy rsyslog
 
 ## mail 发不出去的问题
 
+apt-get install mailutils
+
 [Configure Postfix to Send Mail Using Gmail and Google Apps on Debian or Ubuntu](https://www.linode.com/docs/email/postfix/configure-postfix-to-send-mail-using-gmail-and-google-apps-on-debian-or-ubuntu/)
 
 ### 重启(systemctl restart postfix)失败的解决方法
