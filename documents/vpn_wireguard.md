@@ -88,22 +88,37 @@ external_static_ip: true
 
 启动后的选项: gce-algo y n y n 2
 
+安装完成后记一下登录gce-algo的方法:
+
+ssh -F configs/xx.xx.xx.xx/ssh_config gce-algo
+
 ### wireguard客户端的配置
 ```bash
-mkdir /home/zx/wireguard
+tar -czf algo_configs.tar.gz configs
 
-cp -r ./configs/xx.xx.xx.xx/wireguard/* /home/zx/wireguard
+cp ./algo_configs.tar.gz /home/zx/
 
 # 修改wireguard文件的权限，以便于后续可以用scp下载
-chmod o+r /home/zx/wireguard/*
+chmod o+r /home/zx/algo_configs.tar.gz
 ```
 ### iphone客户端配置
 
 然后在自己的个人电脑上执行:
 
-scp xx.xx.xx.xx:/home/zx/wireguard/phone.* ~/Desktop
+```bash
+scp xx.xx.xx.xx:/home/zx/algo_configs.tar.gz ~/Downloads
 
-需要切换下海外的apple id，在app store下载wireguard应用, 用wireguard扫描下PC桌面的phone.png即可
+mkdir ~/Downloads/algo 
+
+cd ~/Downloads/algo
+
+tar -xzvf ~/Downloads/algo_configs.tar.gz
+
+# 在个人电脑上远程登录服务器
+ssh -F configs/xx.xx.xx.xx/ssh_config gce-algo
+```
+
+需要切换下海外的apple id，在app store下载wireguard应用, 用wireguard扫描下~/Downloads/configs/xx.xx.xx.xx/wireguard/phone.png即可
 
 ### macair客户端配置
 有两种方法: 第一种和iphone类似，切换apple id, 直接下载；第二种方法是用brew，比较慢
