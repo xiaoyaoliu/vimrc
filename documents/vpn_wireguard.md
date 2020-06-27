@@ -1,4 +1,7 @@
 
+## 当其他机器可以正常上google，唯独某个机器不行的问题
+注意检查本地的/etc/host文件是否被人篡改
+
 ## 项目地址
 https://github.com/trailofbits/algo
 服务器使用谷歌云，重点看下这个：https://trailofbits.github.io/algo/cloud-gce.html
