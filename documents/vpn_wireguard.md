@@ -79,6 +79,9 @@ ipsec_enabled: false
 #动态IP和静态IP的区别在于：动态IP需要在连接网络时自动获取IP地址以供用户正常上网，而静态IP是ISP在装机时分配给用户的IP地址，可以直接连接上网，不需要获取IP地址。
 
 #静态IP又称为固定IP，是运营商的专线业务提供的一种IP形式，安装专线后运营商会提供固定IP及对应的子网掩码、网关，然后我们将固定IP的信息配置在本地连接里，这样我们电脑开机时就会少了获取IP的过程。其实固定IP大多数是用来做网站、运行各种服务的服务器
+# 因为只要一个ip在用，无论是静态ip和动态ip收费是一样的，
+# 所以，能用静态尽量用静态，只要保证静态ip不闲置即可！！！
+# https://cloud.google.com/compute/all-pricing#ipaddress
 external_static_ip: true 
 ```
 
@@ -86,7 +89,7 @@ external_static_ip: true
 
 ./algo -e "provider=gce" -e "gce_credentials_file=$(pwd)/configs/gce.json"
 
-启动后的选项: gce-algo y n y n 2
+启动后的选项: gce-algo y n y y 1
 
 安装完成后记一下登录gce-algo的方法:
 
