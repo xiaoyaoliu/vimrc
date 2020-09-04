@@ -116,6 +116,8 @@ apt-cache policy rsyslog
 
 ## mail 发不出去的问题
 
+apt-get install mailutils
+
 [Configure Postfix to Send Mail Using Gmail and Google Apps on Debian or Ubuntu](https://www.linode.com/docs/email/postfix/configure-postfix-to-send-mail-using-gmail-and-google-apps-on-debian-or-ubuntu/)
 
 ### 重启(systemctl restart postfix)失败的解决方法
@@ -174,3 +176,53 @@ sudo rm -rf /var/run/docker.sock
 ```
 
 You have removed Docker from the system completely.
+
+## python相关
+
+## debian上安装python3.7
+
+由于默认python版本是3.5，而某些软件需要3.7，所以只能从源码编译
+
+1. 安装必要的依赖包
+apt-get install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev curl libbz2-dev 
+2. 下载python源码, X替换为最新版本号
+curl -O https://www.python.org/ftp/python/3.7.X/Python-3.7.X.tar.xz
+tar -xf Python-3.7.X.tar.xz
+3. 安装
+./configure --enable-optimizations
+make
+make altinstall
+python3.7
+4. 将python3设置为python3.7
+ln -s /usr/local/bin/python3.7 /usr/bin/python3
+
+### 编译python3.7中间遇到的问题
+
+Q1: No module named 'lsb_release' after install Python 3.7.X from source
+A1: https://askubuntu.com/questions/965043/no-module-named-lsb-release-after-install-python-3-6-3-from-source
+
+Q2: Building Python 3.7.1 - SSL module failed
+A2: https://stackoverflow.com/questions/53543477/building-python-3-7-1-ssl-module-failed
+
+### 关于问题2的重点摘要:
+
+1. Compiling openssl
+
+curl https://www.openssl.org/source/openssl-1.0.2o.tar.gz | tar xz
+cd openssl-1.0.2o
+./config -fPIC -shared
+make && make install
+export PATH="/usr/local/openssl/lib:$PATH"
+export LD_LIBRARY_PATH=/path/to/openssl/lib:$LD_LIBRARY_PATH
+
+2. Compiling Python3，重点关注configure的参数!!
+sudo ./configure --with-openssl=/usr/local --enable-optimizations
+
+注意: The key here is understanding that the path you define with  --with-openssl=  is where Python looks for /openssl/lib. You need to give Python the parent directory of the openssl directory.
+
+That means that if you set  --with-openssl=/usr/local/openssl  your make install will fail even though the make logs show that openssl is fine!
+
+--enable-optimizations is irrelevant but recommended - longer make for 10% faster Python code is a good tradeoff.
+
+
+
