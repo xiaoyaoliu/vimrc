@@ -462,7 +462,9 @@ nnoremap <silent> <leader>52 :!python %<CR>
 nnoremap <silent> <leader>53 :!py -3 %<CR>
 
 " http://www.skywind.me/blog/archives/2084
-set tags=./.tags;,.tags
+" set tags=./.tags;,.tags
+" 这个地方只读取工程目录下的tags，不读取上一层目录的tags，避免同一个函数出现两次
+set tags=./.tags
 "set tags=.tags
 
 "open terminal
