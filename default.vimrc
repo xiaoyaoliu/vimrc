@@ -1,3 +1,4 @@
+source ~/vimrc/vimplug/*.vim
 source ~/vimrc/basic.vim
 if has("win32")
     source ~/vimrc/windows.vim

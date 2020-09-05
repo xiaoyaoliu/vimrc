@@ -165,7 +165,35 @@ xmllint
 * flake8版本过高导致，降低版本
 ```
 pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
+
 ```
+
+## gtags(比ctags更强大的工具, 推荐)
+
+Vim 8 中 C/C++ 符号索引：GTags 篇: https://zhuanlan.zhihu.com/p/36279445
+
+安装指导: https://www.cnblogs.com/kuang17/p/9449258.html
+
+### mac下gtags的安装
+```sh
+# 获取最新版本的gtags源码, 例如6.6.5
+wget http://tamacom.com/global/global-x.x.x.tar.gz
+
+# 解压
+tar -zxvf global-x.x.x.tar.gz
+
+cd global-x.x.x
+
+./configure
+
+make && make install
+
+cp gtags-cscope.vim gtags.vim ~/vimrc/vimplug/
+
+pip install pygments
+```
+
+
 ## 自动补全，Goto功能
 
 ### snippets插件的用法
@@ -176,7 +204,7 @@ pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
 
 例如python的话就是在python.snippets中定义，查看这个文件可以学到一些技巧。
 
-### ctags（最重要的goto功能）
+### ctags（最重要的goto功能, 已过时，obsoleted）
 
 [Universal Ctags](https://ctags.io/): https://ctags.io/
 
