@@ -192,17 +192,11 @@ cp gtags-cscope.vim gtags.vim ~/vimrc/vimplug/
 
 pip install pygments
 ```
+linux下gtags的安装: 步骤和mac下差不多，只是某些步骤需要root权限
 
+由于原生的gtags只支持六种语言: C，C++，Java，PHP4，Yacc，汇编
 
-## 自动补全，Goto功能
-
-### snippets插件的用法
-
-这个插件是否好用，输入一些特定的字母，点tab键就可以生成代码模板
-
-每种语言有哪些“暗号”在这个文件夹中定义：.vim\bundle\vim-snippets\snippets
-
-例如python的话就是在python.snippets中定义，查看这个文件可以学到一些技巧。
+如想要更多语言，那么 gtags 是支持使用 ctags/universal-ctags 或者 pygments 来作为分析前端支持 50+ 种语言。
 
 ### ctags（最重要的goto功能, 已过时，obsoleted）
 
@@ -215,6 +209,33 @@ pip install pygments
 * g(c-])	跳到所有的定义
 * :tnext	跳到下一个定义	
 * ,6		刷新当前工程的ctags的索引
+
+linux下ctags的安装
+```sh
+# 下载ctags
+git clone https://github.com/universal-ctags/ctags.git
+
+# 安装autotools
+sudo apt-get install autoconf automake libtool
+
+# https://github.com/universal-ctags/ctags/blob/master/docs/autotools.rst
+cd ctags
+./autogen.sh
+./configure --prefix=/where/you/want # defaults to /usr/local
+make
+make install # may require extra privileges depending on where to install
+```
+
+
+## 自动补全，Goto功能
+
+### snippets插件的用法
+
+这个插件是否好用，输入一些特定的字母，点tab键就可以生成代码模板
+
+每种语言有哪些“暗号”在这个文件夹中定义：.vim\bundle\vim-snippets\snippets
+
+例如python的话就是在python.snippets中定义，查看这个文件可以学到一些技巧。
 
 ### [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 
