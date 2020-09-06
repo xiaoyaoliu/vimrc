@@ -237,17 +237,13 @@ map <leader>ba :bufdo bd<cr>
 map <leader>l :bnext<cr>
 map <leader>h :bprevious<cr>
 
-" tab navigation
-map tn :tabn<CR>
-map tp :tabp<CR>
-map tm :tabmove 
-map tt :tabnew 
-map tc :tabclose<CR>
-map to :tabonly<CR>
-map ts :tab split<CR>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
+" tab navigation
+map <leader>tn :tabn<CR>
+map <leader>tp :tabp<CR>
+map <leader>ts :tab split<CR>
+map <leader>tt :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 

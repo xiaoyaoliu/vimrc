@@ -19,6 +19,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
+"Python syntax highlighting script for Vim
+Plug 'hdima/python-syntax'
 if has('python') || has('python3')
     Plug 'Yggdroot/LeaderF'
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
