@@ -159,11 +159,6 @@ if has('python') || has('python3')
 
     " YouCompleteMe customizations
     nmap <leader>jk :YcmCompleter GetDoc<CR>
-    nmap <leader>jo :YcmCompleter GoToReferences<CR>
-    nmap <leader>js :split<CR><c-]>
-    nmap <leader>jj :tab split<CR><C-]>
-    nmap <leader>jv :vsplit<CR>:YcmCompleter GoTo<CR>
-    nmap <leader>J :tab split<CR>:YcmCompleter GoTo<CR>
     let g:ycm_key_invoke_completion = '<c-m>'
     "let g:ycm_seed_identifiers_with_syntax = 0
     let g:ycm_show_diagnostics_ui = 0
