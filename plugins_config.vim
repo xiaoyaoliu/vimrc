@@ -29,8 +29,8 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'Valloric/YouCompleteMe'
 "https://tabnine.com/install
 Plug 'zxqfl/tabnine-vim'
-"Plug 'ludovicchabant/vim-gutentags'
-"Plug 'skywind3000/gutentags_plus'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'MattesGroeger/vim-bookmarks'
@@ -317,6 +317,9 @@ au Syntax * RainbowParenthesesLoadBraces
 " IndentLine
 let g:indentLine_color_gui = '#A4E57E'
 
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
 " ctags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_project_root = ['_darcs', '.root', '.git', '.hg', '.project', '.svn']
@@ -335,12 +338,33 @@ let g:gutentags_plus_nomap = 1
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录. 以下配置导致卡死，所以取消
 "let s:vim_tags = expand('~/.cache/tags')
 "let g:gutentags_cache_dir = s:vim_tags
-" let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_cache_dir = expand('~/.cache/tags')
 
 " 配置 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+"0 or s: Find this symbol
+noremap <silent> <leader>ns :GscopeFind s <C-R><C-W><cr>
+"1 or g: Find this definition
+noremap <silent> <leader>ng :GscopeFind g <C-R><C-W><cr>
+"3 or c: Find functions calling this function
+noremap <silent> <leader>nc :GscopeFind c <C-R><C-W><cr>
+"4 or t: Find this text string
+noremap <silent> <leader>nt :GscopeFind t <C-R><C-W><cr>
+"6 or e: Find this egrep pattern
+noremap <silent> <leader>ne :GscopeFind e <C-R><C-W><cr>
+"7 or f: Find this file
+noremap <silent> <leader>nf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+"8 or i: Find files #including this file
+noremap <silent> <leader>ni :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+"2 or d: Find functions called by this function
+noremap <silent> <leader>nd :GscopeFind d <C-R><C-W><cr>
+"9 or a: Find places where this symbol is assigned a value
+noremap <silent> <leader>na :GscopeFind a <C-R><C-W><cr>
+"Find current word in ctags database
+noremap <silent> <leader>nz :GscopeFind z <C-R><C-W><cr>
 
 " log viewer
 let g:LogViewer_SyncUpdate = 'CursorMoved'
