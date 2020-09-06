@@ -366,6 +366,9 @@ noremap <silent> <leader>na :GscopeFind a <C-R><C-W><cr>
 "Find current word in ctags database
 noremap <silent> <leader>nz :GscopeFind z <C-R><C-W><cr>
 
+"enable debug
+let g:gutentags_define_advanced_commands = 1
+
 " refesh gtags
 :nnoremap <silent> <leader>6 :GutentagsUpdate<CR>
 
