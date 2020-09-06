@@ -366,6 +366,9 @@ noremap <silent> <leader>na :GscopeFind a <C-R><C-W><cr>
 "Find current word in ctags database
 noremap <silent> <leader>nz :GscopeFind z <C-R><C-W><cr>
 
+" refesh gtags
+:nnoremap <silent> <leader>6 :GutentagsUpdate<CR>
+
 " log viewer
 let g:LogViewer_SyncUpdate = 'CursorMoved'
 "let g:LogViewer_SyncUpdate = 'CursorHold'
