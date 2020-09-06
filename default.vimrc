@@ -1,4 +1,5 @@
-source ~/vimrc/vimplug/*.vim
+source ~/vimrc/vimplug/gtags.vim
+source ~/vimrc/vimplug/gtags-cscope.vim
 source ~/vimrc/basic.vim
 if has("win32")
     source ~/vimrc/windows.vim
