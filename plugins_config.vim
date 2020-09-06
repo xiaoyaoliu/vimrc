@@ -367,6 +367,7 @@ noremap <silent> <leader>na :GscopeFind a <C-R><C-W><cr>
 noremap <silent> <leader>nz :GscopeFind z <C-R><C-W><cr>
 
 "enable debug
+let g:gutentags_trace = 1
 let g:gutentags_define_advanced_commands = 1
 
 " refesh gtags
