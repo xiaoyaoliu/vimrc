@@ -198,7 +198,13 @@ linux下gtags的安装: 步骤和mac下差不多，只是某些步骤需要root�
 
 如想要更多语言，那么 gtags 是支持使用 ctags/universal-ctags 或者 pygments 来作为分析前端支持 50+ 种语言。
 
-### ctags（最重要的goto功能, 已过时，obsoleted）
+本文推荐使用pygments，不必使用ctags
+
+Q: GscopeFind总是失败
+
+A: 尝试清理一下: rm -rf ~/.cache/tags/*
+
+### ctags（最重要的goto功能, 已过时!，obsoleted）
 
 [Universal Ctags](https://ctags.io/): https://ctags.io/
 
@@ -225,7 +231,6 @@ cd ctags
 make
 make install # may require extra privileges depending on where to install
 ```
-
 
 ## 自动补全，Goto功能
 

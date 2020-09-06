@@ -312,8 +312,36 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:indentLine_color_gui = '#A4E57E'
 
 " enable gtags module
-"let g:gutentags_modules = ['ctags', 'gtags_cscope']
-let g:gutentags_modules = ['gtags_cscope']
+" 同时开启 ctags 和 gtags 支持：
+let g:gutentags_modules = []
+if executable('ctags')
+	let g:gutentags_modules += ['ctags']
+endif
+if executable('gtags-cscope') && executable('gtags')
+	let g:gutentags_modules += ['gtags_cscope']
+
+    "0 or s: Find this symbol
+    noremap <silent> <leader>js :GscopeFind s <C-R><C-W><cr>
+    "1 or g: Find this definition
+    noremap <silent> <leader>jg :GscopeFind g <C-R><C-W><cr>
+    "3 or c: Find functions calling this function
+    noremap <silent> <leader>jc :GscopeFind c <C-R><C-W><cr>
+    "4 or t: Find this text string
+    noremap <silent> <leader>jt :GscopeFind t <C-R><C-W><cr>
+    "6 or e: Find this egrep pattern
+    noremap <silent> <leader>je :GscopeFind e <C-R><C-W><cr>
+    "7 or f: Find this file
+    noremap <silent> <leader>jf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+    "8 or i: Find files #including this file
+    noremap <silent> <leader>ji :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+    "2 or d: Find functions called by this function
+    noremap <silent> <leader>jd :GscopeFind d <C-R><C-W><cr>
+    "9 or a: Find places where this symbol is assigned a value
+    noremap <silent> <leader>ja :GscopeFind a <C-R><C-W><cr>
+    "Find current word in ctags database
+    noremap <silent> <leader>jz :GscopeFind z <C-R><C-W><cr>
+
+endif
 
 " ctags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
@@ -339,27 +367,6 @@ let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-"0 or s: Find this symbol
-noremap <silent> <leader>js :GscopeFind s <C-R><C-W><cr>
-"1 or g: Find this definition
-noremap <silent> <leader>jg :GscopeFind g <C-R><C-W><cr>
-"3 or c: Find functions calling this function
-noremap <silent> <leader>jc :GscopeFind c <C-R><C-W><cr>
-"4 or t: Find this text string
-noremap <silent> <leader>jt :GscopeFind t <C-R><C-W><cr>
-"6 or e: Find this egrep pattern
-noremap <silent> <leader>je :GscopeFind e <C-R><C-W><cr>
-"7 or f: Find this file
-noremap <silent> <leader>jf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-"8 or i: Find files #including this file
-noremap <silent> <leader>ji :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-"2 or d: Find functions called by this function
-noremap <silent> <leader>jd :GscopeFind d <C-R><C-W><cr>
-"9 or a: Find places where this symbol is assigned a value
-noremap <silent> <leader>ja :GscopeFind a <C-R><C-W><cr>
-"Find current word in ctags database
-noremap <silent> <leader>jz :GscopeFind z <C-R><C-W><cr>
 
 "enable debug
 "let g:gutentags_trace = 1
