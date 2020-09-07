@@ -68,7 +68,8 @@ cd Python-3.x.x.tar.xz
 ./configure --enable-optimizations --prefix=/home/<username>/sbin
 make && make install
 
-
+# 回到上文，继续安装vim
+--with-python3-config-dir=/home/<username>/sbin/lib/python3.x/config-3.x-x86_64-linux-gnu/
 ```
 
 方式2: 使用: [Linuxbrew](https://github.com/Linuxbrew/brew)
