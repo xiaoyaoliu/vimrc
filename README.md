@@ -32,6 +32,9 @@ cd ~ && mkdir sbin
 # install: pay attention here check python directory and prefix directory correct
 cd /tmp && git clone https://github.com/vim/vim.git && cd vim
 
+# [https://github.com/vim/vim/issues/3629](https://github.com/vim/vim/issues/3629#issuecomment-440845680)
+export LDFLAGS="-rdynamic"
+
  ./configure --enable-multibyte --enable-cscope --enable-farsi --enable-fail-if-missing -enable-terminal\
  --enable-python3interp=yes \
 --with-python3-config-dir=/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu/ \
@@ -66,6 +69,9 @@ cd Python-3.x.x
 ./configure --enable-shared --prefix=/home/<username>/sbin
 
 make && make install
+
+# 复制python库到系统目录，便于可以直接使用python3命令
+sudo cp ~/sbin/lib/libpython3.x.so.1.0 /usr/lib
 
 # 回到上文，继续安装vim
 --with-python3-config-dir=/home/<username>/sbin/lib/python3.x/config-3.x-x86_64-linux-gnu/
