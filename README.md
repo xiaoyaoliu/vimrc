@@ -224,7 +224,7 @@ cd global-x.x.x
 
 make && make install
 
-cp gtags-cscope.vim gtags.vim ~/vimrc/vimplug/
+cp gtags.conf ~/vimrc/vimplug/
 
 pip install pygments
 ```
