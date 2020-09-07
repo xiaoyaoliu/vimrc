@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 """""""""""""""""""""""""install packages""""""""""""""""""
 Plug 'junegunn/vim-plug'
 Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/FuzzyFinder'
 Plug 'scrooloose/nerdtree'
@@ -277,8 +278,8 @@ let g:ale_fixers = {
 imap <C-i> <Plug>snipMateNextOrTrigger
 
 " tabman shortcuts
-let g:tabman_toggle = '<leader>tt'
-let g:tabman_focus  = 'tf'
+let g:tabman_toggle = '<leader>ta'
+let g:tabman_focus  = '<leader>tf'
 
 " vim-airline-themes settings
 let g:airline_powerline_fonts = 0
