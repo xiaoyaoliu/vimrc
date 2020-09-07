@@ -63,9 +63,10 @@ wget https://www.python.org/ftp/python/3.x.x/Python-3.x.x.tar.xz
 tar xf Python-3.x.x.tar.xz
 
 # 编译安装
-cd Python-3.x.x.tar.xz
-./configure
-./configure --enable-optimizations --prefix=/home/<username>/sbin
+cd Python-3.x.x
+
+./configure --enable-shared --prefix=/home/<username>/sbin
+
 make && make install
 
 # 回到上文，继续安装vim
