@@ -371,7 +371,7 @@ set filetype?
 
 #### [MattesGroeger/vim-bookmarks](https://github.com/MattesGroeger/vim-bookmarks)
 
-使用mi指令将各个工程的某文件加入到标签列表，启动vim后就可以通过ma指令搜索想打开的工程
+使用<leader>mi指令将各个工程的某文件加入到标签列表，启动vim后就可以通过<leader>ma指令搜索想打开的工程
 
 ###  查找文件
 [ctrlp](https://github.com/kien/ctrlp.vim) vs [Leaderf](https://github.com/Yggdroot/LeaderF) vs [fzf](https://github.com/junegunn/fzf.vim)
