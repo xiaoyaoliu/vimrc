@@ -240,6 +240,8 @@ map <leader>h :bprevious<cr>
 
 " Useful mappings for managing tabs
 " tab navigation
+nmap L :tabn<CR>
+nmap H :tabp<CR>
 map <leader>tn :tabn<CR>
 map <leader>tp :tabp<CR>
 map <leader>ts :tab split<CR>
