@@ -462,8 +462,6 @@ nnoremap <silent> <leader>53 :!py -3 %<CR>
 " 这个地方只读取工程目录下的tags，不读取上一层目录的tags，避免同一个函数出现两次
 set tags=./.tags
 "set tags=.tags
-" 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用 gtags 本地分析器，而其他语言使用 pygments 模块。
-let $GTAGSLABEL = 'native-pygments'
 
 "open terminal
 map <leader>fs :terminal<CR>

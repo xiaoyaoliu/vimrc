@@ -174,6 +174,42 @@ Vim 8 中 C/C++ 符号索引：GTags 篇: https://zhuanlan.zhihu.com/p/36279445
 
 安装指导: https://www.cnblogs.com/kuang17/p/9449258.html
 
+### windows下gtags的安装
+windows上默认已经装好，如果需要更新gtags到最新版本，则按如下步骤即可
+
+```sh
+# 下载gtags, 下载的文件名通常为gloXXXwb.zip
+http://adoxa.altervista.org/global/
+
+# 解压gloXXXwb.zip, 得到bin, lib, share三个文件夹
+
+# 把文件copy到vimrc工程中
+将bin、lib目录下的所有散文件copy至~/vimrc/bin/win32
+将share目录整体直接copy至~/vimrc/bin/
+
+#安装pygments
+cd ~\vimrc\bin\win32\python37
+python -m pip install pygments
+
+# 最后提交下vimrc工程的修改，并push到github
+```
+### gtags插件安装失败的调试
+
+错误排查：gutentags: gutentags: gtags-cscope job failed, returned: 1
+
+这说明 gtags 在生成数据时出错了
+
+第一步：判断 gtags 为何失败，需进一步打开日志，查看 gtags 的错误输出：
+
+let g:gutentags_trace = 1
+let g:gutentags_define_advanced_commands = 1
+
+先在 vimrc 中添加上面这一句话，允许 gutentags 打开一些高级命令和选项。
+
+然后打开你出错的源文件，运行 “:GutentagsToggleTrace”命令(相当于g:gutentags_trace = 1)打开日志，它会将 ctags/gtags 命令的输出记录在 Vim 的 message 记录里。
+
+*接着保存一下当前文件，触发 gtags 数据库更新*，稍等片刻你应该能看到一些讨厌的日志输出，然后当你碰到问题时在 vim 里调用 ":messages" 命令列出所有消息记录，即可看到 gtags 的错误输出，方便你定位。
+
 ### mac下gtags的安装
 ```sh
 # 获取最新版本的gtags源码, 例如6.6.5

@@ -322,7 +322,10 @@ if executable('ctags') && !has("win32")
 endif
 if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
-
+	" 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用 gtags 本地分析器，而其他语言使用 pygments 模块。
+	let $GTAGSLABEL = 'native-pygments'
+	" GTAGSCONF主要告诉gtags，其他50多种语言需要分析哪些文件
+	let $GTAGSCONF = expand('~/vimrc/vimplug/gtags.conf')
     "0 or s: Find this symbol
     noremap <silent> <leader>js :GscopeFind s <C-R><C-W><cr>
     "1 or g: Find this definition
