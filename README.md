@@ -36,7 +36,7 @@ cd /tmp && git clone https://github.com/vim/vim.git && cd vim
  --enable-pythoninterp=yes \
  --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/\
  --enable-python3interp=yes \
---with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu/ \
+--with-python3-config-dir=/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu/ \
  --prefix=/home/<username>/sbin
 
 make 
@@ -71,7 +71,10 @@ sudo make install
 ```bash
 # 下载本项目
 cd ~
+# windows os
 git clone https://github.com/xiaoyaoliu/vimrc.git
+# linux or mac
+git clone -b linux https://github.com/xiaoyaoliu/vimrc.git
 # 使用本项目的vimrc
 cp ~/vimrc/default.vimrc ~/.vimrc
 # 安装vim-plug
