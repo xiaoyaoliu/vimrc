@@ -168,7 +168,7 @@ pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
 
 ```
 
-## gtags(比ctags更强大的工具, 推荐)
+## Goto功能GTags(比ctags更强大的工具, 推荐)
 
 Vim 8 中 C/C++ 符号索引：GTags 篇: https://zhuanlan.zhihu.com/p/36279445
 
@@ -202,6 +202,7 @@ python -m pip install pygments
 第一步：判断 gtags 为何失败，需进一步打开日志，查看 gtags 的错误输出：
 
 let g:gutentags_trace = 1
+
 let g:gutentags_define_advanced_commands = 1
 
 先在 vimrc 中添加上面这一句话，允许 gutentags 打开一些高级命令和选项。
@@ -268,7 +269,7 @@ make
 make install # may require extra privileges depending on where to install
 ```
 
-## 自动补全，Goto功能
+## 自动补全
 
 ### snippets插件的用法
 
@@ -322,6 +323,10 @@ filetype具体是什么名字，打开对应文件，执行
 ```
 set filetype?
 ```
+### TabNine
+
+一个号称很智能的补全插件，免费版的功能一般，收费版则有代码泄漏的风险！
+
 ## 工程管理，文件管理，全文检索
 
 ### airblade/vim-rooter
