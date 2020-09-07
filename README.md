@@ -19,7 +19,7 @@ linux下[vim](https://github.com/vim/vim)的版本过低: vim --version
 #### 在和他人共用的机器上
 
 方式1: [直接用源码安装](https://vi.stackexchange.com/questions/11526/how-to-enable-python-feature-in-vim/17502)
-```
+```sh
 # Prepare your system
 
 sudo apt install libncurses5-dev \
@@ -49,6 +49,26 @@ export PATH="$HOME/sbin/bin:$PATH"
 source ~/.profile
 
 vim --version
+```
+
+有些机器默认的python3版本是3.5，
+由于YCM插件要求的python版本号最低为3.6，所以最好将python3升级到3.7+
+```sh
+#到如下网站找到最新的python3版本
+https://www.python.org/downloads/
+
+# 下载最新的python3源码
+cd ~/tmp
+wget https://www.python.org/ftp/python/3.x.x/Python-3.x.x.tar.xz
+tar xf Python-3.x.x.tar.xz
+
+# 编译安装
+cd Python-3.x.x.tar.xz
+./configure
+./configure --enable-optimizations --prefix=/home/<username>/sbin
+make && make install
+
+
 ```
 
 方式2: 使用: [Linuxbrew](https://github.com/Linuxbrew/brew)
