@@ -256,7 +256,9 @@ make && make install
 
 cp gtags.conf ~/vimrc/vimplug/
 
-pip install pygments
+# vim会找$PATH下的python来找pygments，所以干脆两者都装一下
+python -m pip install pygments
+python3 -m pip install pygments
 ```
 linux下gtags的安装: 步骤和mac下差不多，只是某些步骤需要root权限
 
