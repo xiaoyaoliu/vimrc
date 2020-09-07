@@ -3,7 +3,7 @@
 autocmd! bufwritepost .vimrc source $HOME/.vimrc
 
 " refesh ctags
-":nnoremap <silent> ,6 :!ctags -f .tags -R > /dev/null 2>&1 &<CR>
+:nnoremap <silent> ,66 :!ctags -f .tags -R > /dev/null 2>&1 &<CR>
 
 
 " set fileencoding to default in windows
