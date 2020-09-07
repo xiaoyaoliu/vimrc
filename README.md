@@ -32,9 +32,7 @@ cd ~ && mkdir sbin
 # install: pay attention here check python directory and prefix directory correct
 cd /tmp && git clone https://github.com/vim/vim.git && cd vim
 
- ./configure --enable-multibyte --enable-cscope --enable-farsi\
- --enable-pythoninterp=yes \
- --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/\
+ ./configure --enable-multibyte --enable-cscope --enable-farsi --enable-fail-if-missing -enable-terminal\
  --enable-python3interp=yes \
 --with-python3-config-dir=/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu/ \
  --prefix=/home/<username>/sbin
