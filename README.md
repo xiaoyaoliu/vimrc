@@ -274,6 +274,8 @@ A: 尝试清理一下: rm -rf ~/.cache/tags/*
 
 ### ctags（最重要的goto功能, 已过时!，obsoleted）
 
+本插件同时支持gtags和ctags，日常使用以gtags为主，ctags为辅助。
+
 [Universal Ctags](https://ctags.io/): https://ctags.io/
 
 自动建索引插件[vim-gutentags](https://github.com/ludovicchabant/vim-gutentags): https://github.com/ludovicchabant/vim-gutentags
@@ -282,7 +284,8 @@ A: 尝试清理一下: rm -rf ~/.cache/tags/*
 * (c-])		跳到第一个定义	
 * g(c-])	跳到所有的定义
 * :tnext	跳到下一个定义	
-* ,6		刷新当前工程的ctags的索引
+* ,6		手动刷新当前工程的gtags的索引
+* ,66		手动刷新当前工程的ctags的索引
 
 linux下ctags的安装
 ```sh
