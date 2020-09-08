@@ -312,6 +312,12 @@ au Syntax * RainbowParenthesesLoadBraces
 " IndentLine
 let g:indentLine_color_gui = '#A4E57E'
 
+" 同时开启 ctags 和 gtags 支持, windows下只开启gtags(避免gutentags生成ctags的卡顿)：
+let g:gutentags_modules = []
+if executable('ctags')
+	let g:gutentags_modules += ['ctags']
+endif
+
 " enable gtags module
 if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
