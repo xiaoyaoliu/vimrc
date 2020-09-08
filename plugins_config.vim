@@ -406,6 +406,7 @@ if executable('gtags-cscope') && executable('gtags')
 	let $GTAGSLABEL = 'native-pygments'
 	" GTAGSCONF主要告诉gtags，其他50多种语言需要分析哪些文件
 	let $GTAGSCONF = expand('~/vimrc/vimplug/gtags.conf')
+    noremap <silent> <leader>jj :GscopeFind 
     "0 or s: Find this symbol
     noremap <silent> <leader>js :GscopeFind s <C-R><C-W><cr>
     noremap <silent> <leader>jS :GscopeFind s 
