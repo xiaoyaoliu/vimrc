@@ -406,37 +406,37 @@ if executable('gtags-cscope') && executable('gtags')
 	let $GTAGSLABEL = 'native-pygments'
 	" GTAGSCONF主要告诉gtags，其他50多种语言需要分析哪些文件
 	let $GTAGSCONF = expand('~/vimrc/vimplug/gtags.conf')
-    noremap <silent> <leader>jj :GscopeFind 
+    noremap <leader>jj :GscopeFind 
     "0 or s: Find this symbol
     noremap <silent> <leader>js :GscopeFind s <C-R><C-W><cr>
-    noremap <silent> <leader>jS :GscopeFind s 
+    noremap <leader>jS :GscopeFind s 
     "1 or g: Find this definition
     noremap <silent> <leader>jg :GscopeFind g <C-R><C-W><cr>
-    noremap <silent> <leader>jG :GscopeFind g 
+    noremap <leader>jG :GscopeFind g 
     "3 or c: Find functions calling this function
     noremap <silent> <leader>jc :GscopeFind c <C-R><C-W><cr>
-    noremap <silent> <leader>jC :GscopeFind c 
+    noremap <leader>jC :GscopeFind c 
     "4 or t: Find this text string
     noremap <silent> <leader>jt :GscopeFind t <C-R><C-W><cr>
-    noremap <silent> <leader>jT :GscopeFind t 
+    noremap <leader>jT :GscopeFind t 
     "6 or e: Find this egrep pattern
     noremap <silent> <leader>je :GscopeFind e <C-R><C-W><cr>
-    noremap <silent> <leader>jE :GscopeFind e 
+    noremap <leader>jE :GscopeFind e 
     "7 or f: Find this file
     noremap <silent> <leader>jf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-    noremap <silent> <leader>jF :GscopeFind f 
+    noremap <leader>jF :GscopeFind f 
     "8 or i: Find files #including this file
     noremap <silent> <leader>ji :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-    noremap <silent> <leader>jI :GscopeFind i 
+    noremap <leader>jI :GscopeFind i 
     "2 or d: Find functions called by this function
     noremap <silent> <leader>jd :GscopeFind d <C-R><C-W><cr>
-    noremap <silent> <leader>jD :GscopeFind d 
+    noremap <leader>jD :GscopeFind d 
     "9 or a: Find places where this symbol is assigned a value
     noremap <silent> <leader>ja :GscopeFind a <C-R><C-W><cr>
-    noremap <silent> <leader>jA :GscopeFind a 
+    noremap <leader>jA :GscopeFind a 
     "Find current word in ctags database
     noremap <silent> <leader>jz :GscopeFind z <C-R><C-W><cr>
-    noremap <silent> <leader>jZ :GscopeFind z 
+    noremap <leader>jZ :GscopeFind z 
 
 endif
 
