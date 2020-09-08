@@ -394,7 +394,8 @@ let g:indentLine_color_gui = '#A4E57E'
 
 " 同时开启 ctags 和 gtags 支持, windows下只开启gtags(避免gutentags生成ctags的卡顿)：
 let g:gutentags_modules = []
-if executable('ctags')
+if executable('ctags') && !has('win32')
+	" win32下，设置g:gutentags_cache_dir = expand('~/.cache/tags')，且用ctags，会造成C+]卡顿，
 	let g:gutentags_modules += ['ctags']
 endif
 
