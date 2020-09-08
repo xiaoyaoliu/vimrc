@@ -17,7 +17,6 @@ Plug 'vim-scripts/L9'
 Plug 'vim-scripts/FuzzyFinder'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 "Python syntax highlighting script for Vim
@@ -97,9 +96,7 @@ let g:asyncrun_bell = 1
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " toggle Tagbar display
-nmap <leader>4 :TagbarOpen<CR><c-w>h:LeaderfFunction<CR>
-" autofocus on Tagbar open
-let g:tagbar_autofocus = 1
+nmap <leader>4 :LeaderfFunction<CR>
 
 " NERDTree (better file browser) toggle
 nmap <leader>3 :NERDTreeToggle<CR>

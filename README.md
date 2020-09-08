@@ -498,6 +498,7 @@ Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
 * 'fisadev/vim-isort': 安装后，启动vim会报错
 * vim-scripts/indentpython.vim: 安装后，会导致python无法使用tab进行缩进
 * airblade/vim-gitgutter: 安装后，如果一个文件不在git中，直接打开这个文件的时候vim会卡死, 使用<C-c>可以临时解决这个问题
+* majutsushi/tagbar: 你真的不需要 tagbar 了，tagbar 是个老牌插件，用来查看函数列表，但是它已经好几年不更新了，经常在不经我许可的情况下（一次都没打开过它），莫名其妙的给我用阻塞方式调用 ctags，有时候切换文件都会卡几秒。https://www.zhihu.com/question/31934850
 
 ## 扩展阅读
 * Vim 8 下 C/C++ 开发环境搭建: http://www.skywind.me/blog/archives/2084
