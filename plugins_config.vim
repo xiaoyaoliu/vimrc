@@ -15,7 +15,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/FuzzyFinder'
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'kien/ctrlp.vim'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
@@ -27,9 +26,18 @@ if has('python') || has('python3')
     Plug 'Valloric/YouCompleteMe'
     "https://tabnine.com/install
     Plug 'zxqfl/tabnine-vim'
+	if has('nvim')
+		Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+	else
+		Plug 'Shougo/deoplete.nvim'
+		Plug 'Shougo/defx.nvim'
+		Plug 'roxma/nvim-yarp'
+		Plug 'roxma/vim-hug-neovim-rpc'
+	endif
 else
     Plug 'mileszs/ack.vim'
     Plug 'rking/ag.vim'
+	Plug 'scrooloose/nerdtree'
 endif
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
@@ -99,7 +107,16 @@ nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 nmap <leader>4 :LeaderfFunction!<CR>i
 
 " NERDTree (better file browser) toggle
-nmap <leader>3 :NERDTreeToggle<CR>
+"
+if has('python') || has('python3')
+	let g:deoplete#enable_at_startup = 1
+else
+	nmap <leader>3 :NERDTreeToggle<CR>
+
+	" Ignore files on NERDTree
+	let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.lnk$']
+
+endif
 
 " show pending tasks list
 map <leader>2 :TaskList<CR>
@@ -240,9 +257,6 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
   \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
   \ }
-
-" Ignore files on NERDTree
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.lnk$']
 
 " syntastic
 let g:ale_linters_explicit = 1

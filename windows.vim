@@ -30,5 +30,7 @@ nmap <silent> <leader>8 :PrevimOpen<CR>
 "let g:instant_markdown_autostart = 0
 "nmap <silent> <leader>8 :InstantMarkdownPreview<CR>
 "
+"
 set pythonthreehome=~/vimrc/bin/win32/python37
 set pythonthreedll=~/vimrc/bin/win32/python37/python37.dll
+let g:python3_host_prog = '~/vimrc/bin/win32/python37/python.exe'
