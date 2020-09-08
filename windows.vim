@@ -4,6 +4,8 @@ map <leader>fp :term powershell<CR>
 " auto source vimrc
 autocmd! bufwritepost _vimrc source $HOME/_vimrc
 
+let g:gutentags_modules = []
+
 " refesh ctags
 :nnoremap <silent> <leader>66 :!start ctags --output-format=e-ctags -f .tags -R .<CR>
 

@@ -316,11 +316,6 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:indentLine_color_gui = '#A4E57E'
 
 " enable gtags module
-" 同时开启 ctags 和 gtags 支持, windows下只开启gtags(避免gutentags生成ctags的卡顿)：
-let g:gutentags_modules = []
-if executable('ctags') && !has("win32")
-	let g:gutentags_modules += ['ctags']
-endif
 if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
 	" 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用 gtags 本地分析器，而其他语言使用 pygments 模块。
