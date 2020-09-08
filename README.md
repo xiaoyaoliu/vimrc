@@ -398,6 +398,14 @@ vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 #### vim-ctrlp-cmdpalette
 :CtrlPCmdPalette 使用关键词搜索vim的命令行
 
+#### 使用Leaderf搜索本文件函数的技巧
+
+其次 LeaderfFunction 有两种模式：浏览模式和模糊匹配模式，我们直接用 F2 进入浏览模式浏览当前文档的函数：<leader>4 :LeaderfFunction!<cr>
+
+命令后加一个叹号会进入 normal 模式，就跟tagbar一样，除了上下键选择外，Vim的各种跳转和搜索命令都可以始用，回车就跳转过去。
+
+在 LeaderfFunction 的浏览模式中，按 i 进入模糊匹配模式（按 TAB切换回来）：
+
 ### 全文检索工具 
 
 #### 推荐[rg](https://github.com/BurntSushi/ripgrep) ([Leaderf rg](https://github.com/Yggdroot/LeaderF))
