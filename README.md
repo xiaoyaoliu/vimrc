@@ -371,41 +371,54 @@ set filetype?
 
 #### [MattesGroeger/vim-bookmarks](https://github.com/MattesGroeger/vim-bookmarks)
 
-使用<leader>mi指令将各个工程的某文件加入到标签列表，启动vim后就可以通过<leader>ma指令搜索想打开的工程
+使用\<leader\>mi指令将各个工程的某文件加入到标签列表，启动vim后就可以通过\<leader\>ma指令搜索想打开的工程
 
 ###  查找文件[Leaderf](https://github.com/Yggdroot/LeaderF)
 
 Leaderf 是现役插件，如果感觉用的不顺手，可以试试备选插件: https://github.com/liuchengxu/vim-clap
 
-* <leader>f 搜索文件。如果想要的文件没搜到，按下F5 刷新缓存！
-* <leader>b 搜索buffer里的文件。
-* <leader>rm 搜索MRU文件: 最近用过的文件。
-* <leader>4 搜索本文件里的函数
+* \<leader\>f 搜索文件。如果想要的文件没搜到，按下F5 刷新缓存！
+* \<leader\>fm 搜索MRU文件: 最近用过的文件。
+* \<leader\>b 搜索buffer里的文件。
+* \<leader\>4 搜索本文件里的函数
+
+小技巧: 弹出搜索窗口的时候，按Tab 键玩一玩
+
 
 vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
 #### 使用Leaderf搜索本文件函数的技巧
 
-其次 LeaderfFunction 有两种模式：浏览模式和模糊匹配模式，我们直接用 F2 进入浏览模式浏览当前文档的函数：<leader>4 :LeaderfFunction!<cr>
+其次 LeaderfFunction 有两种模式：浏览模式和模糊匹配模式，我们直接用 \<leader\>4 进入浏览模式浏览当前文档的函数：
+
+```vim
+<leader>4 :LeaderfFunction!<cr>
+```
 
 命令后加一个叹号会进入 normal 模式，就跟tagbar一样，除了上下键选择外，Vim的各种跳转和搜索命令都可以始用，回车就跳转过去。
 
 在 LeaderfFunction 的浏览模式中，按 i 进入模糊匹配模式（按 TAB切换回来）：
 
-### 全文检索工具 
-
-#### 推荐[rg](https://github.com/BurntSushi/ripgrep) ([Leaderf rg](https://github.com/Yggdroot/LeaderF))
+### 全文检索工具 [rg](https://github.com/BurntSushi/ripgrep) ([Leaderf rg](https://github.com/Yggdroot/LeaderF))
 
 检索速度： [rg](https://github.com/BurntSushi/ripgrep) > [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)([ag.vim](https://github.com/rking/ag.vim)) > ack > grep
 
 rg的[优势](https://ruby-china.org/topics/38001): 速度最快, 支持中文, 异步搜素, 功能最全
 
+所有的Leaderf的窗口都支持Tab 键！！
+
 windows下安装: choco install ripgrep
 
-#### linux下的手动安装
+linux下的手动安装: [rg](https://github.com/BurntSushi/ripgrep#building)
 
-[rg](https://github.com/BurntSushi/ripgrep#building)
+常用搜索快捷键如下，更多快捷键请阅读plugins_config.vim:
 
+```vim
+<leader>rr 正常的文本搜索: 搜索的关键词包含大写字母则区分大小写，否则不区分大小写
+<leader>rw 正常的文本搜索 + 全字匹配
+<leader>wr 搜索选中的单词
+
+```
 ## 小插件简介
 
 ### md文件的编辑插件
@@ -425,6 +438,8 @@ vim-markdown 编辑
 :!cd <path>
 
 ### [vim-airline](https://github.com/vim-airline/vim-airline)业界标准底部状态栏
+
+竞品: https://github.com/powerline/powerline
 
 ### svn插件[juneedahamed/svnj.vim](https://github.com/juneedahamed/svnj.vim)
 
@@ -517,6 +532,7 @@ Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
 * vim-scripts/indentpython.vim: 安装后，会导致python无法使用tab进行缩进
 * airblade/vim-gitgutter: 安装后，如果一个文件不在git中，直接打开这个文件的时候vim会卡死, 使用<C-c>可以临时解决这个问题
 * majutsushi/tagbar: 你真的不需要 tagbar 了，tagbar 是个老牌插件，用来查看函数列表，但是它已经好几年不更新了，经常在不经我许可的情况下（一次都没打开过它），莫名其妙的给我用阻塞方式调用 ctags，有时候切换文件都会卡几秒。https://www.zhihu.com/question/31934850
+* 
 
 ## 扩展阅读
 * Vim 8 下 C/C++ 开发环境搭建: http://www.skywind.me/blog/archives/2084

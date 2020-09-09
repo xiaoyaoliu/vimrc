@@ -227,12 +227,12 @@ if has('python') || has('python3')
 	"let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 	"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
     " rg https://github.com/BurntSushi/ripgrep
+    nmap <leader>fm :LeaderfMru<CR>
     nmap <leader>ra :Leaderf! rg -g !tags --append -e 
     nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
     nmap <leader>rB :Leaderf! rg -F --current-buffer -e 
     nmap <leader>rd :LeaderfTagPattern
     nmap <leader>ri :Leaderf! rg -g !tags -i -e 
-    nmap <leader>rm :LeaderfMru<CR>
     nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
     nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
     nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
