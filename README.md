@@ -407,6 +407,8 @@ rg的[优势](https://ruby-china.org/topics/38001): 速度最快, 支持中文, 
 
 所有的Leaderf的窗口都支持Tab 键！！
 
+当按Tap 键进入浏览模式后，按下p键试试预览功能
+
 windows下安装: choco install ripgrep
 
 linux下的手动安装: [rg](https://github.com/BurntSushi/ripgrep#building)
