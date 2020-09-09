@@ -444,7 +444,7 @@ if executable('gtags-cscope') && executable('gtags')
 
 endif
 
-let g:rooter_patterns = ['_darcs', '.root', '.git', '.svn', '*.sln', 'build/env.sh']
+let g:rooter_patterns = ['_darcs', '.root', '.git', '.git/','.svn', '.svn/','*.sln', 'build/env.sh']
 
 " ctags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
