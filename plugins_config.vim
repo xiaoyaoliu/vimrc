@@ -15,9 +15,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/FuzzyFinder'
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 Plug 'fisadev/vim-ctrlp-cmdpalette'
 "Python syntax highlighting script for Vim
@@ -28,9 +26,18 @@ if has('python') || has('python3')
     Plug 'Valloric/YouCompleteMe'
     "https://tabnine.com/install
     Plug 'zxqfl/tabnine-vim'
+	if has('nvim')
+		Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+	else
+		Plug 'Shougo/deoplete.nvim'
+		Plug 'Shougo/defx.nvim'
+		Plug 'roxma/nvim-yarp'
+		Plug 'roxma/vim-hug-neovim-rpc'
+	endif
 else
     Plug 'mileszs/ack.vim'
     Plug 'rking/ag.vim'
+	Plug 'scrooloose/nerdtree'
 endif
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
@@ -97,12 +104,85 @@ let g:asyncrun_bell = 1
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " toggle Tagbar display
-nmap <leader>4 :TagbarOpen<CR><c-w>h:LeaderfFunction<CR>
-" autofocus on Tagbar open
-let g:tagbar_autofocus = 1
+nmap <leader>4 :LeaderfFunction!<CR>i
 
 " NERDTree (better file browser) toggle
-nmap <leader>3 :NERDTreeToggle<CR>
+"
+if has('python') || has('python3')
+	let g:deoplete#enable_at_startup = 1
+	nmap <leader>3 :vsplit<CR>:Defx<CR>
+	autocmd FileType defx call s:defx_my_settings()
+	function! s:defx_my_settings() abort
+	  " Define mappings
+	  nnoremap <silent><buffer><expr> <CR>
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> c
+	  \ defx#do_action('copy')
+	  nnoremap <silent><buffer><expr> m
+	  \ defx#do_action('move')
+	  nnoremap <silent><buffer><expr> p
+	  \ defx#do_action('paste')
+	  nnoremap <silent><buffer><expr> l
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> E
+	  \ defx#do_action('open', 'vsplit')
+	  nnoremap <silent><buffer><expr> P
+	  \ defx#do_action('preview')
+	  nnoremap <silent><buffer><expr> o
+	  \ defx#do_action('open_tree', 'toggle')
+	  nnoremap <silent><buffer><expr> K
+	  \ defx#do_action('new_directory')
+	  nnoremap <silent><buffer><expr> N
+	  \ defx#do_action('new_file')
+	  nnoremap <silent><buffer><expr> M
+	  \ defx#do_action('new_multiple_files')
+	  nnoremap <silent><buffer><expr> C
+	  \ defx#do_action('toggle_columns',
+	  \                'mark:indent:icon:filename:type:size:time')
+	  nnoremap <silent><buffer><expr> S
+	  \ defx#do_action('toggle_sort', 'time')
+	  nnoremap <silent><buffer><expr> d
+	  \ defx#do_action('remove')
+	  nnoremap <silent><buffer><expr> r
+	  \ defx#do_action('rename')
+	  nnoremap <silent><buffer><expr> !
+	  \ defx#do_action('execute_command')
+	  nnoremap <silent><buffer><expr> x
+	  \ defx#do_action('execute_system')
+	  nnoremap <silent><buffer><expr> yy
+	  \ defx#do_action('yank_path')
+	  nnoremap <silent><buffer><expr> .
+	  \ defx#do_action('toggle_ignored_files')
+	  nnoremap <silent><buffer><expr> ;
+	  \ defx#do_action('repeat')
+	  nnoremap <silent><buffer><expr> h
+	  \ defx#do_action('cd', ['..'])
+	  nnoremap <silent><buffer><expr> ~
+	  \ defx#do_action('cd')
+	  nnoremap <silent><buffer><expr> q
+	  \ defx#do_action('quit')
+	  nnoremap <silent><buffer><expr> <Space>
+	  \ defx#do_action('toggle_select') . 'j'
+	  nnoremap <silent><buffer><expr> *
+	  \ defx#do_action('toggle_select_all')
+	  nnoremap <silent><buffer><expr> j
+	  \ line('.') == line('$') ? 'gg' : 'j'
+	  nnoremap <silent><buffer><expr> k
+	  \ line('.') == 1 ? 'G' : 'k'
+	  nnoremap <silent><buffer><expr> <C-l>
+	  \ defx#do_action('redraw')
+	  nnoremap <silent><buffer><expr> <C-g>
+	  \ defx#do_action('print')
+	  nnoremap <silent><buffer><expr> cd
+	  \ defx#do_action('change_vim_cwd')
+	endfunction
+else
+	nmap <leader>3 :NERDTreeToggle<CR>
+
+	" Ignore files on NERDTree
+	let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.lnk$']
+
+endif
 
 " show pending tasks list
 map <leader>2 :TaskList<CR>
@@ -244,9 +324,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
   \ }
 
-" Ignore files on NERDTree
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.lnk$']
-
 " syntastic
 let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
@@ -315,40 +392,55 @@ au Syntax * RainbowParenthesesLoadBraces
 " IndentLine
 let g:indentLine_color_gui = '#A4E57E'
 
-" enable gtags module
 " 同时开启 ctags 和 gtags 支持, windows下只开启gtags(避免gutentags生成ctags的卡顿)：
 let g:gutentags_modules = []
-if executable('ctags') && !has("win32")
+if executable('ctags') && !has('win32')
+	" win32下，设置g:gutentags_cache_dir = expand('~/.cache/tags')，且用ctags，会造成C+]卡顿，
 	let g:gutentags_modules += ['ctags']
 endif
+
+" enable gtags module
 if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
 	" 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用 gtags 本地分析器，而其他语言使用 pygments 模块。
 	let $GTAGSLABEL = 'native-pygments'
 	" GTAGSCONF主要告诉gtags，其他50多种语言需要分析哪些文件
 	let $GTAGSCONF = expand('~/vimrc/vimplug/gtags.conf')
+    noremap <leader>jj :GscopeFind 
     "0 or s: Find this symbol
     noremap <silent> <leader>js :GscopeFind s <C-R><C-W><cr>
+    noremap <leader>jS :GscopeFind s 
     "1 or g: Find this definition
     noremap <silent> <leader>jg :GscopeFind g <C-R><C-W><cr>
+    noremap <leader>jG :GscopeFind g 
     "3 or c: Find functions calling this function
     noremap <silent> <leader>jc :GscopeFind c <C-R><C-W><cr>
+    noremap <leader>jC :GscopeFind c 
     "4 or t: Find this text string
     noremap <silent> <leader>jt :GscopeFind t <C-R><C-W><cr>
+    noremap <leader>jT :GscopeFind t 
     "6 or e: Find this egrep pattern
     noremap <silent> <leader>je :GscopeFind e <C-R><C-W><cr>
+    noremap <leader>jE :GscopeFind e 
     "7 or f: Find this file
     noremap <silent> <leader>jf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+    noremap <leader>jF :GscopeFind f 
     "8 or i: Find files #including this file
     noremap <silent> <leader>ji :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+    noremap <leader>jI :GscopeFind i 
     "2 or d: Find functions called by this function
     noremap <silent> <leader>jd :GscopeFind d <C-R><C-W><cr>
+    noremap <leader>jD :GscopeFind d 
     "9 or a: Find places where this symbol is assigned a value
     noremap <silent> <leader>ja :GscopeFind a <C-R><C-W><cr>
+    noremap <leader>jA :GscopeFind a 
     "Find current word in ctags database
     noremap <silent> <leader>jz :GscopeFind z <C-R><C-W><cr>
+    noremap <leader>jZ :GscopeFind z 
 
 endif
+
+let g:rooter_patterns = ['_darcs', '.root', '.git', '.svn', '*.sln', 'build/env.sh']
 
 " ctags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
@@ -393,3 +485,10 @@ autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 let g:LogViewer_SyncUpdate = 'CursorMoved'
 "let g:LogViewer_SyncUpdate = 'CursorHold'
 let g:LogViewer_Filetypes = 'log4j,syslog,log,txt'
+
+"vim-bookmarks
+"disable all default key bindings by setting
+let g:bookmark_no_default_key_mappings = 1
+nmap <leader>mm <Plug>BookmarkToggle
+nmap <leader>mi <Plug>BookmarkAnnotate
+nmap <leader>ma <Plug>BookmarkShowAll
