@@ -373,30 +373,16 @@ set filetype?
 
 使用<leader>mi指令将各个工程的某文件加入到标签列表，启动vim后就可以通过<leader>ma指令搜索想打开的工程
 
-###  查找文件
-[ctrlp](https://github.com/kien/ctrlp.vim) vs [Leaderf](https://github.com/Yggdroot/LeaderF) vs [fzf](https://github.com/junegunn/fzf.vim)
+###  查找文件[Leaderf](https://github.com/Yggdroot/LeaderF)
+
+Leaderf 是现役插件，如果感觉用的不顺手，可以试试备选插件: https://github.com/liuchengxu/vim-clap
+
+* <leader>f 搜索文件。如果想要的文件没搜到，按下F5 刷新缓存！
+* <leader>b 搜索buffer里的文件。
+* <leader>rm 搜索MRU文件: 最近用过的文件。
+* <leader>4 搜索本文件里的函数
 
 vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
-
-#### fzf
-
-对Windows不友好，是弹出来一个cmd窗口进行文件的搜索，无法搜索中文
-
-#### 使用ctrlp，有时候搜不到特定文件的原因（看help文件分析出来的）
-* ctrlp限制了最大文件数ctrlp_max_files，默认为10000
-* ctrlp限制了一次检索的返回结果的最大数量ctrlp_match_window，默认为10
-* ctrlp有工作目录模式ctrlp_working_path_mode，所搜文件并不在状态栏右侧显示的文件夹中
-* 要搜的文件，其格式可能加入了ctrlp的忽略名单ctrlp_custom_ignore
-
-#### ctrlp的优势
-* 很好的搜索文件的工具，例如 :CtrlP, :CtrlPMixed
-* 适合搜索当前打开的文件(file in buffer)里的内容，例如 :CtrlPLine, :CtrlPBufTagAll
-
-#### ctrlp的不足
-搜索特定关键词时，无法针对工程目录所有文件，即没有类似grep的功能
-
-#### vim-ctrlp-cmdpalette
-:CtrlPCmdPalette 使用关键词搜索vim的命令行
 
 #### 使用Leaderf搜索本文件函数的技巧
 
@@ -498,6 +484,30 @@ Ctrl + o 跳转到光标的历史位置; Ctrl + i则是相反方向
 * vim 与 svn git的结合 尤其是blame 查log 以及日常提交
 * vim和工程更好的结合
 * https://juejin.im/entry/5bced0e1e51d457a1179de96 https://github.com/embear/vim-foldsearch
+
+## 过时插件
+
+### 文件查找[ctrlp](https://github.com/kien/ctrlp.vim) -> Leaderf
+
+#### 使用ctrlp，有时候搜不到特定文件的原因（看help文件分析出来的）
+* ctrlp限制了最大文件数ctrlp_max_files，默认为10000
+* ctrlp限制了一次检索的返回结果的最大数量ctrlp_match_window，默认为10
+* ctrlp有工作目录模式ctrlp_working_path_mode，所搜文件并不在状态栏右侧显示的文件夹中
+* 要搜的文件，其格式可能加入了ctrlp的忽略名单ctrlp_custom_ignore
+
+#### ctrlp的优势
+* 很好的搜索文件的工具，例如 :CtrlP, :CtrlPMixed
+* 适合搜索当前打开的文件(file in buffer)里的内容，例如 :CtrlPLine, :CtrlPBufTagAll
+
+#### ctrlp的不足
+搜索特定关键词时，无法针对工程目录所有文件，即没有类似grep的功能
+
+#### vim-ctrlp-cmdpalette
+:CtrlPCmdPalette 使用关键词搜索vim的命令行
+
+### 文件查找[fzf](https://github.com/junegunn/fzf.vim)
+
+对Windows不友好，是弹出来一个cmd窗口进行文件的搜索，无法搜索中文
 
 ## 插件黑名单
 
