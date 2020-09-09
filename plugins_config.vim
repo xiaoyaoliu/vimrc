@@ -21,7 +21,11 @@ Plug 'fisadev/vim-ctrlp-cmdpalette'
 "Python syntax highlighting script for Vim
 Plug 'hdima/python-syntax'
 if has('python') || has('python3')
-    Plug 'Yggdroot/LeaderF'
+	if has("win16") || has("win32")
+		Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
+	else
+		Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+	endif
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'Valloric/YouCompleteMe'
     "https://tabnine.com/install
@@ -440,7 +444,7 @@ if executable('gtags-cscope') && executable('gtags')
 
 endif
 
-let g:rooter_patterns = ['_darcs', '.root', '.git', '.svn', '*.sln', 'build/env.sh']
+let g:rooter_patterns = ['_darcs', '.root', '.git', '.git/','.svn', '.svn/','*.sln', 'build/env.sh']
 
 " ctags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
