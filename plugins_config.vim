@@ -218,6 +218,14 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 " highlight PmenuThumb guibg=Black
 
 if has('python') || has('python3')
+	" don't show the help in normal mode
+	"let g:Lf_HideHelp = 1
+	" Cache 会导致新文件搜索不到，一定要关掉
+	let g:Lf_UseCache = 0
+	let g:Lf_UseVersionControlTool = 0
+	"let g:Lf_IgnoreCurrentBufferName = 1
+	"let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
+	"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
     " rg https://github.com/BurntSushi/ripgrep
     nmap <leader>ra :Leaderf! rg -g !tags --append -e 
     nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
