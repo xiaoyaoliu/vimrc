@@ -21,7 +21,11 @@ Plug 'fisadev/vim-ctrlp-cmdpalette'
 "Python syntax highlighting script for Vim
 Plug 'hdima/python-syntax'
 if has('python') || has('python3')
-    Plug 'Yggdroot/LeaderF'
+	if has("win16") || has("win32")
+		Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
+	else
+		Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+	endif
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'Valloric/YouCompleteMe'
     "https://tabnine.com/install
