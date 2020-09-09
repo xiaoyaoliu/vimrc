@@ -110,6 +110,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim
 # reload .vimrc in vim
 :source ~/.vimrc
+
+# 某些插件(例如: deoplete, nvim-yarp)依赖pynvim
+python3 -m pip install pynvim
+
 # 在vim中下载安装所有插件
 :PlugInstall
 ```
