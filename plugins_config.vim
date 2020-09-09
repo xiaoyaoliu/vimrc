@@ -16,8 +16,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/FuzzyFinder'
 Plug 'scrooloose/nerdcommenter'
-Plug 'kien/ctrlp.vim'
-Plug 'fisadev/vim-ctrlp-cmdpalette'
 "Python syntax highlighting script for Vim
 Plug 'hdima/python-syntax'
 if has('python') || has('python3')
@@ -42,6 +40,8 @@ else
     Plug 'mileszs/ack.vim'
     Plug 'rking/ag.vim'
 	Plug 'scrooloose/nerdtree'
+	Plug 'kien/ctrlp.vim'
+	Plug 'fisadev/vim-ctrlp-cmdpalette'
 endif
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
@@ -218,13 +218,21 @@ highlight Pmenu ctermbg=4 guibg=LightGray
 " highlight PmenuThumb guibg=Black
 
 if has('python') || has('python3')
+	" don't show the help in normal mode
+	"let g:Lf_HideHelp = 1
+	" Cache 会导致新文件搜索不到，一定要关掉。0表示重新打开vim的时候，会更新缓存
+	" 当找不到文件的时候，记得按下F5 刷新缓存
+	let g:Lf_UseCache = 0
+	"let g:Lf_IgnoreCurrentBufferName = 1
+	"let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
+	"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
     " rg https://github.com/BurntSushi/ripgrep
+    nmap <leader>fm :LeaderfMru<CR>
     nmap <leader>ra :Leaderf! rg -g !tags --append -e 
     nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
     nmap <leader>rB :Leaderf! rg -F --current-buffer -e 
     nmap <leader>rd :LeaderfTagPattern
     nmap <leader>ri :Leaderf! rg -g !tags -i -e 
-    nmap <leader>rm :LeaderfMru<CR>
     nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
     nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
     nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
@@ -294,39 +302,39 @@ else
     nmap <leader>ra :AckAdd -i
     nmap <leader>rf :AckFile -i
     nmap <leader>wr :<C-U><C-R>=printf("Ack! --ignore=tags %s", expand("<cword>"))<CR>
+	" CtrlP (new fuzzy finder)
+	let g:ctrlp_map = '<leader>e'
+	nmap <leader>eG :CtrlPBufTag<CR>
+	nmap <leader>eg :CtrlPBufTagAll<CR>
+	nmap <leader>ef :CtrlPLine<CR>
+	nmap <leader>em :CtrlPMRUFiles<CR>
+	nmap <leader>ec :CtrlPCmdPalette<CR>
+	" to be able to call CtrlP with default search text
+	function! CtrlPWithSearchText(search_text, ctrlp_command_end)
+		execute ':CtrlP' . a:ctrlp_command_end
+		call feedkeys(a:search_text)
+	endfunction
+	" CtrlP with default text
+	nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
+	nmap <leader>wh :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+	" 善于使用help命令查看官方解释，例如:help ctrlp_working_path_mode
+	let g:ctrlp_clear_cache_on_exit = 0
+	" 默认进入文件模式，可以使用<C-d>切换
+	let g:ctrlp_by_filename = 1
+	" 延迟搜索，提升搜索时的输入体验
+	let g:ctrlp_lazy_update = 1
+	" 给更多的文件建索引，避免有些文件搜不到
+	let g:ctrlp_max_files = 20000
+	" 将返回的搜索结果提升为50，改善搜到却不显示的情况
+	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
+	" Ignore files on fuzzy finder
+	let g:ctrlp_custom_ignore = {
+	  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
+	  \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
+	  \ }
 endif
-vnoremap <silent> rr :call VisualSelection('gv', '')<CR>
 
-" CtrlP (new fuzzy finder)
-let g:ctrlp_map = '<leader>e'
-nmap <leader>eG :CtrlPBufTag<CR>
-nmap <leader>eg :CtrlPBufTagAll<CR>
-nmap <leader>ef :CtrlPLine<CR>
-nmap <leader>em :CtrlPMRUFiles<CR>
-nmap <leader>ec :CtrlPCmdPalette<CR>
-" to be able to call CtrlP with default search text
-function! CtrlPWithSearchText(search_text, ctrlp_command_end)
-    execute ':CtrlP' . a:ctrlp_command_end
-    call feedkeys(a:search_text)
-endfunction
-" CtrlP with default text
-nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap <leader>wh :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
-" 善于使用help命令查看官方解释，例如:help ctrlp_working_path_mode
-let g:ctrlp_clear_cache_on_exit = 0
-" 默认进入文件模式，可以使用<C-d>切换
-let g:ctrlp_by_filename = 1
-" 延迟搜索，提升搜索时的输入体验
-let g:ctrlp_lazy_update = 1
-" 给更多的文件建索引，避免有些文件搜不到
-let g:ctrlp_max_files = 20000
-" 将返回的搜索结果提升为50，改善搜到却不显示的情况
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
-" Ignore files on fuzzy finder
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
-  \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
-  \ }
+vnoremap <silent> rr :call VisualSelection('gv', '')<CR>
 
 " syntastic
 let g:ale_linters_explicit = 1
