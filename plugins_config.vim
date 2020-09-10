@@ -348,21 +348,21 @@ let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
 let g:airline#extensions#ale#enabled = 1
 "let g:ale_fix_on_save = 1
+"
+let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
 
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
 " Check Python files with flake8 and pylint.
 let g:ale_linters = {
 \	'python': ['flake8'],
-\	'cpp': ['clang', 'clangcheck'],
+\	'cpp': ['clangtidy', 'cppcheck'],
+\	'c': ['clangtidy'],
 \}
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
+\   'cpp': ['clang-format'],
 \}
 " Change snipmate binding, to avoid problems with jedi-vim
 imap <C-i> <Plug>snipMateNextOrTrigger
