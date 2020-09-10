@@ -146,7 +146,6 @@ cp ~/vimrc/default.vimrc ~/_vimrc
 
 ### windows环境配置
 
-将$HOME/vimrc/bin/win32加入到环境变量Path
 
 * xmllint.exe syntastic插件用于xml格式的检查
 

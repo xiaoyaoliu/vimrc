@@ -355,7 +355,8 @@ let g:ale_c_cppcheck_options = ''
 let g:ale_cpp_cppcheck_options = ''
 " Check Python files with flake8 and pylint.
 let g:ale_linters = {
-\	'python': ['flake8']
+\	'python': ['flake8'],
+\	'cpp': ['clang', 'clangcheck'],
 \}
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {
