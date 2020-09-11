@@ -548,8 +548,12 @@ function! NearestMethodOrFunction() abort
   return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 
-function! NearestShowDetail() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
+function! NearestScope() abort
+  return get(b:, 'vista_nearest_scope', '')
+endfunction
+
+function! NearestSymbol() abort
+  return get(b:, 'vista_nearest_symbol', '')
 endfunction
 
 function! LightlineFilename()
@@ -559,6 +563,31 @@ function! LightlineFilename()
     return path[len(root)+1:]
   endif
   return expand('%')
+endfunction
+
+function! LightlineSignify()
+let [added, modified, removed] = sy#repo#get_stats()
+let l:sy = ''
+for [flag, flagcount] in [
+	\   [exists("g:signify_sign_add")?g:signify_sign_add:'+', added],
+	\   [exists("g:signify_sign_delete")?g:signify_sign_delete:'-', removed],
+	\   [exists("g:signify_sign_change")?g:signify_sign_change:'!', modified]
+	\ ]
+	if flagcount> 0
+		if !empty(l:sy)
+			let l:sy .= printf(' %s%d', flag, flagcount)
+		else
+			let l:sy = printf('%s%d', flag, flagcount)
+		endif
+	endif
+endfor
+if !empty(l:sy)
+	let l:sy = printf('[%s]', l:sy)
+	let l:sy_vcs = get(b:sy, 'updated_by', '???')
+	return printf('%s%s', l:sy_vcs, l:sy)
+else
+	return ''
+endif
 endfunction
 
 " By default vista.vim never run if you don't call it explicitly.
@@ -571,11 +600,14 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ]
+      \             [ 'gitbranch', 'signify', 'readonly', 'filename', 'modified', 'scope', 'method'] ]
       \ },
       \ 'component_function': {
       \   'method': 'NearestMethodOrFunction',
 	  \   'gitbranch': 'FugitiveHead',
       \   'filename': 'LightlineFilename',
+      \   'symbol': 'NearestSymbol',
+      \   'scope': 'NearestScope',
+	  \   'signify': 'LightlineSignify',
       \ },
       \ }
