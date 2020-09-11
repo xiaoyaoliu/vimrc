@@ -540,6 +540,7 @@ let g:LogViewer_Filetypes = 'log4j,syslog,log,txt'
 "vim-bookmarks
 "disable all default key bindings by setting
 let g:bookmark_no_default_key_mappings = 1
+nmap <leader>m <Plug>BookmarkShowAll
 nmap <leader>mm <Plug>BookmarkToggle
 nmap <leader>mi <Plug>BookmarkAnnotate
 nmap <leader>ma <Plug>BookmarkShowAll
