@@ -18,6 +18,14 @@ Plug 'vim-scripts/FuzzyFinder'
 Plug 'scrooloose/nerdcommenter'
 "Python syntax highlighting script for Vim
 Plug 'hdima/python-syntax'
+"c++ 语法高亮插件
+Plug 'octol/vim-cpp-enhanced-highlight'
+"c++ 的函数参数提示插件
+Plug 'Shougo/echodoc.vim'
+"c++ 的头文件切换
+Plug 'vim-scripts/a.vim'
+" tagbar太卡，这个是异步的tagbar
+Plug 'liuchengxu/vista.vim'
 if has('python') || has('python3')
 	if has("win16") || has("win32")
 		Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
@@ -31,7 +39,8 @@ if has('python') || has('python3')
 	if has('nvim')
 		Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 	else
-		Plug 'Shougo/deoplete.nvim'
+		" 自动补全先用YCM，这个禁用一下
+		"Plug 'Shougo/deoplete.nvim'
 		Plug 'Shougo/defx.nvim'
 		Plug 'roxma/nvim-yarp'
 		Plug 'roxma/vim-hug-neovim-rpc'
@@ -53,8 +62,9 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'motemen/git-vim'
 Plug 'kien/tabman.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'rosenfeld/conque-term'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'tpope/vim-surround'
@@ -108,6 +118,7 @@ let g:asyncrun_bell = 1
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " toggle Tagbar display
+nmap <leader>44 :Vista!!<CR>
 nmap <leader>4 :LeaderfFunction!<CR>i
 
 " NERDTree (better file browser) toggle
@@ -197,8 +208,8 @@ let g:vim_markdown_folding_disabled=1
 " END markdown
 
 " fix some problems with gitgutter and jedi-vim
-let g:gitgutter_eager = 0
-let g:gitgutter_realtime = 0
+"let g:gitgutter_eager = 0
+"let g:gitgutter_realtime = 0
 
 " automatically close autocompletion window
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -210,12 +221,6 @@ imap <C-J> <C-X><C-O>
 
 " store yankring history file hidden
 let g:yankring_history_file = '.yankring_history'
-
-" colors and settings of autocompletion
-highlight Pmenu ctermbg=4 guibg=LightGray
-" highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
-" highlight PmenuSbar ctermbg=7 guibg=DarkGray
-" highlight PmenuThumb guibg=Black
 
 if has('python') || has('python3')
 	" don't show the help in normal mode
@@ -282,12 +287,24 @@ if has('python') || has('python3')
                 \ "vim":1,
                 \ }
 
+
     " 加载项目配置的ycm的时候，不弹出确认窗口
     let g:ycm_confirm_extra_conf = 0
-    "let g:ycm_semantic_triggers =  {
-                "\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                "\ 'cs,lua,javascript': ['re!\w{2}'],
-                "\ }
+	let g:ycm_semantic_triggers = {
+    \   'c': ['->', '.'],
+    \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+    \            're!\[.*\]\s'],
+    \   'ocaml': ['.', '#'],
+    \   'cpp,cuda,objcpp': ['->', '.', '::'],
+    \   'perl': ['->'],
+    \   'php': ['->', '::'],
+    \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+    \   'ruby,rust': ['.', '::'],
+    \   'lua': ['.', ':'],
+    \   'erlang': [':'],
+	\	'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+	\	'cs,lua,javascript': ['re!\w{2}'],
+    \ }
 
 else
     " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
@@ -334,6 +351,17 @@ else
 	  \ }
 endif
 
+" https://zhuanlan.zhihu.com/p/33046090
+" 不少人觉得 Vim 自动补全的弹出窗口默认配色很丑
+" colors and settings of autocompletion
+highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
+"highlight Pmenu ctermbg=4 guibg=LightGray
+" highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
+" highlight PmenuSbar ctermbg=7 guibg=DarkGray
+" highlight PmenuThumb guibg=Black
+
+
 vnoremap <silent> rr :call VisualSelection('gv', '')<CR>
 
 " syntastic
@@ -346,7 +374,7 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
-let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#ale#enabled = 1
 "let g:ale_fix_on_save = 1
 "
 let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
@@ -367,14 +395,21 @@ let g:ale_fixers = {
 " Change snipmate binding, to avoid problems with jedi-vim
 imap <C-i> <Plug>snipMateNextOrTrigger
 
+" vim-cpp-enhanced-highlight
+" Highlighting of class scope
+let g:cpp_class_scope_highlight = 1
+
+"echodoc
+set noshowmode
+
 " tabman shortcuts
 let g:tabman_toggle = '<leader>ta'
 let g:tabman_focus  = '<leader>tf'
 
 " vim-airline-themes settings
-let g:airline_powerline_fonts = 0
-let g:airline_theme = 'light'
-let g:airline#extensions#whitespace#enabled = 1
+"let g:airline_powerline_fonts = 0
+"let g:airline_theme = 'light'
+"let g:airline#extensions#whitespace#enabled = 1
 
 " Better Rainbow Parentheses
 let g:rbpt_colorpairs = [
@@ -490,6 +525,9 @@ let g:gutentags_define_advanced_commands = 1
 " refesh gtags
 :nnoremap <silent> <leader>6 :GutentagsUpdate<CR>
 
+" airline 和 gutentags的结合
+"let g:airline#extensions#gutentags#enabled = 1
+
 "vim-preview
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
@@ -505,3 +543,39 @@ let g:bookmark_no_default_key_mappings = 1
 nmap <leader>mm <Plug>BookmarkToggle
 nmap <leader>mi <Plug>BookmarkAnnotate
 nmap <leader>ma <Plug>BookmarkShowAll
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+function! NearestShowDetail() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ]
+      \ },
+      \ 'component_function': {
+      \   'method': 'NearestMethodOrFunction',
+	  \   'gitbranch': 'FugitiveHead',
+      \   'filename': 'LightlineFilename',
+      \ },
+      \ }
