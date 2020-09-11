@@ -228,6 +228,8 @@ if has('python') || has('python3')
 	" Cache 会导致新文件搜索不到，一定要关掉。0表示重新打开vim的时候，会更新缓存
 	" 当找不到文件的时候，记得按下F5 刷新缓存
 	let g:Lf_UseCache = 0
+	let g:Lf_GtagsGutentags = 1
+	let g:Lf_GtagsAutoGenerate = 0
 	"let g:Lf_IgnoreCurrentBufferName = 1
 	"let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 	"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
@@ -510,7 +512,9 @@ let g:gutentags_plus_nomap = 1
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录. 以下配置导致卡死，所以取消
 "let s:vim_tags = expand('~/.cache/tags')
 "let g:gutentags_cache_dir = s:vim_tags
-let g:gutentags_cache_dir = expand('~/.cache/tags')
+""),
+let g:Lf_CacheDirectory = expand('~')
+let g:gutentags_cache_dir = expand(g:Lf_CacheDirectory.'/.LfCache/gtags')
 
 " 配置 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
