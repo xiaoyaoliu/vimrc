@@ -110,6 +110,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 vim
 # reload .vimrc in vim
 :source ~/.vimrc
+
+# 某些插件(例如: deoplete, nvim-yarp)依赖pynvim
+python3 -m pip install pynvim
+
 # 在vim中下载安装所有插件
 :PlugInstall
 ```
@@ -142,7 +146,6 @@ cp ~/vimrc/default.vimrc ~/_vimrc
 
 ### windows环境配置
 
-将$HOME/vimrc/bin/win32加入到环境变量Path
 
 * xmllint.exe syntastic插件用于xml格式的检查
 

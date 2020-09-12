@@ -18,6 +18,14 @@ Plug 'vim-scripts/FuzzyFinder'
 Plug 'scrooloose/nerdcommenter'
 "Python syntax highlighting script for Vim
 Plug 'hdima/python-syntax'
+"c++ 语法高亮插件
+Plug 'octol/vim-cpp-enhanced-highlight'
+"c++ 的函数参数提示插件
+Plug 'Shougo/echodoc.vim'
+"c++ 的头文件切换
+Plug 'vim-scripts/a.vim'
+" tagbar太卡，这个是异步的tagbar
+Plug 'liuchengxu/vista.vim'
 if has('python') || has('python3')
 	if has("win16") || has("win32")
 		Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
@@ -31,7 +39,8 @@ if has('python') || has('python3')
 	if has('nvim')
 		Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 	else
-		Plug 'Shougo/deoplete.nvim'
+		" 自动补全先用YCM，这个禁用一下
+		"Plug 'Shougo/deoplete.nvim'
 		Plug 'Shougo/defx.nvim'
 		Plug 'roxma/nvim-yarp'
 		Plug 'roxma/vim-hug-neovim-rpc'
@@ -53,8 +62,9 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'motemen/git-vim'
 Plug 'kien/tabman.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'rosenfeld/conque-term'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'tpope/vim-surround'
@@ -108,6 +118,7 @@ let g:asyncrun_bell = 1
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " toggle Tagbar display
+nmap <leader>44 :Vista!!<CR>
 nmap <leader>4 :LeaderfFunction!<CR>i
 
 " NERDTree (better file browser) toggle
@@ -197,8 +208,8 @@ let g:vim_markdown_folding_disabled=1
 " END markdown
 
 " fix some problems with gitgutter and jedi-vim
-let g:gitgutter_eager = 0
-let g:gitgutter_realtime = 0
+"let g:gitgutter_eager = 0
+"let g:gitgutter_realtime = 0
 
 " automatically close autocompletion window
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -211,22 +222,20 @@ imap <C-J> <C-X><C-O>
 " store yankring history file hidden
 let g:yankring_history_file = '.yankring_history'
 
-" colors and settings of autocompletion
-highlight Pmenu ctermbg=4 guibg=LightGray
-" highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
-" highlight PmenuSbar ctermbg=7 guibg=DarkGray
-" highlight PmenuThumb guibg=Black
-
 if has('python') || has('python3')
 	" don't show the help in normal mode
 	"let g:Lf_HideHelp = 1
 	" Cache 会导致新文件搜索不到，一定要关掉。0表示重新打开vim的时候，会更新缓存
 	" 当找不到文件的时候，记得按下F5 刷新缓存
 	let g:Lf_UseCache = 0
+	let g:Lf_GtagsGutentags = 1
+	let g:Lf_GtagsAutoGenerate = 0
 	"let g:Lf_IgnoreCurrentBufferName = 1
 	"let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 	"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
     " rg https://github.com/BurntSushi/ripgrep
+	noremap <M-r> :Leaderf! rg -g !tags -e 
+	noremap <M-m> :LeaderfMru<CR>
     nmap <leader>fm :LeaderfMru<CR>
     nmap <leader>ra :Leaderf! rg -g !tags --append -e 
     nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
@@ -282,12 +291,24 @@ if has('python') || has('python3')
                 \ "vim":1,
                 \ }
 
+
     " 加载项目配置的ycm的时候，不弹出确认窗口
     let g:ycm_confirm_extra_conf = 0
-    "let g:ycm_semantic_triggers =  {
-                "\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                "\ 'cs,lua,javascript': ['re!\w{2}'],
-                "\ }
+	let g:ycm_semantic_triggers = {
+    \   'c': ['->', '.'],
+    \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+    \            're!\[.*\]\s'],
+    \   'ocaml': ['.', '#'],
+    \   'cpp,cuda,objcpp': ['->', '.', '::'],
+    \   'perl': ['->'],
+    \   'php': ['->', '::'],
+    \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+    \   'ruby,rust': ['.', '::'],
+    \   'lua': ['.', ':'],
+    \   'erlang': [':'],
+	\	'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+	\	'cs,lua,javascript': ['re!\w{2}'],
+    \ }
 
 else
     " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
@@ -334,6 +355,17 @@ else
 	  \ }
 endif
 
+" https://zhuanlan.zhihu.com/p/33046090
+" 不少人觉得 Vim 自动补全的弹出窗口默认配色很丑
+" colors and settings of autocompletion
+highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
+"highlight Pmenu ctermbg=4 guibg=LightGray
+" highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
+" highlight PmenuSbar ctermbg=7 guibg=DarkGray
+" highlight PmenuThumb guibg=Black
+
+
 vnoremap <silent> rr :call VisualSelection('gv', '')<CR>
 
 " syntastic
@@ -346,34 +378,42 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
-let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#ale#enabled = 1
 "let g:ale_fix_on_save = 1
+"
+let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
 
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
 " Check Python files with flake8 and pylint.
 let g:ale_linters = {
-\	'python': ['flake8']
+\	'python': ['flake8'],
+\	'cpp': ['clangtidy', 'cppcheck'],
+\	'c': ['clangtidy'],
 \}
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
+\   'cpp': ['clang-format'],
 \}
 " Change snipmate binding, to avoid problems with jedi-vim
 imap <C-i> <Plug>snipMateNextOrTrigger
+
+" vim-cpp-enhanced-highlight
+" Highlighting of class scope
+let g:cpp_class_scope_highlight = 1
+
+"echodoc
+set noshowmode
 
 " tabman shortcuts
 let g:tabman_toggle = '<leader>ta'
 let g:tabman_focus  = '<leader>tf'
 
 " vim-airline-themes settings
-let g:airline_powerline_fonts = 0
-let g:airline_theme = 'light'
-let g:airline#extensions#whitespace#enabled = 1
+"let g:airline_powerline_fonts = 0
+"let g:airline_theme = 'light'
+"let g:airline#extensions#whitespace#enabled = 1
 
 " Better Rainbow Parentheses
 let g:rbpt_colorpairs = [
@@ -472,7 +512,9 @@ let g:gutentags_plus_nomap = 1
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录. 以下配置导致卡死，所以取消
 "let s:vim_tags = expand('~/.cache/tags')
 "let g:gutentags_cache_dir = s:vim_tags
-let g:gutentags_cache_dir = expand('~/.cache/tags')
+""),
+let g:Lf_CacheDirectory = expand('~')
+let g:gutentags_cache_dir = expand(g:Lf_CacheDirectory.'/.LfCache/gtags')
 
 " 配置 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
@@ -489,6 +531,9 @@ let g:gutentags_define_advanced_commands = 1
 " refesh gtags
 :nnoremap <silent> <leader>6 :GutentagsUpdate<CR>
 
+" airline 和 gutentags的结合
+"let g:airline#extensions#gutentags#enabled = 1
+
 "vim-preview
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
@@ -501,6 +546,75 @@ let g:LogViewer_Filetypes = 'log4j,syslog,log,txt'
 "vim-bookmarks
 "disable all default key bindings by setting
 let g:bookmark_no_default_key_mappings = 1
+nmap <leader>m <Plug>BookmarkShowAll
 nmap <leader>mm <Plug>BookmarkToggle
 nmap <leader>mi <Plug>BookmarkAnnotate
 nmap <leader>ma <Plug>BookmarkShowAll
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+function! NearestScope() abort
+  return get(b:, 'vista_nearest_scope', '')
+endfunction
+
+function! NearestSymbol() abort
+  return get(b:, 'vista_nearest_symbol', '')
+endfunction
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+function! LightlineSignify()
+let [added, modified, removed] = sy#repo#get_stats()
+let l:sy = ''
+for [flag, flagcount] in [
+	\   [exists("g:signify_sign_add")?g:signify_sign_add:'+', added],
+	\   [exists("g:signify_sign_delete")?g:signify_sign_delete:'-', removed],
+	\   [exists("g:signify_sign_change")?g:signify_sign_change:'!', modified]
+	\ ]
+	if flagcount> 0
+		if !empty(l:sy)
+			let l:sy .= printf(' %s%d', flag, flagcount)
+		else
+			let l:sy = printf('%s%d', flag, flagcount)
+		endif
+	endif
+endfor
+if !empty(l:sy)
+	let l:sy = printf('[%s]', l:sy)
+	let l:sy_vcs = get(b:sy, 'updated_by', '???')
+	return printf('%s%s', l:sy_vcs, l:sy)
+else
+	return ''
+endif
+endfunction
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'signify', 'readonly', 'filename', 'modified', 'scope', 'method'] ]
+      \ },
+      \ 'component_function': {
+      \   'method': 'NearestMethodOrFunction',
+	  \   'gitbranch': 'FugitiveHead',
+      \   'filename': 'LightlineFilename',
+      \   'symbol': 'NearestSymbol',
+      \   'scope': 'NearestScope',
+	  \   'signify': 'LightlineSignify',
+      \ },
+      \ }
