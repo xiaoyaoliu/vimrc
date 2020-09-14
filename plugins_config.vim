@@ -25,7 +25,8 @@ Plug 'Shougo/echodoc.vim'
 "c++ 的头文件切换
 Plug 'vim-scripts/a.vim'
 " tagbar太卡，这个是异步的tagbar
-Plug 'liuchengxu/vista.vim'
+"Plug 'liuchengxu/vista.vim'
+Plug 'xiaoyaoliu/vista.vim'
 if has('python') || has('python3')
 	if has("win16") || has("win32")
 		Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
@@ -557,8 +558,10 @@ function! NearestMethodOrFunction() abort
 endfunction
 
 function! NearestScope() abort
-  return get(b:, 'vista_nearest_scope', '')
+  let info = get(b:, 'vista_cursor_info', {})
+  return get(info, 'scope', '')
 endfunction
+
 
 function! NearestSymbol() abort
   return get(b:, 'vista_nearest_symbol', '')
