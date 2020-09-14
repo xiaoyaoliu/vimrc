@@ -12,24 +12,46 @@ call plug#begin('~/.vim/plugged')
 """""""""""""""""""""""""install packages""""""""""""""""""
 Plug 'junegunn/vim-plug'
 Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/L9'
 Plug 'vim-scripts/FuzzyFinder'
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
-Plug 'kien/ctrlp.vim'
-Plug 'fisadev/vim-ctrlp-cmdpalette'
 "Python syntax highlighting script for Vim
 Plug 'hdima/python-syntax'
+"c++ 语法高亮插件
+Plug 'octol/vim-cpp-enhanced-highlight'
+"c++ 的函数参数提示插件
+Plug 'Shougo/echodoc.vim'
+"c++ 的头文件切换
+Plug 'vim-scripts/a.vim'
+" tagbar太卡，这个是异步的tagbar
+"Plug 'liuchengxu/vista.vim'
+Plug 'xiaoyaoliu/vista.vim'
 if has('python') || has('python3')
-    Plug 'Yggdroot/LeaderF'
+	if has("win16") || has("win32")
+		Plug 'Yggdroot/LeaderF', { 'do': '.\install.bat' }
+	else
+		Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+	endif
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'Valloric/YouCompleteMe'
     "https://tabnine.com/install
     Plug 'zxqfl/tabnine-vim'
+	if has('nvim')
+		Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+	else
+		" 自动补全先用YCM，这个禁用一下
+		"Plug 'Shougo/deoplete.nvim'
+		Plug 'Shougo/defx.nvim'
+		Plug 'roxma/nvim-yarp'
+		Plug 'roxma/vim-hug-neovim-rpc'
+	endif
 else
     Plug 'mileszs/ack.vim'
     Plug 'rking/ag.vim'
+	Plug 'scrooloose/nerdtree'
+	Plug 'kien/ctrlp.vim'
+	Plug 'fisadev/vim-ctrlp-cmdpalette'
 endif
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
@@ -41,8 +63,9 @@ Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'motemen/git-vim'
 Plug 'kien/tabman.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'rosenfeld/conque-term'
 Plug 'fisadev/FixedTaskList.vim'
 Plug 'tpope/vim-surround'
@@ -96,12 +119,86 @@ let g:asyncrun_bell = 1
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " toggle Tagbar display
-nmap <leader>4 :TagbarOpen<CR><c-w>h:LeaderfFunction<CR>
-" autofocus on Tagbar open
-let g:tagbar_autofocus = 1
+nmap <leader>44 :Vista!!<CR>
+nmap <leader>4 :LeaderfFunction!<CR>i
 
 " NERDTree (better file browser) toggle
-nmap <leader>3 :NERDTreeToggle<CR>
+"
+if has('python') || has('python3')
+	let g:deoplete#enable_at_startup = 1
+	nmap <leader>3 :vsplit<CR>:Defx<CR>
+	autocmd FileType defx call s:defx_my_settings()
+	function! s:defx_my_settings() abort
+	  " Define mappings
+	  nnoremap <silent><buffer><expr> <CR>
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> c
+	  \ defx#do_action('copy')
+	  nnoremap <silent><buffer><expr> m
+	  \ defx#do_action('move')
+	  nnoremap <silent><buffer><expr> p
+	  \ defx#do_action('paste')
+	  nnoremap <silent><buffer><expr> l
+	  \ defx#do_action('open')
+	  nnoremap <silent><buffer><expr> E
+	  \ defx#do_action('open', 'vsplit')
+	  nnoremap <silent><buffer><expr> P
+	  \ defx#do_action('preview')
+	  nnoremap <silent><buffer><expr> o
+	  \ defx#do_action('open_tree', 'toggle')
+	  nnoremap <silent><buffer><expr> K
+	  \ defx#do_action('new_directory')
+	  nnoremap <silent><buffer><expr> N
+	  \ defx#do_action('new_file')
+	  nnoremap <silent><buffer><expr> M
+	  \ defx#do_action('new_multiple_files')
+	  nnoremap <silent><buffer><expr> C
+	  \ defx#do_action('toggle_columns',
+	  \                'mark:indent:icon:filename:type:size:time')
+	  nnoremap <silent><buffer><expr> S
+	  \ defx#do_action('toggle_sort', 'time')
+	  nnoremap <silent><buffer><expr> d
+	  \ defx#do_action('remove')
+	  nnoremap <silent><buffer><expr> r
+	  \ defx#do_action('rename')
+	  nnoremap <silent><buffer><expr> !
+	  \ defx#do_action('execute_command')
+	  nnoremap <silent><buffer><expr> x
+	  \ defx#do_action('execute_system')
+	  nnoremap <silent><buffer><expr> yy
+	  \ defx#do_action('yank_path')
+	  nnoremap <silent><buffer><expr> .
+	  \ defx#do_action('toggle_ignored_files')
+	  nnoremap <silent><buffer><expr> ;
+	  \ defx#do_action('repeat')
+	  nnoremap <silent><buffer><expr> h
+	  \ defx#do_action('cd', ['..'])
+	  nnoremap <silent><buffer><expr> ~
+	  \ defx#do_action('cd')
+	  nnoremap <silent><buffer><expr> q
+	  \ defx#do_action('quit')
+	  nnoremap <silent><buffer><expr> <Space>
+	  \ defx#do_action('toggle_select') . 'j'
+	  nnoremap <silent><buffer><expr> *
+	  \ defx#do_action('toggle_select_all')
+	  nnoremap <silent><buffer><expr> j
+	  \ line('.') == line('$') ? 'gg' : 'j'
+	  nnoremap <silent><buffer><expr> k
+	  \ line('.') == 1 ? 'G' : 'k'
+	  nnoremap <silent><buffer><expr> <C-l>
+	  \ defx#do_action('redraw')
+	  nnoremap <silent><buffer><expr> <C-g>
+	  \ defx#do_action('print')
+	  nnoremap <silent><buffer><expr> cd
+	  \ defx#do_action('change_vim_cwd')
+	endfunction
+else
+	nmap <leader>3 :NERDTreeToggle<CR>
+
+	" Ignore files on NERDTree
+	let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.lnk$']
+
+endif
 
 " show pending tasks list
 map <leader>2 :TaskList<CR>
@@ -112,8 +209,8 @@ let g:vim_markdown_folding_disabled=1
 " END markdown
 
 " fix some problems with gitgutter and jedi-vim
-let g:gitgutter_eager = 0
-let g:gitgutter_realtime = 0
+"let g:gitgutter_eager = 0
+"let g:gitgutter_realtime = 0
 
 " automatically close autocompletion window
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -126,20 +223,26 @@ imap <C-J> <C-X><C-O>
 " store yankring history file hidden
 let g:yankring_history_file = '.yankring_history'
 
-" colors and settings of autocompletion
-highlight Pmenu ctermbg=4 guibg=LightGray
-" highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
-" highlight PmenuSbar ctermbg=7 guibg=DarkGray
-" highlight PmenuThumb guibg=Black
-
 if has('python') || has('python3')
+	" don't show the help in normal mode
+	"let g:Lf_HideHelp = 1
+	" Cache 会导致新文件搜索不到，一定要关掉。0表示重新打开vim的时候，会更新缓存
+	" 当找不到文件的时候，记得按下F5 刷新缓存
+	let g:Lf_UseCache = 0
+	let g:Lf_GtagsGutentags = 1
+	let g:Lf_GtagsAutoGenerate = 0
+	"let g:Lf_IgnoreCurrentBufferName = 1
+	"let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
+	"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
     " rg https://github.com/BurntSushi/ripgrep
+	noremap <M-r> :Leaderf! rg -g !tags -e 
+	noremap <M-m> :LeaderfMru<CR>
+    nmap <leader>fm :LeaderfMru<CR>
     nmap <leader>ra :Leaderf! rg -g !tags --append -e 
     nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
     nmap <leader>rB :Leaderf! rg -F --current-buffer -e 
     nmap <leader>rd :LeaderfTagPattern
     nmap <leader>ri :Leaderf! rg -g !tags -i -e 
-    nmap <leader>rm :LeaderfMru<CR>
     nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
     nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
     nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
@@ -189,12 +292,24 @@ if has('python') || has('python3')
                 \ "vim":1,
                 \ }
 
+
     " 加载项目配置的ycm的时候，不弹出确认窗口
     let g:ycm_confirm_extra_conf = 0
-    "let g:ycm_semantic_triggers =  {
-                "\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                "\ 'cs,lua,javascript': ['re!\w{2}'],
-                "\ }
+	let g:ycm_semantic_triggers = {
+    \   'c': ['->', '.'],
+    \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+    \            're!\[.*\]\s'],
+    \   'ocaml': ['.', '#'],
+    \   'cpp,cuda,objcpp': ['->', '.', '::'],
+    \   'perl': ['->'],
+    \   'php': ['->', '::'],
+    \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+    \   'ruby,rust': ['.', '::'],
+    \   'lua': ['.', ':'],
+    \   'erlang': [':'],
+	\	'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+	\	'cs,lua,javascript': ['re!\w{2}'],
+    \ }
 
 else
     " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
@@ -209,42 +324,50 @@ else
     nmap <leader>ra :AckAdd -i
     nmap <leader>rf :AckFile -i
     nmap <leader>wr :<C-U><C-R>=printf("Ack! --ignore=tags %s", expand("<cword>"))<CR>
+	" CtrlP (new fuzzy finder)
+	let g:ctrlp_map = '<leader>e'
+	nmap <leader>eG :CtrlPBufTag<CR>
+	nmap <leader>eg :CtrlPBufTagAll<CR>
+	nmap <leader>ef :CtrlPLine<CR>
+	nmap <leader>em :CtrlPMRUFiles<CR>
+	nmap <leader>ec :CtrlPCmdPalette<CR>
+	" to be able to call CtrlP with default search text
+	function! CtrlPWithSearchText(search_text, ctrlp_command_end)
+		execute ':CtrlP' . a:ctrlp_command_end
+		call feedkeys(a:search_text)
+	endfunction
+	" CtrlP with default text
+	nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
+	nmap <leader>wh :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+	" 善于使用help命令查看官方解释，例如:help ctrlp_working_path_mode
+	let g:ctrlp_clear_cache_on_exit = 0
+	" 默认进入文件模式，可以使用<C-d>切换
+	let g:ctrlp_by_filename = 1
+	" 延迟搜索，提升搜索时的输入体验
+	let g:ctrlp_lazy_update = 1
+	" 给更多的文件建索引，避免有些文件搜不到
+	let g:ctrlp_max_files = 20000
+	" 将返回的搜索结果提升为50，改善搜到却不显示的情况
+	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
+	" Ignore files on fuzzy finder
+	let g:ctrlp_custom_ignore = {
+	  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
+	  \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
+	  \ }
 endif
+
+" https://zhuanlan.zhihu.com/p/33046090
+" 不少人觉得 Vim 自动补全的弹出窗口默认配色很丑
+" colors and settings of autocompletion
+highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
+"highlight Pmenu ctermbg=4 guibg=LightGray
+" highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
+" highlight PmenuSbar ctermbg=7 guibg=DarkGray
+" highlight PmenuThumb guibg=Black
+
+
 vnoremap <silent> rr :call VisualSelection('gv', '')<CR>
-
-" CtrlP (new fuzzy finder)
-let g:ctrlp_map = '<leader>e'
-nmap <leader>eG :CtrlPBufTag<CR>
-nmap <leader>eg :CtrlPBufTagAll<CR>
-nmap <leader>ef :CtrlPLine<CR>
-nmap <leader>em :CtrlPMRUFiles<CR>
-nmap <leader>ec :CtrlPCmdPalette<CR>
-" to be able to call CtrlP with default search text
-function! CtrlPWithSearchText(search_text, ctrlp_command_end)
-    execute ':CtrlP' . a:ctrlp_command_end
-    call feedkeys(a:search_text)
-endfunction
-" CtrlP with default text
-nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-nmap <leader>wh :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
-" 善于使用help命令查看官方解释，例如:help ctrlp_working_path_mode
-let g:ctrlp_clear_cache_on_exit = 0
-" 默认进入文件模式，可以使用<C-d>切换
-let g:ctrlp_by_filename = 1
-" 延迟搜索，提升搜索时的输入体验
-let g:ctrlp_lazy_update = 1
-" 给更多的文件建索引，避免有些文件搜不到
-let g:ctrlp_max_files = 20000
-" 将返回的搜索结果提升为50，改善搜到却不显示的情况
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
-" Ignore files on fuzzy finder
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
-  \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
-  \ }
-
-" Ignore files on NERDTree
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.lnk$']
 
 " syntastic
 let g:ale_linters_explicit = 1
@@ -256,34 +379,42 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
-let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#ale#enabled = 1
 "let g:ale_fix_on_save = 1
+"
+let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
 
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
 " Check Python files with flake8 and pylint.
 let g:ale_linters = {
-\	'python': ['flake8']
+\	'python': ['flake8'],
+\	'cpp': ['clangtidy', 'cppcheck'],
+\	'c': ['clangtidy'],
 \}
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \   'python': ['autopep8', 'yapf'],
+\   'cpp': ['clang-format'],
 \}
 " Change snipmate binding, to avoid problems with jedi-vim
 imap <C-i> <Plug>snipMateNextOrTrigger
 
+" vim-cpp-enhanced-highlight
+" Highlighting of class scope
+let g:cpp_class_scope_highlight = 1
+
+"echodoc
+set noshowmode
+
 " tabman shortcuts
-let g:tabman_toggle = '<leader>tt'
-let g:tabman_focus  = 'tf'
+let g:tabman_toggle = '<leader>ta'
+let g:tabman_focus  = '<leader>tf'
 
 " vim-airline-themes settings
-let g:airline_powerline_fonts = 0
-let g:airline_theme = 'light'
-let g:airline#extensions#whitespace#enabled = 1
+"let g:airline_powerline_fonts = 0
+"let g:airline_theme = 'light'
+"let g:airline#extensions#whitespace#enabled = 1
 
 " Better Rainbow Parentheses
 let g:rbpt_colorpairs = [
@@ -314,37 +445,55 @@ au Syntax * RainbowParenthesesLoadBraces
 " IndentLine
 let g:indentLine_color_gui = '#A4E57E'
 
-" enable gtags module
 " 同时开启 ctags 和 gtags 支持, windows下只开启gtags(避免gutentags生成ctags的卡顿)：
 let g:gutentags_modules = []
-if executable('ctags') && !has("win32")
+if executable('ctags') && !has('win32')
+	" win32下，设置g:gutentags_cache_dir = expand('~/.cache/tags')，且用ctags，会造成C+]卡顿，
 	let g:gutentags_modules += ['ctags']
 endif
+
+" enable gtags module
 if executable('gtags-cscope') && executable('gtags')
 	let g:gutentags_modules += ['gtags_cscope']
-
+	" 第一个 GTAGSLABEL 告诉 gtags 默认 C/C++/Java 等六种原生支持的代码直接使用 gtags 本地分析器，而其他语言使用 pygments 模块。
+	let $GTAGSLABEL = 'native-pygments'
+	" GTAGSCONF主要告诉gtags，其他50多种语言需要分析哪些文件
+	let $GTAGSCONF = expand('~/vimrc/vimplug/gtags.conf')
+    noremap <leader>jj :GscopeFind 
     "0 or s: Find this symbol
     noremap <silent> <leader>js :GscopeFind s <C-R><C-W><cr>
+    noremap <leader>jS :GscopeFind s 
     "1 or g: Find this definition
     noremap <silent> <leader>jg :GscopeFind g <C-R><C-W><cr>
+    noremap <leader>jG :GscopeFind g 
     "3 or c: Find functions calling this function
     noremap <silent> <leader>jc :GscopeFind c <C-R><C-W><cr>
+    noremap <leader>jC :GscopeFind c 
     "4 or t: Find this text string
     noremap <silent> <leader>jt :GscopeFind t <C-R><C-W><cr>
+    noremap <leader>jT :GscopeFind t 
     "6 or e: Find this egrep pattern
     noremap <silent> <leader>je :GscopeFind e <C-R><C-W><cr>
+    noremap <leader>jE :GscopeFind e 
     "7 or f: Find this file
     noremap <silent> <leader>jf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+    noremap <leader>jF :GscopeFind f 
     "8 or i: Find files #including this file
     noremap <silent> <leader>ji :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+    noremap <leader>jI :GscopeFind i 
     "2 or d: Find functions called by this function
     noremap <silent> <leader>jd :GscopeFind d <C-R><C-W><cr>
+    noremap <leader>jD :GscopeFind d 
     "9 or a: Find places where this symbol is assigned a value
     noremap <silent> <leader>ja :GscopeFind a <C-R><C-W><cr>
+    noremap <leader>jA :GscopeFind a 
     "Find current word in ctags database
     noremap <silent> <leader>jz :GscopeFind z <C-R><C-W><cr>
+    noremap <leader>jZ :GscopeFind z 
 
 endif
+
+let g:rooter_patterns = ['_darcs', '.root', '.git', '.git/','.svn', '.svn/','*.sln', 'build/env.sh']
 
 " ctags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
@@ -364,7 +513,9 @@ let g:gutentags_plus_nomap = 1
 " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录. 以下配置导致卡死，所以取消
 "let s:vim_tags = expand('~/.cache/tags')
 "let g:gutentags_cache_dir = s:vim_tags
-let g:gutentags_cache_dir = expand('~/.cache/tags')
+""),
+let g:Lf_CacheDirectory = expand('~')
+let g:gutentags_cache_dir = expand(g:Lf_CacheDirectory.'/.LfCache/gtags')
 
 " 配置 ctags 的参数
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
@@ -381,6 +532,9 @@ let g:gutentags_define_advanced_commands = 1
 " refesh gtags
 :nnoremap <silent> <leader>6 :GutentagsUpdate<CR>
 
+" airline 和 gutentags的结合
+"let g:airline#extensions#gutentags#enabled = 1
+
 "vim-preview
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
@@ -389,3 +543,79 @@ autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 let g:LogViewer_SyncUpdate = 'CursorMoved'
 "let g:LogViewer_SyncUpdate = 'CursorHold'
 let g:LogViewer_Filetypes = 'log4j,syslog,log,txt'
+
+"vim-bookmarks
+"disable all default key bindings by setting
+let g:bookmark_no_default_key_mappings = 1
+nmap <leader>m <Plug>BookmarkShowAll
+nmap <leader>mm <Plug>BookmarkToggle
+nmap <leader>mi <Plug>BookmarkAnnotate
+nmap <leader>ma <Plug>BookmarkShowAll
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+function! NearestScope() abort
+  return get(b:, 'vista_nearest_scope', '')
+endfunction
+
+function! NearestSymbol() abort
+  return get(b:, 'vista_nearest_symbol', '')
+endfunction
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+function! LightlineSignify()
+let [added, modified, removed] = sy#repo#get_stats()
+let l:sy = ''
+for [flag, flagcount] in [
+	\   [exists("g:signify_sign_add")?g:signify_sign_add:'+', added],
+	\   [exists("g:signify_sign_delete")?g:signify_sign_delete:'-', removed],
+	\   [exists("g:signify_sign_change")?g:signify_sign_change:'!', modified]
+	\ ]
+	if flagcount> 0
+		if !empty(l:sy)
+			let l:sy .= printf(' %s%d', flag, flagcount)
+		else
+			let l:sy = printf('%s%d', flag, flagcount)
+		endif
+	endif
+endfor
+if !empty(l:sy)
+	let l:sy = printf('[%s]', l:sy)
+	let l:sy_vcs = get(b:sy, 'updated_by', '???')
+	return printf('%s%s', l:sy_vcs, l:sy)
+else
+	return ''
+endif
+endfunction
+
+" By default vista.vim never run if you don't call it explicitly.
+"
+" If you want to show the nearest function in your statusline automatically,
+" you can add the following line to your vimrc
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'signify', 'readonly', 'filename', 'modified', 'scope', 'method'] ]
+      \ },
+      \ 'component_function': {
+      \   'method': 'NearestMethodOrFunction',
+	  \   'gitbranch': 'FugitiveHead',
+      \   'filename': 'LightlineFilename',
+      \   'symbol': 'NearestSymbol',
+      \   'scope': 'NearestScope',
+	  \   'signify': 'LightlineSignify',
+      \ },
+      \ }
