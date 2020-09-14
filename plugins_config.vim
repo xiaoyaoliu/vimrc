@@ -230,6 +230,7 @@ if has('python') || has('python3')
 	let g:Lf_UseCache = 0
 	let g:Lf_GtagsGutentags = 1
 	let g:Lf_GtagsAutoGenerate = 0
+    let g:Lf_Gtagslabel = 'native-pygments' 
 	"let g:Lf_IgnoreCurrentBufferName = 1
 	"let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 	"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
@@ -461,7 +462,7 @@ if executable('gtags-cscope') && executable('gtags')
     noremap <leader>jj :GscopeFind 
     "0 or s: Find this symbol
     noremap <silent> <leader>js :GscopeFind s <C-R><C-W><cr>
-    noremap <leader>jS :GscopeFind s 
+    noremap <leader>jS :Leaderf! gtags -g 
     "1 or g: Find this definition
     noremap <silent> <leader>jg :GscopeFind g <C-R><C-W><cr>
     noremap <leader>jG :GscopeFind g 
