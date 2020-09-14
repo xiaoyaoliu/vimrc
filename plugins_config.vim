@@ -87,7 +87,7 @@ Plug 'vim-scripts/xptemplate'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-scripts/rainbow_parentheses.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'airblade/vim-rooter'
+Plug 'xiaoyaoliu/vim-rooter'
 "Plug 'vim-scripts/LogViewer'
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-LogViewer'
@@ -557,8 +557,10 @@ function! NearestMethodOrFunction() abort
 endfunction
 
 function! NearestScope() abort
-  return get(b:, 'vista_nearest_scope', '')
+  let info = get(b:, 'vista_cursor_info', {})
+  return get(info, 'scope', '')
 endfunction
+
 
 function! NearestSymbol() abort
   return get(b:, 'vista_nearest_symbol', '')
