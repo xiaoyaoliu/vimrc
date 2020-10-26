@@ -16,7 +16,7 @@ au BufNewFile,BufRead *.uproject set filetype=json
 "if want refresh, please use:e!
 au BufNewFile,BufRead *.txt setlocal noautoread 
 "打开py文件的时候，自动将其四个空格替换为tab键，从而符合规范
-auto BufReadPost	*.py	retab! 4
+auto BufReadPost	**/script/**.py	retab! 4
 
 "function! CheckUpdate(timer)
     "silent! checktime
