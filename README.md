@@ -402,6 +402,12 @@ vimrc中的关于ctrlp的各项配置的具体含义直接在vim中:help ctrlp
 
 在 LeaderfFunction 的浏览模式中，按 i 进入模糊匹配模式（按 TAB切换回来）：
 
+Q1: [中文文件名乱码的问题](https://github.com/Yggdroot/LeaderF/issues/203)
+
+A1: 这是git的问题，可以这样：
+
+git config --global core.quotepath false
+
 ### 全文检索工具 [rg](https://github.com/BurntSushi/ripgrep) ([Leaderf rg](https://github.com/Yggdroot/LeaderF))
 
 检索速度： [rg](https://github.com/BurntSushi/ripgrep) > [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)([ag.vim](https://github.com/rking/ag.vim)) > ack > grep
