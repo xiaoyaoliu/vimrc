@@ -1,7 +1,6 @@
 
-" https://zhuanlan.zhihu.com/p/33046090
-" 不少人觉得 Vim 自动补全的弹出窗口默认配色很丑
-" colors and settings of autocompletion
+" vim在xshell等终端下的配色方案，推荐darkburn
+" https://blog.csdn.net/linxxx3/article/details/6372755
 colorscheme darkburn
 
 " auto source vimrc
