@@ -357,17 +357,6 @@ else
 	  \ }
 endif
 
-" https://zhuanlan.zhihu.com/p/33046090
-" 不少人觉得 Vim 自动补全的弹出窗口默认配色很丑
-" colors and settings of autocompletion
-highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
-highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
-"highlight Pmenu ctermbg=4 guibg=LightGray
-" highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
-" highlight PmenuSbar ctermbg=7 guibg=DarkGray
-" highlight PmenuThumb guibg=Black
-
-
 vnoremap <silent> rr :call VisualSelection('gv', '')<CR>
 
 " syntastic
