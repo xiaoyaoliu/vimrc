@@ -20,6 +20,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'hdima/python-syntax'
 "c++ 语法高亮插件
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'TaurusOlson/darkburn.vim'
 "c++ 的函数参数提示插件
 Plug 'Shougo/echodoc.vim'
 "c++ 的头文件切换
