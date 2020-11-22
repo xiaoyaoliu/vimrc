@@ -2,8 +2,8 @@
 " https://zhuanlan.zhihu.com/p/33046090
 " 不少人觉得 Vim 自动补全的弹出窗口默认配色很丑
 " colors and settings of autocompletion
-highlight PMenu ctermfg=0 ctermbg=242 guifg=White guibg=darkgrey
-highlight PMenuSel ctermfg=242 ctermbg=8 guifg=Yellow guibg=Black
+source ~/vimrc/colors/darkburn.vim
+colorscheme darkburn
 
 " auto source vimrc
 autocmd! bufwritepost .vimrc source $HOME/.vimrc
