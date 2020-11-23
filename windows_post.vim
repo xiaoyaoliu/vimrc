@@ -1,4 +1,3 @@
-language message zh_CN.UTF-8
 map <leader>fp :term powershell<CR>
 
 " https://zhuanlan.zhihu.com/p/33046090
@@ -13,11 +12,8 @@ highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
 " highlight PmenuThumb guibg=Black
 
 
-
 " auto source vimrc
 autocmd! bufwritepost _vimrc source $HOME/_vimrc
-
-let g:gutentags_modules = []
 
 " refesh ctags
 :nnoremap <silent> <leader>66 :!start ctags --output-format=e-ctags -f .tags -R .<CR>
