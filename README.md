@@ -326,7 +326,7 @@ make install # may require extra privileges depending on where to install
 
 #### YCM的windows安装注意事项
 
-注意根据自己本地的vs版本，设置好命令行参数--msvc 
+注意根据自己本地的vs版本，设置好命令行参数--msvc, msvc默认值是16，对应vs2019
 
 #### [YCM] python自动补全的大致流程
 
