@@ -196,7 +196,7 @@ xmllint
   * 得到 flake8 3.3.0 has requirement pycodestyle<2.4.0,>=2.0.0, but you have pycodestyle 2.5.0
 * flake8版本过高导致，降低版本
 ```
-pip install 'flake8>=2.3.0,<2.4.0' --force-reinstall
+pip install "flake8>=2.3.0,<2.4.0" --force-reinstall
 
 ```
 
