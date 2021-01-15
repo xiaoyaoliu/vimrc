@@ -380,6 +380,7 @@ let g:ale_linters = {
 \	'python': ['flake8'],
 \	'cpp': ['clangtidy', 'cppcheck'],
 \	'c': ['clangtidy'],
+\	'xml': ['xmllint'],
 \}
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {
