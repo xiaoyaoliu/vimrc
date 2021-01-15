@@ -20,6 +20,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'hdima/python-syntax'
 "c++ 语法高亮插件
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'TaurusOlson/darkburn.vim'
 "c++ 的函数参数提示插件
 Plug 'Shougo/echodoc.vim'
 "c++ 的头文件切换
@@ -53,7 +54,7 @@ else
 	Plug 'kien/ctrlp.vim'
 	Plug 'fisadev/vim-ctrlp-cmdpalette'
 endif
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'xiaoyaoliu/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 Plug 'skywind3000/vim-preview'
 Plug 'godlygeek/tabular'
@@ -228,7 +229,7 @@ if has('python') || has('python3')
 	"let g:Lf_HideHelp = 1
 	" Cache 会导致新文件搜索不到，一定要关掉。0表示重新打开vim的时候，会更新缓存
 	" 当找不到文件的时候，记得按下F5 刷新缓存
-	let g:Lf_UseCache = 0
+	let g:Lf_UseCache = 1
 	let g:Lf_GtagsGutentags = 1
 	let g:Lf_GtagsAutoGenerate = 0
     let g:Lf_Gtagslabel = 'native-pygments' 
@@ -357,17 +358,6 @@ else
 	  \ }
 endif
 
-" https://zhuanlan.zhihu.com/p/33046090
-" 不少人觉得 Vim 自动补全的弹出窗口默认配色很丑
-" colors and settings of autocompletion
-highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
-highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
-"highlight Pmenu ctermbg=4 guibg=LightGray
-" highlight PmenuSel ctermbg=8 guibg=DarkBlue guifg=Red
-" highlight PmenuSbar ctermbg=7 guibg=DarkGray
-" highlight PmenuThumb guibg=Black
-
-
 vnoremap <silent> rr :call VisualSelection('gv', '')<CR>
 
 " syntastic
@@ -390,6 +380,7 @@ let g:ale_linters = {
 \	'python': ['flake8'],
 \	'cpp': ['clangtidy', 'cppcheck'],
 \	'c': ['clangtidy'],
+\	'xml': ['xmllint'],
 \}
 " In ~/.vim/vimrc, or somewhere similar.
 let g:ale_fixers = {
