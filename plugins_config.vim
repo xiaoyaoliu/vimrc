@@ -54,7 +54,7 @@ else
 	Plug 'kien/ctrlp.vim'
 	Plug 'fisadev/vim-ctrlp-cmdpalette'
 endif
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'xiaoyaoliu/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 Plug 'skywind3000/vim-preview'
 Plug 'godlygeek/tabular'
