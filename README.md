@@ -151,6 +151,12 @@ windows上默认已经支持三种格式的自动检查:python、c/cpp、xml，�
 
 [ALE](https://github.com/w0rp/ale)：https://github.com/w0rp/ale
 
+linux下需要安装语法检查工具，例如:
+
+```bash
+apt-get install libxml2-utils # xmllint
+```
+更多语言的语法支持见: [https://github.com/xiaoyaoliu/vimrc/blob/master/logs.md](https://github.com/xiaoyaoliu/vimrc/blob/master/logs.md)
 
 ## Goto功能插件GTags
 
