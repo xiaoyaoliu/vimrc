@@ -224,5 +224,19 @@ That means that if you set  --with-openssl=/usr/local/openssl  your make install
 
 --enable-optimizations is irrelevant but recommended - longer make for 10% faster Python code is a good tradeoff.
 
+### redis相关知识
+
+安装: apt-get install redis
+
+测试命令: redis-cli
+
+redis默认有16个数据库(0-15) 默认在0号数据库
+
+DB_CONN = 'redis://:pwd@127.0.0.1:8888/0' 对应的就是redis://:password@ip:port/db
+
+更多内容参考: https://www.cnblogs.com/happywish/p/10944253.html
+
+https://www.cnblogs.com/tjp40922/p/10421911.html
+
 
 
