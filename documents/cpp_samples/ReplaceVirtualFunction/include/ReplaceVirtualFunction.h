@@ -75,9 +75,9 @@ size_t __ReplaceVirtualWithMember(TOld* obj, FOld f, TNew *new_obj, FNew new_fun
 
 #define ReplaceVirtualWithFunction(obj, f, new_func) __ReplaceVirtualFunction(obj, &f, (size_t)new_func, #new_func);
 
-#define SuperCall(func_name, callSupers) {auto __CUR_FUNC_ADDR = __PauseReplace(func_name); \
+#define SuperVirtualCall(callSupers) {auto __CUR_FUNC_ADDR = __PauseReplace(__FUNCTION__); \
 callSupers; \
-__ResumeReplace(func_name, __CUR_FUNC_ADDR);	\
+__ResumeReplace(__FUNCTION__, __CUR_FUNC_ADDR);	\
 }
 
 

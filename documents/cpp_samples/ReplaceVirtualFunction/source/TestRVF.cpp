@@ -48,7 +48,7 @@ public:
 	virtual void OverrideFun2()
 	{
 		auto a = (A*)this;
-		SuperCall(__FUNCTION__, a->fun2());
+		SuperVirtualCall(a->fun2());
 		cout << "Member Function Changed and can use this now" << endl << endl;
 	}
 
