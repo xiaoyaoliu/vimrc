@@ -1,4 +1,4 @@
-#include "../ReplaceVirtualFunction/ReplaceVirtualFunction.h"
+#include "../ReplaceVirtualFunction/include/TestRVF.h"
 
 int main()
 {

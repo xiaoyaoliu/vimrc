@@ -1,4 +1,20 @@
+#pragma once
 #include "VirtualGetIndex.h"
+
+
+// DLL export and import definitions
+#define DLLEXPORT __declspec(dllexport)
+#define DLLIMPORT __declspec(dllimport)
+
+#ifdef DLL_EXPORT
+#ifdef REPLACE_VIRTUAL_FUNCTION_EXPORT
+#define REPLACE_VIRTUAL_FUNCTION_API DLLEXPORT
+#else
+#define REPLACE_VIRTUAL_FUNCTION_API DLLIMPORT
+#endif
+#else
+#define REPLACE_VIRTUAL_FUNCTION_API
+#endif
 
 
 template <class T, typename F>
@@ -17,12 +33,12 @@ int __VTableIndex(F f)
 	return (t->*getIndex)();
 }
 
-void __DoMemReplace(size_t* VirtualFunctionTable, int index, size_t new_func, const char* new_funcname);
+REPLACE_VIRTUAL_FUNCTION_API void __DoMemReplace(size_t* VirtualFunctionTable, int index, size_t new_func, const char* new_funcname);
 
 
-size_t __PauseReplace(const char* new_funcname);
+REPLACE_VIRTUAL_FUNCTION_API size_t __PauseReplace(const char* new_funcname);
 
-void __ResumeReplace(const char* new_funcname, size_t new_func);
+REPLACE_VIRTUAL_FUNCTION_API void __ResumeReplace(const char* new_funcname, size_t new_func);
 
 template <typename T, typename F>
 size_t __ReplaceVirtualFunction(T *obj, F f, size_t new_func, const char* new_funcname)
@@ -65,5 +81,3 @@ __ResumeReplace(func_name, __CUR_FUNC_ADDR);	\
 }
 
 
-// test funciton
-void TestVirtualFunctionReplaceMain();

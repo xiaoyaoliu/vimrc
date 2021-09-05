@@ -1,3 +1,4 @@
+#pragma once
 #define VirtualGetIndexBody \
 virtual int Get0() {return 0; } \
 virtual int Get1() {return 1; } \
