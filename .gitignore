@@ -7,3 +7,4 @@
 /documents/cpp_samples/cpp_samples/x64/
 *.vcxproj.user
 /documents/cpp_samples/*/x64/
+/documents/*/x64/

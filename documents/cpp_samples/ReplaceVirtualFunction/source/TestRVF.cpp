@@ -2,10 +2,7 @@
 #if _DEBUG
 #include "ReplaceVirtualFunction.h"
 #include <iostream>
-#include <windows.h>
-#include <unordered_map>
 #include <string>
-#include <assert.h>
 using namespace std;
 
 
