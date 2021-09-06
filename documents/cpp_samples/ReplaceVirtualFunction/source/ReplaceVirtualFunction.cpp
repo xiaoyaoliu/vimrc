@@ -15,7 +15,15 @@ typedef std::unordered_map<std::string, OriginVirtualInfo> FuncTableType;
 
 FuncTableType NewFuncNameToOldFuncs;
 
-static const int PTR_BYTES = sizeof(size_t);
+
+
+void __DoMemWrite(size_t* virtualFunctionTable, int index, size_t newFunc) {
+	DWORD old;
+	static const int PTR_BYTES = sizeof(size_t);
+	VirtualProtect(virtualFunctionTable + index, PTR_BYTES, PAGE_READWRITE, &old);
+	virtualFunctionTable[index] = newFunc;
+	VirtualProtect(virtualFunctionTable + index, PTR_BYTES, old, &old);
+}
 
 void __DoMemReplace(size_t* virtualFunctionTable, int index, size_t newFunc, const char* new_funcname)
 {
@@ -35,10 +43,7 @@ void __DoMemReplace(size_t* virtualFunctionTable, int index, size_t newFunc, con
 		NewFuncNameToOldFuncs.emplace(std::make_pair(newFuncName, info));
 	}
 	
-	DWORD old;
-	VirtualProtect(virtualFunctionTable, PTR_BYTES, PAGE_READWRITE, &old);
-	virtualFunctionTable[index] = newFunc;
-	VirtualProtect(virtualFunctionTable, PTR_BYTES, old, &old);
+	__DoMemWrite(virtualFunctionTable, index, newFunc);
 }
 
 
@@ -52,10 +57,7 @@ size_t __PauseReplace(const char* new_funcname, bool deleteReplace)
 	}
 	OriginVirtualInfo& info = origInfos->second;
 	func = info.mVirtualFunctionTable[info.mIndex];
-	DWORD old;
-	VirtualProtect(info.mVirtualFunctionTable, PTR_BYTES, PAGE_READWRITE, &old);
-	info.mVirtualFunctionTable[info.mIndex] = info.mOriginFuncMemAddr;
-	VirtualProtect(info.mVirtualFunctionTable, PTR_BYTES, old, &old);
+	__DoMemWrite(info.mVirtualFunctionTable, info.mIndex, info.mOriginFuncMemAddr);
 
 	if (deleteReplace) {
 		NewFuncNameToOldFuncs.erase(origInfos);
@@ -70,8 +72,5 @@ void __ResumeReplace(const char* new_funcname, size_t new_func)
 		return;
 	}
 	OriginVirtualInfo& info = origInfos->second;
-	DWORD old;
-	VirtualProtect(info.mVirtualFunctionTable, PTR_BYTES, PAGE_READWRITE, &old);
-	info.mVirtualFunctionTable[info.mIndex] = new_func;
-	VirtualProtect(info.mVirtualFunctionTable, PTR_BYTES, old, &old);
+	__DoMemWrite(info.mVirtualFunctionTable, info.mIndex, new_func);
 }
