@@ -35,8 +35,7 @@ int __VTableIndex(F f)
 
 REPLACE_VIRTUAL_FUNCTION_API void __DoMemReplace(size_t* VirtualFunctionTable, int index, size_t new_func, const char* new_funcname);
 
-
-REPLACE_VIRTUAL_FUNCTION_API size_t __PauseReplace(const char* new_funcname);
+REPLACE_VIRTUAL_FUNCTION_API size_t __PauseReplace(const char* new_funcname, bool deleteReplace);
 
 REPLACE_VIRTUAL_FUNCTION_API void __ResumeReplace(const char* new_funcname, size_t new_func);
 
@@ -75,9 +74,13 @@ size_t __ReplaceVirtualWithMember(TOld* obj, FOld f, TNew *new_obj, FNew new_fun
 
 #define ReplaceVirtualWithFunction(obj, f, new_func) __ReplaceVirtualFunction(obj, &f, (size_t)new_func, #new_func);
 
-#define SuperVirtualCall(callSupers) {auto __CUR_FUNC_ADDR = __PauseReplace(__FUNCTION__); \
+#define RecoverReplace(new_func)  __PauseReplace(#new_func, true);
+
+#define SuperVirtualCall(callSupers) {auto __CUR_FUNC_ADDR = __PauseReplace(__FUNCTION__, false); \
 callSupers; \
 __ResumeReplace(__FUNCTION__, __CUR_FUNC_ADDR);	\
 }
+
+
 
 

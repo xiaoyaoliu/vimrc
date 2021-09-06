@@ -72,6 +72,13 @@ void TestVirtualFunctionReplaceMain()
 	for (A* pTmp : pObj) {
 		pTmp->fun2();
 	}
+
+	RecoverReplace(ReplaceA::OverrideFun2);
+	RecoverReplace(changedVirtualFunc);
+	cout << "----- After Recover" << endl;
+	for (A* pTmp : pObj) {
+		pTmp->fun2();
+	}
 #endif
 	
 }

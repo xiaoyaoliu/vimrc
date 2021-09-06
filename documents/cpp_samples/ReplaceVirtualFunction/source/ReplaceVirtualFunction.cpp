@@ -42,7 +42,8 @@ void __DoMemReplace(size_t* virtualFunctionTable, int index, size_t newFunc, con
 }
 
 
-size_t __PauseReplace(const char* new_funcname)
+
+size_t __PauseReplace(const char* new_funcname, bool deleteReplace)
 {
 	size_t func = 0;
 	FuncTableType::iterator origInfos = NewFuncNameToOldFuncs.find(new_funcname);
@@ -55,6 +56,10 @@ size_t __PauseReplace(const char* new_funcname)
 	VirtualProtect(info.mVirtualFunctionTable, PTR_BYTES, PAGE_READWRITE, &old);
 	info.mVirtualFunctionTable[info.mIndex] = info.mOriginFuncMemAddr;
 	VirtualProtect(info.mVirtualFunctionTable, PTR_BYTES, old, &old);
+
+	if (deleteReplace) {
+		NewFuncNameToOldFuncs.erase(origInfos);
+	}
 	return func;
 }
 
