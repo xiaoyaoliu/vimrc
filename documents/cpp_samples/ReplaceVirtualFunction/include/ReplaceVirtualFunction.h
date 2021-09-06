@@ -29,7 +29,10 @@ int __VTableIndex(F f)
 	T* t = reinterpret_cast<T*>(&vt);
 
 	typedef int (T::*GetIndex)();
+#pragma warning(push)
+#pragma warning(disable: 4191)
 	GetIndex getIndex = (GetIndex)f;
+#pragma warning(pop)
 	return (t->*getIndex)();
 }
 
