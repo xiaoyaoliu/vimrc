@@ -48,7 +48,12 @@ public:
 		SuperVirtualCall(a->fun2());
 		cout << "Member Function Changed and can use this now" << endl << endl;
 	}
-
+	void OverrideFun()
+	{
+		auto a = (A*)this;
+		SuperVirtualCall(a->fun2());
+		cout << "Member Function Changed w" << endl << endl;
+	}
 };
 
 #endif
@@ -66,16 +71,17 @@ void TestVirtualFunctionReplaceMain()
 
 	//ReplaceVirtualFunction(pObj[0], &B1::fun2, (uint64_t)chengedPrintf);
 	ReplaceA replObj;
-	size_t oldfun = ReplaceVirtualWithMember(pObj[0], B1::fun2, &replObj, ReplaceA::OverrideFun2);
+	size_t oldfun = ReplaceVirtualWithVirtualMember(pObj[0], B1::fun2, &replObj, ReplaceA::OverrideFun2);
 	ReplaceVirtualWithFunction(pObj[2], A::fun2, changedVirtualFunc);
 
 	for (A* pTmp : pObj) {
 		pTmp->fun2();
 	}
-
+	
 	RecoverReplace(ReplaceA::OverrideFun2);
 	RecoverReplace(changedVirtualFunc);
 	cout << "----- After Recover" << endl;
+	ReplaceVirtualWithNonVirtualMember(pObj[2], A::fun2, ReplaceA::OverrideFun);
 	for (A* pTmp : pObj) {
 		pTmp->fun2();
 	}

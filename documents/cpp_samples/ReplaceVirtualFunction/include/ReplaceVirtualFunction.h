@@ -72,8 +72,22 @@ size_t __ReplaceVirtualWithMember(TOld* obj, FOld f, TNew *new_obj, FNew new_fun
 	return old_func;
 }
 
+template <typename T, typename F>
+T ForceTypeCast(F src)
+{
+	union 
+	{
+		T t;
+		F f;
+	} u;
+	u.f = src;
+	return u.t;
+}
 
-#define ReplaceVirtualWithMember(obj, f, new_obj, new_func) __ReplaceVirtualWithMember(obj, &f, new_obj, &new_func, #new_func);
+
+#define ReplaceVirtualWithVirtualMember(obj, f, new_obj, new_func) __ReplaceVirtualWithMember(obj, &f, new_obj, &new_func, #new_func);
+
+#define ReplaceVirtualWithNonVirtualMember(obj, f, new_func) __ReplaceVirtualFunction(obj, &f, ForceTypeCast<size_t>(&new_func), #new_func);
 
 #define ReplaceVirtualWithFunction(obj, f, new_func) __ReplaceVirtualFunction(obj, &f, (size_t)new_func, #new_func);
 
