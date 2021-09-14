@@ -1,10 +1,13 @@
+#include <cstdint>
 #include <cstdlib>
-
-#include "../ReplaceVirtualFunction/include/TestRVF.h"
+#include <iostream>
+#include "SizeOfMemberFunctionIs24_C5243.h"
 
 int main()
 {
-	TestVirtualFunctionReplaceMain();
+	
+	TestMemberFunctionSize();
+
 	system("pause");
 	return 0;
 }
