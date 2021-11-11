@@ -22,6 +22,7 @@ nmap <leader>ww :<C-U><C-R>=printf("!start FileLocatorPro -d %s -f %s", shellesc
 
 " set fileencoding to default in windows
 nmap <leader>cf :<C-U>setlocal nobomb<CR>:set fileencoding=utf-8<CR>:set ff=dos<CR>
+nmap <leader>cg :<C-U>setlocal nobomb<CR>:set fileencoding=gb18030<CR>:set ff=dos<CR>
 
 "open extern tool
 map <leader>fe :silent !start explorer /select,%<CR>
