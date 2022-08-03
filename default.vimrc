@@ -11,6 +11,7 @@ endif
 
 source ~/vimrc/plugins_config.vim
 source ~/vimrc/python.vim
+source ~/vimrc/cpp.vim
 
 if has("win32")
     source ~/vimrc/windows_post.vim

@@ -233,6 +233,9 @@ if has('python') || has('python3')
 	let g:Lf_GtagsGutentags = 1
 	let g:Lf_GtagsAutoGenerate = 0
     let g:Lf_Gtagslabel = 'native-pygments' 
+    let g:Lf_GtagsSkipSymlink = 'f'
+
+    let g:Lf_FollowLinks = 1
 	"let g:Lf_IgnoreCurrentBufferName = 1
 	"let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2" }
 	"let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
@@ -267,6 +270,10 @@ if has('python') || has('python3')
 
     " YouCompleteMe customizations
     nmap <leader>jk :YcmCompleter GetDoc<CR>
+    let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', '*.tga', '*.png']
+            \}
     let g:ycm_key_invoke_completion = '<c-m>'
     "let g:ycm_seed_identifiers_with_syntax = 0
     let g:ycm_show_diagnostics_ui = 0
@@ -355,7 +362,7 @@ else
 	" Ignore files on fuzzy finder
 	let g:ctrlp_custom_ignore = {
 	  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|res|tools|doc)$',
-	  \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp)$',
+	  \ 'file': '\v\.(pyc|pyo|exe|so|dll|lnk|swp|tmp|tga|png|jpg)$',
 	  \ }
 endif
 
@@ -368,13 +375,24 @@ let g:ale_echo_delay = 20
 let g:ale_lint_delay = 500
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
 "let g:airline#extensions#ale#enabled = 1
-"let g:ale_fix_on_save = 1
 "
-let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
+let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++ '
+
+"let g:ale_c_clangformat_style_option = '{ }'
+"let g:ale_c_clangformat_options = '-style="{ColumnLimit: 30}"'
+let g:clangformat_style = {
+\ "ColumnLimit": 119,
+\ "KeepEmptyLinesAtTheStartOfBlocks": "false",
+\ "IndentWidth" : 4,
+\ "SortIncludes": "false",
+\}
+
+let g:ale_c_clangformat_options = '-style="'. string(g:clangformat_style) .'"'
+
 
 " Check Python files with flake8 and pylint.
 let g:ale_linters = {
@@ -483,7 +501,7 @@ if executable('gtags-cscope') && executable('gtags')
     "Find current word in ctags database
     noremap <silent> <leader>jz :GscopeFind z <C-R><C-W><cr>
     noremap <leader>jZ :GscopeFind z 
-
+    let g:Gtags_Auto_Update = 0  " avoid go to the top after save
 endif
 
 let g:rooter_patterns = ['_darcs', '.root', '.git', '.git/','.svn', '.svn/','*.sln', 'build/env.sh']
