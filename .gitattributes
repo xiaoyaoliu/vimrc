@@ -1,0 +1,5 @@
+bin/win32/LLVM/clang.exe filter=lfs diff=lfs merge=lfs -text
+bin/win32/LLVM/clang++.exe filter=lfs diff=lfs merge=lfs -text
+bin/win32/LLVM/clang-cpp.exe filter=lfs diff=lfs merge=lfs -text
+bin/win32/LLVM/clang-cl.exe filter=lfs diff=lfs merge=lfs -text
+bin/win32/LLVM/liblldb.dll filter=lfs diff=lfs merge=lfs -text

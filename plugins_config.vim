@@ -383,13 +383,21 @@ let g:ale_lint_on_enter = 0
 let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++ '
 
 "let g:ale_c_clangformat_style_option = '{ }'
-"let g:ale_c_clangformat_options = '-style="{ColumnLimit: 30}"'
 let g:clangformat_style = {
 \ "ColumnLimit": 119,
 \ "KeepEmptyLinesAtTheStartOfBlocks": "false",
 \ "IndentWidth" : 4,
 \ "SortIncludes": "false",
+\ "TabWidth": 4,
+\ "UseTab": "Never",
+\ "AccessModifierOffset": -3, 
+\ "EmptyLineBeforeAccessModifier": "Always",
 \}
+
+" https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+" ColumnLimit: the max length of a line
+" KeepEmptyLinesAtTheStartOfBlocks: delete the blank lines after 'if' line
+" AccessModifierOffset: the indent of public、private、protected == IndentWidth + AccessModifierOffset
 
 let g:ale_c_clangformat_options = '-style="'. string(g:clangformat_style) .'"'
 
@@ -501,7 +509,7 @@ if executable('gtags-cscope') && executable('gtags')
     "Find current word in ctags database
     noremap <silent> <leader>jz :GscopeFind z <C-R><C-W><cr>
     noremap <leader>jZ :GscopeFind z 
-    let g:Gtags_Auto_Update = 0  " avoid go to the top after save
+    "let g:Gtags_Auto_Update = 0  " avoid go to the top after save
 endif
 
 let g:rooter_patterns = ['_darcs', '.root', '.git', '.git/','.svn', '.svn/','*.sln', 'build/env.sh']
