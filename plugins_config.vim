@@ -392,6 +392,7 @@ let g:clangformat_style = {
 \ "UseTab": "Never",
 \ "AccessModifierOffset": -3, 
 \ "EmptyLineBeforeAccessModifier": "Always",
+\ "SpacesBeforeTrailingComments": 4,
 \}
 
 " https://clang.llvm.org/docs/ClangFormatStyleOptions.html
