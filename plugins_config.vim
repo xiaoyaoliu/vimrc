@@ -234,6 +234,7 @@ if has('python') || has('python3')
 	let g:Lf_GtagsAutoGenerate = 0
     let g:Lf_Gtagslabel = 'native-pygments' 
     let g:Lf_GtagsSkipSymlink = 'f'
+    let g:Lf_MaxCount = 1000000
 
     let g:Lf_FollowLinks = 1
 	"let g:Lf_IgnoreCurrentBufferName = 1
