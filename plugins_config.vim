@@ -243,6 +243,8 @@ if has('python') || has('python3')
     " rg https://github.com/BurntSushi/ripgrep
 	noremap <M-r> :Leaderf! rg -g !tags -e 
 	noremap <M-m> :LeaderfMru<CR>
+    nmap <leader>ff :let @+ = expand("%:p")<cr>
+    nmap <leader>ft :let @+ = expand("%:t")<cr>
     nmap <leader>fm :LeaderfMru<CR>
     nmap <leader>ra :Leaderf! rg -g !tags --append -e 
     nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
