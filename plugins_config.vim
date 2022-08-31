@@ -247,15 +247,16 @@ if has('python') || has('python3')
     nmap <leader>ft :let @+ = expand("%:t")<cr>
     nmap <leader>fm :LeaderfMru<CR>
     nmap <leader>ra :Leaderf! rg -g !tags --append -e 
-    nmap <leader>rb :Leaderf! rg -F --all-buffers -e 
+    nmap <leader>rb :Leaderf! rg --heading -F --all-buffers -e 
     nmap <leader>rB :Leaderf! rg -F --current-buffer -e 
     nmap <leader>rd :LeaderfTagPattern
-    nmap <leader>ri :Leaderf! rg -g !tags -i -e 
+    nmap <leader>ri :Leaderf! rg --heading -g !tags -i -e 
     nmap <leader>rs :Leaderf! rg -F --stayOpen -e 
     nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
     nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
-    nmap <leader>rr :Leaderf! rg -g !tags -e 
-    nmap <leader>rw :Leaderf! rg -g !tags -w -e 
+    "It's a Leaderf's bug: if you do not using no-sort, the result may be missing some valid result. 
+    nmap <leader>rr :Leaderf! rg --no-sort --heading -g !tags -e 
+    nmap <leader>rw :Leaderf! rg --heading -g !tags -w -e 
     " search word under cursor, the pattern is treated as regex, and enter normal mode directly
     nmap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -g !tags -e %s", expand("<cword>"))<CR>
 
