@@ -290,6 +290,14 @@ linux下的手动安装: [rg](https://github.com/BurntSushi/ripgrep#building)
 <leader>rw 正常的文本搜索 + 全字匹配
 <leader>wr 搜索选中的单词
 
+#### rg搜索结果不全的排查步骤
+1. 确保当前目录下的.gitignore文件中没有忽略目标
+1. 先脱离vim，直接用命令行搜索：首先看结果全不全，其次要确认程序的正常退出（ExitCode == 0）。windows下: echo %ERRORLEVEL%
+2. rg的逻辑: https://github.com/Yggdroot/LeaderF/blob/master/autoload/leaderf/python/leaderf/rgExpl.py
+
+经验记录
+1. 是因为被.gitignore给忽略了
+1. 是ExitCode是1，没有正常退出，后来更新rg的版本到最新得以解决。
 ```
 ## 小插件简介
 

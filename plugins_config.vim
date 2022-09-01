@@ -255,7 +255,8 @@ if has('python') || has('python3')
     nmap <leader>ro :<C-U>Leaderf! rg --recall<CR>
     nmap <Leader>rp :Leaderf! rg -g *.h -t py -e 
     "It's a Leaderf's bug: if you do not using no-sort, the result may be missing some valid result. 
-    nmap <leader>rr :Leaderf! rg --no-sort --heading -g !tags -e 
+    nmap <leader>rr :Leaderf! rg --heading -g !tags -e 
+    nmap <leader>rR :Leaderf! rg --no-ignore --hidden --heading -g !tags -e 
     nmap <leader>rw :Leaderf! rg --heading -g !tags -w -e 
     " search word under cursor, the pattern is treated as regex, and enter normal mode directly
     nmap <leader>wr :<C-U><C-R>=printf("Leaderf! rg -g !tags -e %s", expand("<cword>"))<CR>
