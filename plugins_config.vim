@@ -95,8 +95,7 @@ Plug 'inkarkat/vim-LogViewer'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Maxlufs/LargeFile.vim'
 " hex editor
-Plug 'vim-denops/denops.vim'
-Plug 'Shougo/ddx.vim'
+Plug 'd0c-s4vage/pfp-vim'
 
 if has("win16") || has("win32")
     Plug 'lsdr/monokai'
