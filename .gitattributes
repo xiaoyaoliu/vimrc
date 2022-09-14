@@ -107,3 +107,4 @@ bin/win32/LLVM/Remarks.dll filter=lfs diff=lfs merge=lfs -text
 bin/win32/LLVM/ucrtbase.dll filter=lfs diff=lfs merge=lfs -text
 bin/win32/LLVM/api-ms-win-core-timezone-l1-1-0.dll filter=lfs diff=lfs merge=lfs -text
 bin/win32/LLVM/LTO.dll filter=lfs diff=lfs merge=lfs -text
+bin/win32/deno.exe filter=lfs diff=lfs merge=lfs -text
