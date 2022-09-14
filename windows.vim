@@ -5,6 +5,6 @@ let $path = expand('~/vimrc/bin/win32/python37/').';'.expand('~/vimrc/bin/win32/
 " 避免安装的时候自动安装了python2
 set pythondll=
 set pythonhome=
-set pythonthreehome=~/vimrc/bin/win32/python37
-set pythonthreedll=~/vimrc/bin/win32/python37/python37.dll
+set pythonthreehome=$HOME/vimrc/bin/win32/python37
+set pythonthreedll=$HOME/vimrc/bin/win32/python37/python37.dll
 let g:python3_host_prog = '~/vimrc/bin/win32/python37/python.exe'
