@@ -37,3 +37,31 @@ B_Pistol: 手枪的actor，模型
 B_WeaponInstance_Pistol: 手枪的Equip Instance. 手枪射击的主要参数都在这里: 射程、伤害、Falloff、射击动画、debug参数、角色移速
 
 GA_Weapon_Fire_Pistol: 手枪的射击能力，主管射击逻辑
+
+WID_Pistol: 挂点配置
+
+### ULyraQuickBarComponent
+
+创建: UGameFeatureAction_AddComponents::AddToWorld -> UGameFrameworkComponentManager::AddComponentRequest -> UGameFrameworkComponentManager::CreateComponentOnInstance
+
+UGameFeatureAction_AddComponents的激活: ULyraExperienceManagerComponent::OnExperienceLoadComplete -> UGameFeaturesSubsystem::Get().LoadAndActivateGameFeaturePlugin
+
+UGameFeatureAction_AddComponents的配置: B_ShooterGame_Elimination::GameFeaturesToEnable(插件名，例如: ShooterCore) -> /ShooterCore/ShooterCore::Actions
+
+ShooterCore的UGameFeatureAction_AddComponents::ComponentList中包含: B_EliminationFeedReplay，LyraEquipmentManagerComponent，LyraIndicatorManagerComponent，LyraInventoryManagerComponent, LyraWeaponStateComponent, B_AimAssistTargetManager
+
+ULyraQuickBarComponent的配置:  B_ShooterGame_Elimination::ActionSets -> LAS_ShooterGame_StandardComponents::ComponentList
+
+### 射击过程
+
+输入配置: InputData_Hero, IMC_Default_KBM
+
+键盘输入: LyraHeroComponent::OnInputConfigActivated -> ULyraGameplayAbility_RangedWeapon::StartRangedWeaponTargeting
+
+射击伤害: OnRangedWeaponTargetDataReady -> BP_ApplyGameplayEffectToTarget -> ULyraDamageExecution::Execute_Implementation -> GE_Damage_RifleAuto
+
+射击伤害蓝图: GA_Weapon_Fire::EventOnRangedWeaponTargetDataReady
+
+lyra伤害的父类: GameplayEffectParent_Damage_Basic
+
+射击同步:  [client] OnRangedWeaponTargetDataReady -> UAbilitySystemComponent::CallServerSetReplicatedTargetData -> 【server】ServerSetReplicatedTargetData_Implementation (AbilitySystemComponent_Abilities.cpp) -> [server]OnRangedWeaponTargetDataReady
