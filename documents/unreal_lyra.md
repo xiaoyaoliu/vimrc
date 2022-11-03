@@ -40,6 +40,10 @@ GA_Weapon_Fire_Pistol: 手枪的射击能力，主管射击逻辑
 
 WID_Pistol: 挂点配置
 
+GA_Weapon_Reload_Pistol: 换弹夹的逻辑和配置
+
+ID_Pistol: 弹匣容量，弹匣个数。UI图标配置
+
 ### ULyraQuickBarComponent
 
 创建: UGameFeatureAction_AddComponents::AddToWorld -> UGameFrameworkComponentManager::AddComponentRequest -> UGameFrameworkComponentManager::CreateComponentOnInstance
@@ -65,3 +69,17 @@ ULyraQuickBarComponent的配置:  B_ShooterGame_Elimination::ActionSets -> LAS_S
 lyra伤害的父类: GameplayEffectParent_Damage_Basic
 
 射击同步:  [client] OnRangedWeaponTargetDataReady -> UAbilitySystemComponent::CallServerSetReplicatedTargetData -> 【server】ServerSetReplicatedTargetData_Implementation (AbilitySystemComponent_Abilities.cpp) -> [server]OnRangedWeaponTargetDataReady
+
+### 换弹匣(Reload)
+
+输入配置: InputData_Hero 中添加IA_Weapon_Reload
+
+自动换弹的能力: GA_Weapon_AutoReload
+
+换弹匣动画Montage配置: GA_Weapon_Reload_Rifle, GA_Weapon_Reload_Pistol
+
+动画Montage添加AnimNotify: AN_Notify
+
+弹匣容量、个数配置: ID_Rifle::Fragments. MagazineSize是弹匣容量，MagazineAmmo是第一个弹匣的子弹数量(可以超过弹匣容量), SpareAmmo是剩余子弹总数
+
+玩家初始化后: 总子弹数 == MagazineAmmo + SpareAmmo，可换弹次数 == Floor(SpareAmmo / MagazineSize)

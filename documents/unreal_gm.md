@@ -13,3 +13,5 @@ command大多定义在: BaseInput.ini
 由于动画树通常很大，占用过多屏幕空间，经常需要隐藏动画树: ShowDebugToggleSubCategory GRAPH
 
 相关代码: AHUD::ShowDebug -> ACharacter::DisplayDebug -> UAnimInstance::DisplayDebug
+
+TODO: 如何查看第三方动画的Debug Info ?
