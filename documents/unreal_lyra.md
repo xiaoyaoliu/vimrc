@@ -70,6 +70,8 @@ lyra伤害的父类: GameplayEffectParent_Damage_Basic
 
 射击同步:  [client] OnRangedWeaponTargetDataReady -> UAbilitySystemComponent::CallServerSetReplicatedTargetData -> 【server】ServerSetReplicatedTargetData_Implementation (AbilitySystemComponent_Abilities.cpp) -> [server]OnRangedWeaponTargetDataReady
 
+受击动作: GCNL_Character_DamageTaken
+
 ### 换弹匣(Reload)
 
 输入配置: InputData_Hero 中添加IA_Weapon_Reload
@@ -78,8 +80,22 @@ lyra伤害的父类: GameplayEffectParent_Damage_Basic
 
 换弹匣动画Montage配置: GA_Weapon_Reload_Rifle, GA_Weapon_Reload_Pistol
 
-动画Montage添加AnimNotify: AN_Notify
+动画Montage添加AnimNotify: AN_Reload
 
 弹匣容量、个数配置: ID_Rifle::Fragments. MagazineSize是弹匣容量，MagazineAmmo是第一个弹匣的子弹数量(可以超过弹匣容量), SpareAmmo是剩余子弹总数
 
 玩家初始化后: 总子弹数 == MagazineAmmo + SpareAmmo，可换弹次数 == Floor(SpareAmmo / MagazineSize)
+
+### 持武器动画的同步
+
+持武器动画的位置: B_WeaponInstance_Rifle::EquippedAnimSet::LayerRules -> ABP_RifleAnimLayers -> AO_MM_Rifle_Idle_Hipfire
+
+动画Layer的第三方同步: FLyraEquipmentList::PostReplicatedAdd -> ULyraRangedWeaponInstance::OnEquipped -> ULyraEquipmentInstance::OnEquipped -> B_WeaponInstance_Pistol::Event OnEquipped -> ULyraWeaponInstance::PickBestAnimLayer
+
+动画Layer的第一方逻辑: ULyraQuickBarComponent::EquipItemInSlot -> LyraEquipmentManagerComponent::EquipItem -> ULyraRangedWeaponInstance::OnEquipped
+
+### Q键仍手雷
+
+手雷Ability逻辑: GA_Grenade
+
+手雷Actor: B_Grenade
