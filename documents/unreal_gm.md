@@ -15,3 +15,9 @@ command大多定义在: BaseInput.ini
 相关代码: AHUD::ShowDebug -> ACharacter::DisplayDebug -> UAnimInstance::DisplayDebug
 
 TODO: 如何查看第三方动画的Debug Info ?
+
+### Audio Sound
+
+官方文档: https://docs.unrealengine.com/5.0/en-US/audio-console-commands-in-unreal-engine/
+
+运行时音效可视化gm: au.3dVisualize.Enabled = 1

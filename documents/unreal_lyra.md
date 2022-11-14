@@ -44,6 +44,8 @@ GA_Weapon_Reload_Pistol: 换弹夹的逻辑和配置
 
 ID_Pistol: 弹匣容量，弹匣个数。UI图标配置
 
+GCN_Weapon_Pistol_Fire: 射击特效配置，包括开枪音效(BurstSounds)、粒子特效(BurstParticles)，镜头震动(BurstCameraShake)，手柄震动(BurstForceFeedback), 镜头特效(BurstCameraLensEffect)，贴花(BurstDecal)
+
 ### ULyraQuickBarComponent
 
 创建: UGameFeatureAction_AddComponents::AddToWorld -> UGameFrameworkComponentManager::AddComponentRequest -> UGameFrameworkComponentManager::CreateComponentOnInstance
@@ -99,3 +101,15 @@ lyra伤害的父类: GameplayEffectParent_Damage_Basic
 手雷Ability逻辑: GA_Grenade
 
 手雷Actor: B_Grenade
+
+### 后坐力Recoil
+
+### 射击的音效
+
+通过gm指令(au.3dVisualize.Enabled = 1)可以观察到音效是: MSS_Weapons_Pistol_Fire
+
+配置: GCN_Weapon_Pistol_Fire::BurstEffects::BurstSounds
+
+步枪rifle的音效: MSS_Weapons_Rifle2_Fire
+
+rifle配置: GCN_Weapon_Rifle_Fire蓝图中: TriggerFIreAudio函数
