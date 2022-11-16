@@ -113,3 +113,34 @@ lyra伤害的父类: GameplayEffectParent_Damage_Basic
 步枪rifle的音效: MSS_Weapons_Rifle2_Fire
 
 rifle配置: GCN_Weapon_Rifle_Fire蓝图中: TriggerFIreAudio函数
+
+### CuePath的配置
+
+DefaultGame.ini文件中配置默认的CuePath, 例如[/Script/GameplayAbilities.AbilitySystemGlobals], +GameplayCueNotifyPaths=/Game/GameplayCueNotifies，+GameplayCueNotifyPaths=/Game/GameplayCues
+
+Plugin的GameplayCue的路径配置在: /ShooterCore/ShooterCore::Actions, UGameFeatureAction_AddGameplayCuePath和UGameFeatureAction_AddComponents的配置类似. CuePath包含: /GameplayCues, /Weapons, /Items
+
+除了ShooterCore插件，CuePath还加载了ShooterMaps插件, TopDownArena插件
+
+unreal编辑器启动后，所有的CuePath都汇总到一个全局数组中: UAbilitySystemGlobals::Get().GetGameplayCueNotifyPaths()
+
+插件加载Cue的入口: ULyraGameFeature_AddGameplayCuePaths::OnGameFeatureRegistering
+
+DefaultGame.ini是因为 UAbilitySystemGlobals::GameplayCueNotifyPaths的宏是: UPROPERTY(config)
+
+### Cue的加载，注册
+
+遍历所有CuePath，找到所有的AGameplayCueNotify_Actor资源: UGameplayCueManager::InitObjectLibrary -> UObjectLibrary::LoadBlueprintAssetDataFromPaths
+
+
+### 命中的decal贴花
+
+命中角色的decal配置: GCNL_Character_DamageTaken :: BurstEffects :: BurstDecal
+
+FGameplayCueNotify_DecalInfo::SpawnDecal中加断点即可看到调用堆栈
+
+GameplayCue.Character.DamageTaken是GCNL_Character_DamageTaken的位移标识符，外界通过这个找到它
+
+GE_Damage_Pistol :: GameplayCues :: GameplayCueTags中配置: GameplayCue.Character.DamageTaken
+
+所有这些GameplayCue都保存在: GlobalGameplayCueSet(UGameplayCueSet) :: GameplayCueData
