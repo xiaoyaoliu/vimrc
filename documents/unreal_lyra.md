@@ -104,6 +104,8 @@ lyra伤害的父类: GameplayEffectParent_Damage_Basic
 
 ### 后坐力Recoil
 
+给APawn::AddControllerPitchInput加一个向上的pitch，带动镜头向上走
+
 ### 射击的音效
 
 通过gm指令(au.3dVisualize.Enabled = 1)可以观察到音效是: MSS_Weapons_Pistol_Fire
