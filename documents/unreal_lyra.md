@@ -160,3 +160,6 @@ GameplayCue.Character.DamageTaken是GCNL_Character_DamageTaken的位移标识符
 
 GE_Damage_Pistol :: GameplayCues :: GameplayCueTags中配置: GameplayCue.Character.DamageTaken
 
+普通地面的射击decal: B_Weapon -> B_WeaponDecals -> NS_ImpactDecals -> MI_Decal_Concrete 或 MI_Decal_Transparent_Glass
+
+地面decal调用栈: GA_Weapon_Fire_Pistol::Gameplay Cue TagFiring -> GCN_Weapon_Pistol_Fire::OnBurst -> B_Weapon:: Fire Event
