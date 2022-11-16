@@ -130,8 +130,23 @@ DefaultGame.ini是因为 UAbilitySystemGlobals::GameplayCueNotifyPaths的宏是:
 
 ### Cue的加载，注册
 
-遍历所有CuePath，找到所有的AGameplayCueNotify_Actor资源: UGameplayCueManager::InitObjectLibrary -> UObjectLibrary::LoadBlueprintAssetDataFromPaths
+GameplayCue简称GC，所以游戏里Cue基本都是以GC开头。GameplayCueMananger简称GCM
 
+遍历所有CuePath，找到所有的AGameplayCueNotify_Actor、UGameplayCueNotify_Static资源: UGameplayCueManager::InitObjectLibrary -> UObjectLibrary::LoadBlueprintAssetDataFromPaths
+
+加载完成后，所有Cue都保存在: UGameplayCueManager::RuntimeGameplayCueObjectLibrary::CueSet
+
+加入CueDataMap: UGameplayCueManager::InitObjectLibrary -> UGameplayCueSet::AddCues -> BuildAccelerationMap_Internal -> GameplayCueDataMap
+
+所有这些GameplayCue都保存在: GlobalGameplayCueSet(UGameplayCueSet) :: GameplayCueData
+
+最终所有的Cue都会和GameplayCueReferences (类型: GameplayCueRefs)进行关联，估计是为了便于打包或者查找。
+
+Cue的名字保存在: 资源的GameplayCueName属性
+
+log中打印CueDataMap的Gm: GameplayCue.PrintGameplayCueNotifyMap
+
+打印已加载的Cue类: GameplayCue.PrintLoadedGameplayCueNotifyClasses
 
 ### 命中的decal贴花
 
@@ -139,8 +154,7 @@ DefaultGame.ini是因为 UAbilitySystemGlobals::GameplayCueNotifyPaths的宏是:
 
 FGameplayCueNotify_DecalInfo::SpawnDecal中加断点即可看到调用堆栈
 
-GameplayCue.Character.DamageTaken是GCNL_Character_DamageTaken的位移标识符，外界通过这个找到它
+GameplayCue.Character.DamageTaken是GCNL_Character_DamageTaken的位移标识符，外界通过这个找到它, 保存在属性GameplayCueName
 
 GE_Damage_Pistol :: GameplayCues :: GameplayCueTags中配置: GameplayCue.Character.DamageTaken
 
-所有这些GameplayCue都保存在: GlobalGameplayCueSet(UGameplayCueSet) :: GameplayCueData
