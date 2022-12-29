@@ -163,3 +163,7 @@ GE_Damage_Pistol :: GameplayCues :: GameplayCueTags中配置: GameplayCue.Charac
 普通地面的射击decal: B_Weapon -> B_WeaponDecals -> NS_ImpactDecals -> MI_Decal_Concrete 或 MI_Decal_Transparent_Glass
 
 地面decal调用栈: GA_Weapon_Fire_Pistol::Gameplay Cue TagFiring -> GCN_Weapon_Pistol_Fire::OnBurst -> B_Weapon:: Fire Event
+
+### [射击]掉落弹壳
+
+B_Weapon::Fire -> B_WeaponFire::Fire -> Shell Eject System = NS_WeaponFire_ShellEject -> SM_rifleshell
