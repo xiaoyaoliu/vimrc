@@ -185,6 +185,10 @@ set expandtab
 
 " Use tabs instead of spaces
 "set noexpandtab
+if has("autocmd")
+    autocmd BufReadPre *.lua setlocal noexpandtab
+endif
+
 
 " Be smart when using tabs ;)
 set smarttab
