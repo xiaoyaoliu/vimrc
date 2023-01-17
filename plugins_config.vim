@@ -471,6 +471,11 @@ au Syntax * RainbowParenthesesLoadBraces
 " IndentLine
 let g:indentLine_color_gui = '#A4E57E'
 
+" lua use tab, not space
+if has("autocmd")
+    autocmd BufReadPre *.lua setlocal list lcs=tab:\|\ 
+endif
+
 " 同时开启 ctags 和 gtags 支持, windows下只开启gtags(避免gutentags生成ctags的卡顿)：
 let g:gutentags_modules = []
 if executable('ctags') && !has('win32')
