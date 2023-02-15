@@ -64,6 +64,7 @@ void FYourTableRow::OnDataTableChanged(const UDataTable* InDataTable, const FNam
 ```cpp
 // 假设如下代码所在的module名为YourGame，module具体名称可以查看最近的Build.cs文件
 // 所以，UStateConfig类型的路径就是: /Script/YourGame.StateConfig
+// 也可以用UCLASS(Blueprintable)
 UCLASS(BlueprintType)
 class UStateConfig: public UObject
 {
@@ -84,6 +85,7 @@ public:
     TSubclassOf<UStateConfig> ConfigClass;
 	
     //负责保存行数据的对象; 也可用宏UPROPERTY(instanced, EditAnywhere, meta = (AllowedClasses = "/Script/YourGame.StateConfig"))
+    //注意此处的类型一定要用UObject，不建议用UStateConfig
     UPROPERTY(EditAnywhere, meta = (EditInline, AllowedClasses = "/Script/YourGame.StateConfig"))
     TObjectPtr<UObject> ConfigObj;
 	
