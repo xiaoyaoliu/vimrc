@@ -40,17 +40,16 @@ public:
 void FYourTableRow::OnDataTableChanged(const UDataTable* InDataTable, const FName InRowName)
 {
 	
-	auto rowData = InDataTable->FindRow<FYourTableRow>(InRowName, TEXT("TryChangeRowConfigType"));
-	if (IsValid(rowData->ConfigClass))
+	if (IsValid(ConfigClass))
 	{
-		if (!rowData->ConfigObj || !rowData->ConfigObj.GetClass()->IsChildOf(rowData->ConfigClass))
+		if (!ConfigObj || ConfigObj.GetClass() != ConfigClass.Get())
 		{
-			rowData->ConfigObj = NewObject<UObject>(const_cast<UDataTable*>(InDataTable), rowData->ConfigClass);
+			ConfigObj = NewObject<UObject>(const_cast<UDataTable*>(InDataTable), ConfigClass);
 		}
 	}
 	else
 	{
-		rowData->ConfigObj = nullptr;
+		ConfigObj = nullptr;
 	}
 }
 ```
@@ -98,19 +97,137 @@ public:
 
 void FYourTableRow::OnDataTableChanged(const UDataTable* InDataTable, const FName InRowName)
 {
-	
-	auto rowData = InDataTable->FindRow<FYourTableRow>(InRowName, TEXT("TryChangeRowConfigType"));
-	if (IsValid(rowData->ConfigClass))
-	{
-		if (!rowData->ConfigObj || !rowData->ConfigObj.GetClass()->IsChildOf(rowData->ConfigClass))
-		{
-			rowData->ConfigObj = NewObject<UStateConfig>(const_cast<UDataTable*>(InDataTable), rowData->ConfigClass);
-		}
-	}
-	else
-	{
-		rowData->ConfigObj = nullptr;
-	}
+    // 内容和上文函数相同即可
 }
 ```
 这样的话，用户就只能选择UStateConfig的子类作为行数据类型了。
+
+## 如何查看DataTable中ConfigObj属性(UObject 类型)的Diff
+
+如何看DataTable的Diff呢: DataTable右键菜单 -> Source Control -> History, 会弹出File History窗口; 在File History窗口: 选中你感兴趣的一行Revision, 右键菜单 -> Diff Against Previous Revision
+
+虽然ConfigObj中存储的数据实现了类型的动态化，但是，在实际使用中，我们经常需要查看别人改了ConfigObj的哪个字段.
+
+可是对于Object类型的属性，DataTable的默认行为，只会导出Object的Path，不会导出Object内部的任何字段；如此，ConfigObj的Diff就无法看到改了什么字段
+
+
+### 先确保DataTable导出为Json格式的时候，包含ConfigObj的字段
+
+找到Engine中的DataTableJSON.cpp文件，修改函数TDataTableExporterJSON<CharType>::WriteStruct
+```cpp
+// bool TDataTableExporterJSON<CharType>::WriteStruct(const UScriptStruct* InStruct, const void* InStructData, const FString* FieldToSkip)
+bool TDataTableExporterJSON<CharType>::WriteStruct(const UStruct* InStruct, const void* InStructData, const FString* FieldToSkip)
+```
+然后，在WriteStructEntry函数中添加如下代码:
+```cpp
+bool TDataTableExporterJSON<CharType>::WriteStructEntry(const void* InRowData, const FProperty* InProperty, const void* InPropertyData)
+{
+    ......
+	else if (const FObjectPropertyBase* ObjectProp = CastField<const FObjectPropertyBase>(InProperty))
+	{
+		UObject* Object = ObjectProp->GetObjectPropertyValue(InPropertyData);
+		if (IsValid(Object) && Object->GetOutermostObject() && Object->GetOutermostObject()->IsA<UDataTable>() && !!(DTExportFlags & EDataTableExportFlags::UseJsonObjectsForStructs))
+		{
+			JsonWriter->WriteObjectStart(Identifier);
+			WriteStruct(Object->GetClass(), Object);
+			JsonWriter->WriteObjectEnd();
+		}
+		else
+		{
+			const FString PropertyValue = DataTableUtils::GetPropertyValueAsString(InProperty, (uint8*)InRowData, DTExportFlags);
+			JsonWriter->WriteValue(Identifier, PropertyValue);
+		}
+	}
+    ......
+}
+```
+
+验证: DataTable右键菜单 -> Export As JSON
+
+### 将CSV格式的导出逻辑也改为包含ConfigObj字段
+
+你加Breakpoint观察可以发现，unreal看diff的时候，默认用的就是CSV格式; 也就是CSV的导出结果是正确的话，diff自然也就好了
+
+找到Engine的DataTableUtils.cpp文件，修改函数GetPropertyValueAsStringDirect如下
+```cpp
+void GetPropertyValueAsStringDirect(const FProperty* InProp, const uint8* InData, const int32 InPortFlags, const EDataTableExportFlags InDTExportFlags, FString& OutString)
+{
+#if WITH_EDITOR
+    //将ExportStructAsJson的定义挪到最前方
+    auto ExportStructAsJson = .....
+    ......
+    if (const FObjectPropertyBase* ObjectProp = CastField<const FObjectPropertyBase>(InProp))
+	{
+		const UObject* Object = ObjectProp->GetObjectPropertyValue(InData);
+		if (IsValid(Object) && Object->GetOutermostObject() && Object->GetOutermostObject()->IsA<UDataTable>())
+		{
+			OutString.Append(ExportStructAsJson(Object->GetClass(), Object));
+			return;
+		}
+	}
+#endif // WITH_EDITOR
+    ......
+}
+```
+
+至此，我们就解决了无法看object的Diff的烦恼。
+
+验证: DataTable右键菜单 -> Export As CSV
+
+## 一些注意事项
+
+### OnDataTableChanged函数加载时机过早的问题
+
+实测中发现，在UnrealEditor启动过程中，也会触发OnDataTableChanged函数。
+
+如果你的实际需求和我们类似：希望只在编辑DataTable的时候触发，不希望加载DataTable的时候触发OnDataTableChanged，那么可以用如下代码过滤
+
+```cpp
+#if !PLATFORM_MAC
+    // 判断编辑器是否加载完成
+	if(! FGlobalTabmanager::Get()->GetRootWindow().IsValid())
+	{
+		return;
+	}
+#endif
+```
+
+### UStateConfig属性显示不出来的问题
+
+```cpp
+// 正确的属性定义
+UPROPERTY(EditAnywhere, Category = "Animation")
+
+// 正确的属性定义
+UPROPERTY(EditDefaultsOnly)
+
+// 错误的定义: 由于不可编辑，所以表格中不会显示此属性
+UPROPERTY()
+
+// 错误的定义: Category字段不允许包含'|'，否则也会不显示
+UPROPERTY(EditAnywhere, Category = "Gameplay|Animation")
+```
+
+
+一个检查属性问题的代码
+
+```cpp
+auto ConfigProp = ConfigClass->PropertyLink;
+while (ConfigProp)
+{
+    if (const auto CategoryString = ConfigProp->FindMetaData(TEXT("Category")))
+    {
+        if (CategoryString->Contains(TEXT("|")))
+        {
+            // report error
+        }
+
+    }
+    if((ConfigProp->PropertyFlags & CPF_Edit) != CPF_Edit)
+    {
+        // report error
+    }
+
+    ConfigProp = ConfigProp->PropertyLinkNext;
+}
+```
