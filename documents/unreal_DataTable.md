@@ -26,8 +26,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UObject> ConfigClass;
 	
-	//负责保存行数据的对象; 也可用宏UPROPERTY(EditAnywhere, meta = (EditInline))
-	UPROPERTY(instanced, EditAnywhere)
+	//负责保存行数据的对象; 
+	UPROPERTY(EditAnywhere, meta = (EditInline))
 	TObjectPtr<UObject> ConfigObj;
 	
 	//监听表的修改操作
@@ -83,7 +83,7 @@ public:
     UPROPERTY(EditAnywhere)
     TSubclassOf<UStateConfig> ConfigClass;
 	
-    //负责保存行数据的对象; 也可用宏UPROPERTY(instanced, EditAnywhere, meta = (AllowedClasses = "/Script/YourGame.StateConfig"))
+    //负责保存行数据的对象; 注意千万不要用instanced替代EditInline, 因为instanced Implies EditInline and Export. Export会导致此属性复制粘贴过程Crash
     //注意此处的类型一定要用UObject，不建议用UStateConfig
     UPROPERTY(EditAnywhere, meta = (EditInline, AllowedClasses = "/Script/YourGame.StateConfig"))
     TObjectPtr<UObject> ConfigObj;
