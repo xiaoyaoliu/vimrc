@@ -225,6 +225,10 @@ set filetype?
 
 一个号称很智能的补全插件，免费版的功能一般，收费版则有代码泄漏的风险！
 
+现在已经用Copilot插件来代替
+
+技巧：如何查看Vim的<TAB>按键被何处占用: :verbose imap <Tab>
+
 ## 工程管理，文件管理，全文检索
 
 ### airblade/vim-rooter

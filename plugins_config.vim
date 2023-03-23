@@ -36,8 +36,6 @@ if has('python') || has('python3')
 	endif
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
     Plug 'Valloric/YouCompleteMe'
-    "https://tabnine.com/install
-    Plug 'zxqfl/tabnine-vim'
 	if has('nvim')
 		Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 	else
@@ -74,7 +72,6 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
 Plug 'juneedahamed/svnj.vim'
 Plug 'nvie/vim-flake8'
@@ -94,6 +91,11 @@ Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-LogViewer'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'Maxlufs/LargeFile.vim'
+
+if v:version >= 900
+    Plug 'github/copilot.vim'
+endif
+    
 
 if has("win16") || has("win32")
     Plug 'lsdr/monokai'
@@ -224,6 +226,67 @@ imap <C-J> <C-X><C-O>
 " store yankring history file hidden
 let g:yankring_history_file = '.yankring_history'
 
+if has_key(plugs, 'copilot.vim')
+    imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+endif
+
+
+if has_key(plugs, 'YouCompleteMe')
+    " YouCompleteMe customizations
+    "
+    nmap <leader>jk :YcmCompleter GetDoc<CR>
+    let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', '*.tga', '*.png']
+            \}
+    let g:ycm_key_invoke_completion = '<c-m>'
+    "let g:ycm_seed_identifiers_with_syntax = 0
+    let g:ycm_show_diagnostics_ui = 0
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_min_num_identifier_candidate_chars = 1
+    let g:ycm_complete_in_strings=1
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    let g:ycm_filetype_whitelist = {
+                \ "c":1,
+                \ "cpp":1,
+                \ "xml":1,
+                \ "objc":1,
+                \ "sh":1,
+                \ "zsh":1,
+                \ "zimbu":1,
+                \ "python":1,
+                \ "java":1,
+                \ "go":1,
+                \ "erlang":1,
+                \ "perl":1,
+                \ "def":1,
+                \ "lua":1,
+                \ "cs":1,
+                \ "javascript":1,
+                \ "dosbatch":1,
+                \ "vim":1,
+                \ }
+
+
+    " 加载项目配置的ycm的时候，不弹出确认窗口
+    let g:ycm_confirm_extra_conf = 0
+    let g:ycm_semantic_triggers = {
+    \   'c': ['->', '.'],
+    \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+    \            're!\[.*\]\s'],
+    \   'ocaml': ['.', '#'],
+    \   'cpp,cuda,objcpp': ['->', '.', '::'],
+    \   'perl': ['->'],
+    \   'php': ['->', '::'],
+    \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+    \   'ruby,rust': ['.', '::'],
+    \   'lua': ['.', ':'],
+    \   'erlang': [':'],
+    \	'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+    \	'cs,lua,javascript': ['re!\w{2}'],
+    \ }
+endif
+    
 if has('python') || has('python3')
 	" don't show the help in normal mode
 	"let g:Lf_HideHelp = 1
@@ -273,60 +336,6 @@ if has('python') || has('python3')
 
     nmap <leader>wb :<C-U><C-R>=printf("Leaderf! rg -F --all-buffer -e %s", expand("<cword>"))<CR>
     nmap <leader>wB :LeaderfLineCword<CR>
-
-    " YouCompleteMe customizations
-    nmap <leader>jk :YcmCompleter GetDoc<CR>
-    let g:Lf_WildIgnore = {
-            \ 'dir': ['.svn','.git','.hg'],
-            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', '*.tga', '*.png']
-            \}
-    let g:ycm_key_invoke_completion = '<c-m>'
-    "let g:ycm_seed_identifiers_with_syntax = 0
-    let g:ycm_show_diagnostics_ui = 0
-    let g:ycm_collect_identifiers_from_tags_files = 1
-    let g:ycm_min_num_identifier_candidate_chars = 1
-    let g:ycm_complete_in_strings=1
-    let g:ycm_collect_identifiers_from_comments_and_strings = 1
-    let g:ycm_filetype_whitelist = {
-                \ "c":1,
-                \ "cpp":1,
-                \ "xml":1,
-                \ "objc":1,
-                \ "sh":1,
-                \ "zsh":1,
-                \ "zimbu":1,
-                \ "python":1,
-                \ "java":1,
-                \ "go":1,
-                \ "erlang":1,
-                \ "perl":1,
-                \ "def":1,
-                \ "lua":1,
-                \ "cs":1,
-                \ "javascript":1,
-                \ "dosbatch":1,
-                \ "vim":1,
-                \ }
-
-
-    " 加载项目配置的ycm的时候，不弹出确认窗口
-    let g:ycm_confirm_extra_conf = 0
-	let g:ycm_semantic_triggers = {
-    \   'c': ['->', '.'],
-    \   'objc': ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
-    \            're!\[.*\]\s'],
-    \   'ocaml': ['.', '#'],
-    \   'cpp,cuda,objcpp': ['->', '.', '::'],
-    \   'perl': ['->'],
-    \   'php': ['->', '::'],
-    \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
-    \   'ruby,rust': ['.', '::'],
-    \   'lua': ['.', ':'],
-    \   'erlang': [':'],
-	\	'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-	\	'cs,lua,javascript': ['re!\w{2}'],
-    \ }
-
 else
     " ack.vim -i(ignore-case), -w(whole-word), -v(invert-match)
     " https://github.com/ggreer/the_silver_searcher
