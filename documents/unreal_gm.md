@@ -16,6 +16,12 @@ command大多定义在: BaseInput.ini
 
 TODO: 如何查看第三方动画的Debug Info ?
 
+### Camera
+
+打开Camera Debug信息的GM: ShowDebug CAMERA
+
+查看Camera Shake的gm: r.CameraShakeDebug = 1
+
 ### Audio Sound
 
 官方文档: https://docs.unrealengine.com/5.0/en-US/audio-console-commands-in-unreal-engine/
