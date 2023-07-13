@@ -11,6 +11,12 @@ root用户的crontab文件地址: /var/spool/cron/crontabs/root
 
 经验1: 查看log发现cron restart的时候报语法错误，检查发现，root文件的格式为dos所致
 
+server的时区和你本地PC不一致，也可能让你误以为crontab不工作: timedatectl status
+
+修改时区:  timedatectl set-timezone Asia/Taipei
+
+修改时区后，为了crontab用新时区，要重启syslog
+
 ### crontab比设定的次数多执行的问题
 
 https://askubuntu.com/questions/635704/strange-root-cronjob-ive-never-set-it
