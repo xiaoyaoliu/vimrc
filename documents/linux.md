@@ -247,4 +247,10 @@ DB_CONN = 'redis://:pwd@127.0.0.1:8888/0' 对应的就是redis://:password@ip:po
 https://www.cnblogs.com/tjp40922/p/10421911.html
 
 
+### http server相关
 
+nginx新手设置: http://nginx.org/en/docs/beginners_guide.html
+
+tornado服务器的nginx配置: 将init/tornado.conf copy到 /etc/nginx/conf.d/文件夹
+
+重启nginx: nginx -s reload
