@@ -152,6 +152,8 @@ iptables开启特定端口: https://github.com/judasn/Linux-Tutorial
 * iptables -A OUTPUT -p tcp --sport 587 -j ACCEPT
 * iptables -A OUTPUT -p tcp --sport 25 -j ACCEPT
 
+debian防火墙直接用ufw: ufw allow 80/tcp
+
 ## docker相关
 
 ### 彻底卸载docker
