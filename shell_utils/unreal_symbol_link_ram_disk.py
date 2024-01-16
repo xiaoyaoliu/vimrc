@@ -67,16 +67,18 @@ def UnlinkSingleFile(sourcePath, cacheDir):
 
 
 def LinkSingleFile(sourcePath, cacheDir):
-    if not Path(sourcePath).is_symlink():
-        targetPath = os.path.join(cacheDir, os.path.basename(sourcePath))
+    targetPath = os.path.join(cacheDir, os.path.basename(sourcePath))
+    if Path(sourcePath).is_symlink():
+        os.remove(sourcePath)
+    else:
         if os.path.isfile(sourcePath):
             shutil.copy2(sourcePath, targetPath)
             os.remove(sourcePath)
-        command = 'mklink "%s" "%s"' % (sourcePath, targetPath)
-        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        exit_code = proc.wait()
-        if exit_code != 0:
-            print("[%s]: %s" %( exit_code, command))
+    command = 'mklink "%s" "%s"' % (sourcePath, targetPath)
+    proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    exit_code = proc.wait()
+    if exit_code != 0:
+        print("[%s]: %s" %( exit_code, command))
 
 
 def LinkMemoryDisk():
