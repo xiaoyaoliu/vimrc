@@ -59,4 +59,27 @@ def get_guid(dll_path):
         print(e)
         return None
     return tmp.upper()
+
 ```
+## 下载DLL对应的PDB的官方方法
+
+symbol server: https://learn.microsoft.com/zh-cn/windows/win32/dxtecharts/debugging-with-symbols?redirectedfrom=MSDN
+
+```sh
+"C:\Program Files (x86)\Windows Kits\8.1\Debuggers\x64\symchk.exe" X:\your\local\path\to\UnrealEditor-RenderCore.dll /s  Srv*C:\Users\YourName\AppData\Local\Temp\SymbolCache*http://your.symbol.server.ip /os /op
+```
+
+以上命令会从Servrer上查找UnrealEditor-RenderCore.dll对应的pdb，并下载到本地的目录: C:\Users\YourName\AppData\Local\Temp\SymbolCache
+
+以上命令会输出匹配的pdb的fullpath；
+
+如果添加一个重定向到一个文件的话，会输出空字符串，所以就无法用python来调用，因为看不到任何输出！
+
+
+```sh
+"C:\Program Files (x86)\Windows Kits\8.1\Debuggers\x64\symchk.exe" X:\your\local\path\to\UnrealEditor-RenderCore.dll /s  Srv*C:\Users\YourName\AppData\Local\Temp\SymbolCache*http://your.symbol.server.ip /os /op > C:\111.txt
+```
+
+如果本地之前从未下载过这个UnrealEditor-RenderCore.pdb，那么111.txt将是空文件
+
+如果用python下载pdb的话，建议直接构造Url，使用HTTP协议下载。
