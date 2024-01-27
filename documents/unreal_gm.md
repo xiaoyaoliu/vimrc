@@ -14,7 +14,10 @@ command大多定义在: BaseInput.ini
 
 相关代码: AHUD::ShowDebug -> ACharacter::DisplayDebug -> UAnimInstance::DisplayDebug
 
-TODO: 如何查看第三方动画的Debug Info ?
+Q: 如何查看第三方动画的Debug Info ?
+
+A: 使用Unreal的官方调试器Rewind Debugger: 菜单栏 -> Tools -> Debug -> Rewind Debugger
+
 
 ### Camera
 

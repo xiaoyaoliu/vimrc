@@ -81,3 +81,13 @@ AG14W武器动画的配置在: DT_LPAMG_WEP_Information -> DT_LPAMG_WEP_AG14W_Mo
 配置在:  DT_LPAMG_WEP_Information表 -> DT_LPAMG_CH_Abilities表
 
 表的获取: BP_LPSP_WEP蓝图的CGraph Cache Character Abilities中设置了Player Character Abilities变量， BP_LPSP_PCH接口通过Update Current Weapon函数LPSP - Get Character Abilities接口设置到Abilities变量中
+
+## 消音器
+
+典型的消音器: BP_LPSP_WEP_Silencer_03
+
+挂消音器的枪: BP_LPSP_WEP_AR_01
+
+配表: DT_LPSP_Actors_Muzzles
+
+挂消音器到枪上的蓝图位置: BP_LPSP_WEP的CGraph Swap Muzzle
