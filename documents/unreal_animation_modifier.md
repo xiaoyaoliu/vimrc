@@ -5,7 +5,7 @@ UAnimationModifier是官方提供的批量修改AnimSequence的方法
 以一个需求为例：
 
 1. 项目中通常有一个参与蒙皮的FootL骨骼，还有一个挂在Root骨骼下不参与蒙皮的IkFootL骨骼
-1. 通常对于一个AnimSequence骨骼，FootL骨骼应该和IkFootL骨骼，在角色空间上完全对齐
+1. 通常对于一个AnimSequence资产，FootL骨骼应该和IkFootL骨骼，在角色空间上完全对齐
 1. 但是实际上美术输出的AnimSequence资产里，这两个骨骼不一定是对齐的，那么如何修复呢？
 
 
@@ -32,7 +32,7 @@ UCopyBonesModifier就是UAnimationModifier的一个子类，可以将一个Bone�
 1. 鼠标右键，然后和上一节方法相同
 
 
-## 一些个人感悟
+## 展望
 
 以后开发一些修改AnimationSequence的工具，尽量用AnimationModifier来做，而不是传统的使用UAnimMetaData
 
