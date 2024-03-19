@@ -35,7 +35,7 @@ python示例如下：
 import pefile
 import struct
 # dll_path是DLL文件的路径
-def get_guid(dll_path):
+def get_guid_of_pdb(dll_path):
     # https://gist.github.com/Manouchehri/98dbb75e226e6cc962b989caef38b399 
     #ugly code, isn't it ?
     try:
@@ -83,3 +83,41 @@ symbol server: https://learn.microsoft.com/zh-cn/windows/win32/dxtecharts/debugg
 如果本地之前从未下载过这个UnrealEditor-RenderCore.pdb，那么111.txt将是空文件
 
 如果用python下载pdb的话，建议直接构造Url，使用HTTP协议下载。
+
+## 仿照SymStore命令上传DLL和PDB到Server
+
+### 获取DLL的GUID
+
+首先获取DLL的GUID: https://randomascii.wordpress.com/2013/03/09/symbols-the-microsoft-way/
+
+Dll的GUID的计算方式和PDB不同，Dll的GUID是又TimeStamp和SizeOfImage拼接而成, python代码如下
+
+```python
+import pefile
+def get_guid_of_dll(dll_path):
+    try:
+        dll = pefile.PE(dll_path)
+        date_stamp = hex(dll.FILE_HEADER.TimeDateStamp)
+        image_size = hex(dll.OPTIONAL_HEADER.SizeOfImage)
+        tmp = "%s%s" % (date_stamp[2:].zfill(8).upper(), image_size[2:].lower())
+    except AttributeError as e:
+        print('Error appends during %s parsing' % dll_path)
+        print(e)
+        return None
+    return tmp
+```
+### 压缩与上传
+
+https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/makecab
+
+因为SymbolServer存储的都是压缩文件，所以上传的时候需要先用makecab压缩dll文件为dl_：
+```batch
+makecab your/dll/fullpath /l your/dll/dir
+    ```
+
+上传DLL的几个步骤:
+1. 获取DLL的GUID
+2. 用makecab压缩dll文件为dl_
+3. 上传dl_文件上传到: http://SymbolServer/<DllName>.dll/ <GUID> /<DllName>.dl_
+
+pdb的上传也类似，这种上传方式和SymStore命令上传相比，最大的优势就是可以用python的multiprocessing.Pool并行化, 从而大大提升上传速度
