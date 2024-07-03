@@ -22,10 +22,9 @@ Unreal的默认模式是服务端做物理Simulate，然后由Server来同步其
 1. FPhysicsReplicationAsync::OnPreSimulate_Internal 物理线程同步入口，所有的同步模式都会走ApplyTargetStatesAsync
 
 
-Default模式：截至到5.3，会走DefaultReplication_DEPRECATED(), 并不会走DefaultReplication()
-PredictiveInterpolation模式：会走PredictiveInterpolation()
-Resimulation模式：会走ResimulationReplication()
-
+- Default模式：截至到5.3，会走DefaultReplication_DEPRECATED(), 并不会走DefaultReplication()
+- PredictiveInterpolation模式：会走PredictiveInterpolation()
+- Resimulation模式：会走ResimulationReplication()
 
 ## 第一方做物理Simulate，Server做转发和校验，第三方做物理同步
 
