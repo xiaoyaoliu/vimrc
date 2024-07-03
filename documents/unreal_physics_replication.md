@@ -106,3 +106,31 @@ AngVel统一为Degree的好处有：
 2. 加BreakPoint调试的时候，Degree的可读性更强
 
 最后，要把CharacterMovementCVars::bPredictiveInterpolationAlwaysHardSnap设置为False，这样才能做到Interpolation
+
+## Debug工具分享
+
+查第三方异常弹飞的过程中，我曾经一度怀疑是其他Logic也在修改位置，所以我希望能够监听到所有改变我关心Actor位置的Logic, 但是又不想直接修改UE源码:USceneComponent::GetRelativeLocation_DirectMutable()
+
+于是，我写了下面一小段代码，通过Hook的方式，监听到了所有对Actor位置的修改，这样就可以方便的定位到问题所在了
+
+```cpp
+// Build.cs里添加Module："IrisCore"
+#include "Core/Private/Iris/ReplicationSystem/LegacyPushModel.h"
+//以下代码放在Actor的BeginPlay或其他函数中
+// 参考UEPushModelPrivate::MarkPropertyDirty的实现，主要为了FNetPushObjectId::IsIrisId()返回True, 只要前32bit不是0xFFFFFFFF就可以
+uint64 NetPushID = 0x1FFFFFFFFFFFFFFFULL;
+const UE::Net::Private::FNetPushObjectHandle Handle (*reinterpret_cast<UE::Net::Private::FNetPushObjectHandle*>(&NetPushID));
+UE::Net::Private::FNetHandleLegacyPushModelHelper::SetNetPushID(RootComponent, Handle);
+UEPushModelPrivate::SetIrisMarkPropertyDirtyDelegate(UEPushModelPrivate::FIrisMarkPropertyDirty::CreateLambda([this](const UObject* Obj, UEPushModelPrivate::FNetIrisPushObjectId InPushId, const int32 InRepIndex)
+	{
+		if(RootComponent == Obj)
+		{
+			if(InRepIndex == GET_PROPERTY_REP_INDEX(USceneComponent, RelativeLocation))
+			{
+                // 此处加BreakPoint，可以监听到所有对Actor位置的修改
+				DrawDebugSphere(RootComponent->GetWorld(), RootComponent->GetComponentLocation(), 5.f, 8, FColor::Green, false, 10.f);
+			}
+		
+		}
+	}));
+```
