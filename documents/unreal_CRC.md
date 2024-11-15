@@ -11,7 +11,7 @@ CRC就是当你的UnrealEditor，或者你发布的Game, 发生Crash时，会弹
 
 本文提到的部署、代码、函数，主要基于Unreal5.3
 
-用CRC的最大好处就是当你的非程序员同时发生Crash，只需要发送一张CRC截图给你, 你就可以知道Crash的原因，提高Crash的处理效率
+用CRC的最大好处就是当你的非程序员同事发生Crash，只需要发送一张CRC截图给你, 你就可以知道Crash的原因，提高Crash的处理效率
 
 本文也会介绍如何利用CRC，将Crash线程的堆栈信息上传到收集统计网站, 尤其是FullCrashDump的堆栈
 
@@ -98,7 +98,7 @@ CRC.exe是在Test包发生Crash后才启动的，具体的BreakPoint位置在函
 ## CRC的一些定制开发思路
 
 ### CRC的调试方法
-由于只有CRCEditor是跟随UnrealEditor一起启动，所以日常定制开发CRC，都是安装如下方法调试代码（加BreakPoint）:
+由于只有CRCEditor是跟随UnrealEditor一起启动，所以日常定制开发CRC，都是按照如下方法调试代码（加BreakPoint）:
 1. 启动UnrealEditor进程
 2. 在VS里Attach到CrashReportClientEditor进程
 
