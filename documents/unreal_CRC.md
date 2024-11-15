@@ -13,6 +13,8 @@ CRC就是当你的UnrealEditor，或者你发布的Game, 发生Crash时，会弹
 
 用CRC的最大好处就是当你的非程序员同时发生Crash，只需要发送一张CRC截图给你, 你就可以知道Crash的原因，提高Crash的处理效率
 
+本文也会介绍如何利用CRC，将Crash线程的堆栈信息上传到收集统计网站, 尤其是FullCrashDump的堆栈
+
 ## CRC的部署
 
 1. 大部分Unreal项目都不是直接使用公办引擎进行开发
@@ -57,7 +59,7 @@ Test包主要需要`CrashReportClient.exe` , CRC才可以正常工作：
 
 部署CRC的过程可能不是那么一帆风顺，很可能需要Debug, 尤其是Test包的部署。
 
-启动CRC的代码基本都在：`Client\Engine\Source\Runtime\Core\Private\Windows\WindowsPlatformCrashContext.cpp`
+启动CRC的代码基本都在：`Engine\Source\Runtime\Core\Private\Windows\WindowsPlatformCrashContext.cpp`
 
 CRCEditor是随着UnrealEditor进程一起启动的，所以你启动UnrealEditor后，用任务管理器观察下有没有CRCEditor进程即可: 原理见函数`LaunchCrashReportClient`
 
@@ -210,5 +212,5 @@ void FCrashReportClient::FinalizeDiagnoseReportWorker()
 ```
 
 利用CRC收集Crash信息的优点:
-1. FullCrashDump也会启动CRC，所以FullCrashDump的堆栈也能上传到统计网站
+1. FullCrashDump也会启动CRC，所以FullCrashDump的堆栈也能通过CRC上传到统计网站
 2. 堆栈中可以显示Unreal中check代码导致assert信息, 且上传的堆栈是完整的
