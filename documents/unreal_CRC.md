@@ -41,11 +41,20 @@ Test包主要需要`CrashReportClient.exe` , CRC才可以正常工作：
 - File: `Engine\Binaries\Win64\CrashReportClient.exe`
 
 但是CRC.exe有一堆依赖资源，要确保一起部署到Test包, 至少依赖如下资源：
-- 目录: Engine\Content\Internationalization\icudt64l
+- 目录: Engine\Content\Internationalization\icudt64l\brkitr
+- 文件: Engine\Content\Internationalization\icudt64l\curr\pool.res
+- 文件: Engine\Content\Internationalization\icudt64l\curr\root.res
+- 文件: Engine\Content\Internationalization\icudt64l\cnvalias.icu
+- 文件: Engine\Content\Internationalization\icudt64l\en.res
+- 文件: Engine\Content\Internationalization\icudt64l\pool.res
+- 文件: Engine\Content\Internationalization\icudt64l\zh.res
 - 文件: `Engine\Content\Slate\Checkerboard.png`
 - 目录：Engine\Content\Slate\Cursor; Engine\Content\Slate\Fonts; Engine\Content\Slate\Starship
 - 目录：Engine\Content\SlateDebug\Fonts
 - 目录：Engine\Shaders\StandaloneRenderer\D3D
+
+下面文件是可选的文件(Optional):  
+- Engine\Content\Internationalization\icudt64l\zh_CN.res
 
 上面的CRC依赖项只是经验总结，如果您的项目Crash后无法启动CRC，那么可以全局搜一下: `CrashReportClient.log`
 
