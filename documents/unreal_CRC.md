@@ -77,6 +77,32 @@ CRC.exe是在Test包发生Crash后才启动的，具体的BreakPoint位置在函
 
 但是，我碰到一个问题：Test包加上-fullcrashdump启动后闪退，在Unreal Handle Crash线程跑到创建CRC进程的那行代码时候又Crash了，导致CRC没弹出
 
+#### Test包FullCrashDump的最终解决办法
+
+后来分析，发现是因为FullCrashDump写入硬盘的时间太久了，远远超过了Unreal设置的主线程等待HandleCrash Thread的时间，导致Unreal Handle Crash线程被强制终止
+
+Unreal主线程等待处理Crash的时间是由`CrashHandlingTimeoutSecs`控制的，这个值默认是60s(1分钟)， 然后HandleCrash Thread只是写入Fulldump的时间远远超过了60s
+
+于是最终方案是修改`WaitUntilCrashIsHandled`函数，FullCrashDump下，将CrashHandlingTimeoutSecs的值放大10倍，即600s(10分钟)
+
+
+```cpp
+	FORCEINLINE bool WaitUntilCrashIsHandled()
+	{
+		float FinalCrashHandlingTimeoutSecs = CrashHandlingTimeoutSecs;
+		const TCHAR* CmdLine = FCommandLine::Get();
+		// fullcrashdump should wait to write the very large full crash dump file
+		if (FParse::Param(CmdLine, TEXT("fullcrashdumpalways")) || FParse::Param(CmdLine, TEXT("fullcrashdump")))
+		{
+			FinalCrashHandlingTimeoutSecs *= 10.f;
+		}
+		// Wait 60s, it's more than enough to generate crash report. We don't want to stall forever otherwise.
+		return WaitForSingleObject(CrashHandledEvent, static_cast<DWORD>(FinalCrashHandlingTimeoutSecs * 1000)) == WAIT_OBJECT_0;
+	}
+```
+
+#### ~~临时的解决办法~~
+
 ```cpp
         // 在Crash目录(dmp文件所在目录，通常在Saved\Crashes里的一个子目录)生成CRCCommand.txt文件，内容是CRC的启动命令
         FString CrashReporterClientFullPath = FPaths::ConvertRelativePathToFull(CrashReporterClientPath);
@@ -99,9 +125,9 @@ CRC.exe是在Test包发生Crash后才启动的，具体的BreakPoint位置在函
         }
 ```
 
-- 于是我加上了如上的代码，启动CRC之前先生成CRCCommand.txt文件，然后再启动CRC.exe，如果CRC启动Crash，那么dmp所在目录就会多一个CRCCommand.txt文件
-- 我们有一个python写的类似游戏助手进程，里面加了一个逻辑: 如果dmp目录有CRCCommand.txt文件，那么读取CRCCommand.txt文件来执行CRC.exe，然后删除CRCCommand.txt文件.
-- 这样实现了Test包即便是FullCrashDump时候CRC.exe也能稳定成功启动
+- ~~于是我加上了如上的代码，启动CRC之前先生成CRCCommand.txt文件，然后再启动CRC.exe，如果CRC启动Crash，那么dmp所在目录就会多一个CRCCommand.txt文件~~
+- ~~我们有一个python写的类似游戏助手进程，里面加了一个逻辑: 如果dmp目录有CRCCommand.txt文件，那么读取CRCCommand.txt文件来执行CRC.exe，然后删除CRCCommand.txt文件.~~
+- ~~ 这样实现了Test包即便是FullCrashDump时候CRC.exe也能稳定成功启动 ~~
 
 ## CRC的一些定制开发思路
 
