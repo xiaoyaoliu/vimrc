@@ -40,7 +40,7 @@ CRCEditor生成方法：
 Test包主要需要`CrashReportClient.exe` , CRC才可以正常工作：
 - File: `Engine\Binaries\Win64\CrashReportClient.exe`
 
-但是CRC.exe有一堆依赖资源，要确保一起部署到Test包, 至少依赖如下资源：
+但是CRC.exe有30个左右的依赖资源，要确保一起部署到Test包, 至少依赖如下资源：
 - 6文件: Engine\Content\Internationalization\icudt64l\brkitr\char.brk, line_cj.brk, root.res, word.brk, zh.res, en.res
 - 2文件: Engine\Content\Internationalization\icudt64l\curr\pool.res, root.res
 - 4文件: Engine\Content\Internationalization\icudt64l\cnvalias.icu, pool.res, zh.res, en.res
@@ -50,7 +50,7 @@ Test包主要需要`CrashReportClient.exe` , CRC才可以正常工作：
 
 下面文件是可选的文件(Optional):  
 - CRC右上角3个按钮的图标：Engine\Content\Slate\Starship\CoreWidgets\Window
-- CRC左上角的Unreal图标：Engine\Content\Slate\Starship\CoreWidgets\Common\unreal-small.svg
+- CRC左上角的Unreal图标：Engine\Content\Slate\Starship\Common\unreal-small.svg
 - CRC左下方协议的CheckBox：Engine\Content\Slate\Starship\CoreWidgets\CheckBox
 - Engine\Content\Internationalization\icudt64l\zh_CN.res
 
