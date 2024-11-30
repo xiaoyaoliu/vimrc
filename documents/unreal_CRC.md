@@ -45,7 +45,6 @@ Test包主要需要`CrashReportClient.exe` , CRC才可以正常工作：
 - 2文件: Engine\Content\Internationalization\icudt64l\curr\pool.res, root.res
 - 4文件: Engine\Content\Internationalization\icudt64l\cnvalias.icu, pool.res, zh.res, en.res
 - 1文件: `Engine\Content\Slate\Checkerboard.png`
-- 1文件: `Engine\Content\Slate\Cursor\invisible.cur`
 - 2个字体文件：Engine\Content\Slate\Fonts\Roboto-Regular.ttf; Engine\Content\SlateDebug\Fonts\LastResort.ttf
 - 目录：Engine\Shaders\StandaloneRenderer\D3D
 
