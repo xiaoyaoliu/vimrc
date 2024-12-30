@@ -248,3 +248,8 @@ void FCrashReportClient::FinalizeDiagnoseReportWorker()
 利用CRC收集Crash信息的优点:
 1. FullCrashDump也会启动CRC，所以FullCrashDump的堆栈也能通过CRC上传到统计网站
 2. 堆栈中可以显示Unreal中check代码导致assert信息, 且上传的堆栈是完整的
+
+## Ensure类型的dmp
+
+文件：CrashReportClientApp.cpp
+函数：RunUnattended -> FCrashReportCoreUnattended
