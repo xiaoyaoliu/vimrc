@@ -35,6 +35,8 @@ A: 使用Unreal的官方调试器Rewind Debugger: 菜单栏 -> Tools -> Debug ->
 
 gm: dumpticks
 
+输入之后，Tick关系在log里查看即可
+
 ### 查看一些默认关闭的log
 
 gm指令: log log类型 log级别
