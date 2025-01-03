@@ -31,6 +31,10 @@ A: 使用Unreal的官方调试器Rewind Debugger: 菜单栏 -> Tools -> Debug ->
 
 运行时音效可视化gm: au.3dVisualize.Enabled = 1
 
+### Tick分析
+
+gm: dumpticks
+
 ### 查看一些默认关闭的log
 
 gm指令: log log类型 log级别
