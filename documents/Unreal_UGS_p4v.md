@@ -1,5 +1,6 @@
 # UnrealGameSync是如何实现免密连接P4V的？
 
+
 ## 背景
 
 UnrealGameSync简称UGS
@@ -72,8 +73,17 @@ def FindUGSIni(Home):
                         selected_file = file
         print("Selected UGS.ini: %s" % selected_file)
     return os.path.join(ini_dir, selected_file), selected_file
-
     ```
+
+## UGS是如何下载Precompiled Binaries
+
+UGS源码工程: `Engine\Source\Programs\UnrealGameSync\UnrealGameSync.sln`
+
+函数: PerforceArchive::EnumerateAsync, 文件: ArchiveInfo.cs
+
+读取的文件：ProjectDir/Build/UnrealGameSync.ini
+
+读取的字段: ZippedBinariesPath
 
 ## 总结
 
