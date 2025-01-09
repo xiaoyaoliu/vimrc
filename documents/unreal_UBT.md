@@ -1,3 +1,21 @@
+## UBT的配置
+UBT读取配置的核心代码在：H:\PC\Client\Engine\Source\Programs\UnrealBuildTool\System\XmlConfig.cs
+1. Unreal.EngineDirectory/Restricted/NotForLicensees/Programs/UnrealBuildTool/BuildConfiguration.xml (前提：InstalledBuild.txt不存在)
+1. Unreal.EngineDirectory/Saved/UnrealBuildTool/BuildConfiguration.xml (前提：InstalledBuild.txt不存在)
+3. `C:\Users\<username>\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml`
+4. `C:\Users\<username>\AppData\Documents(Environment.SpecialFolder.Personal)\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml`
+5. ProjectRootDirectory/Saved/UnrealBuildTool/BuildConfiguration.xml
+
+后面的配置会覆盖前面的配置
+
+UBT配置的元文件：`Client\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.xml`
+
+但是，并不是元文件里所有属性都可以在BuildConfiguration.xml里配置
+
+只有配置了修饰器XmlConfigFile修饰器的属性才可以在BuildConfiguration.xml里配置: `[XmlConfigFile]`
+
+XmlConfigFile的修饰器只支持简单类型（bool int float string string[]）等，并不支持VersionNumber这种组合(复杂)类型
+
 ## DisableAdaptiveUnity参数
 
 ```cpp
