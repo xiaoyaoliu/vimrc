@@ -174,7 +174,7 @@ void UPrimitiveComponent::SetRigidBodyReplicatedTarget(FRigidBodyState& UpdatedS
 					}
 				}
 				// add by ZhangXu
-				if (BI && BI->IsValidBodyInstance() && BI->IsInstanceSimulatingPhysics())
+				if (BI && BI->IsInstanceSimulatingPhysics())
 				{
 					if (!BI->IsInstanceAwake())
 					{
