@@ -134,3 +134,59 @@ UEPushModelPrivate::SetIrisMarkPropertyDirtyDelegate(UEPushModelPrivate::FIrisMa
 		}
 	}));
 ```
+
+## 物理同步后，客户端可以看到碰撞体，但是实际LineTrace却没有
+
+bug发生的时序：
+
+1. 客户端的物理只要进入了Sleep状态后
+2. 服务器开始物理模拟并下发客户端（`PostNetReceivePhysicState` -> `UPrimitiveComponent::SetRigidBodyReplicatedTarget`）
+3. `FPhysicsReplication::SetReplicatedTarget`最终改变了一个Sleep刚体的位置
+4. 刚体无法被LineTrace到
+
+我猜测的原因：一个正在Simulate且Sleep的刚体，强行改位置，不会更新物理Engine底层的dynamic BVH tree
+
+让你设计一个物理engine，sleep刚体的初衷就是为了提升性能，那么外部对sleep刚体的修改忽略掉也正常。
+
+gm指令: show Collision，看到的应该不是底层simulate刚体的位置。
+
+解决办法：在Client开始物理同步前，手动WakeUp 刚体。
+
+在SetRigidBodyReplicatedTarget中添加如下代码
+
+```cpp
+void UPrimitiveComponent::SetRigidBodyReplicatedTarget(FRigidBodyState& UpdatedState, FName BoneName, int32 ServerFrame, int32 ServerHandle)
+{
+	if (UWorld* World = GetWorld())
+	{
+		if (FPhysScene* PhysScene = World->GetPhysicsScene())
+		{
+			if (IPhysicsReplication* PhysicsReplication = PhysScene->GetPhysicsReplication())
+			{
+				// If we are not allowed to replicate physics objects,
+				// don't set replicated target unless we have a BodyInstance.
+				FBodyInstance* BI = GetBodyInstance(BoneName);
+				if (PrimitiveComponentCVars::bReplicatePhysicsObject == false)
+				{
+					if (BI == nullptr || !BI->IsValidBodyInstance())
+					{
+						return;
+					}
+				}
+				// add by ZhangXu
+				if (BI && BI->IsValidBodyInstance() && BI->IsInstanceSimulatingPhysics())
+				{
+					if (!BI->IsInstanceAwake())
+					{
+						BI->WakeInstance();
+					}
+				}
+				// end add by ZhangXu
+				
+				PhysicsReplication->SetReplicatedTarget(this, BoneName, UpdatedState, ServerFrame);
+			}
+		}
+	}
+}
+
+```
