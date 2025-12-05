@@ -99,6 +99,21 @@ UGS源码工程: `Engine\Source\Programs\UnrealGameSync\UnrealGameSync.sln`
 
 读取的字段: ZippedBinariesPath
 
+## 外包人员的UGS无法启动Editor: The editor needs to be built before you can run it. Build it now?
+
+最后是通过观察外包同事的UGS.log发现问题: `C:\Users\<UserName>\AppData\Local\UnrealGameSync\UnrealGameSync.log`
+```log
+p4.exe ......  fstat "//.../Client/Engine/Build/Build.version'
+Found branch root at //.../Client
+//.../Client/Projects/Source/*Editor.Target.cs - protected namespace - access denied.
+ Couldn't find any editor targets for this project
+```
+最终是UGS依赖后缀为Editor.Target.cs的文件，给外包同学开通此文件的权限，
+
+外包同学本地手动杀死UGS进程，再启动UGS，这个问题就解决了
+
+这些log对应的底层源码在文件: `Engine\Source\Programs\UnrealGameSync\UnrealGameSyncShared\OpenProjectInfo.cs` 函数`CreateAsync`
+
 ## 总结
 
 工具每少一项配置，就多一份用户体验
