@@ -44,7 +44,9 @@ P4CLIENT就是UGS当前的p4 workspace
 
 P4CLIENT的获取方式是通过读取: `C:\Users\<Username>\AppData\Local\UnrealGameSync\UnrealGameSync.ini`
 
-UGS.ini里General.OpenProjects.ClientPath字段就包含了P4CLIENT
+UGS.ini里General.LastProject.ClientPath字段就包含了P4CLIENT
+
+注意: 要用LastProject，切记不要用OpenProjects字段，因为OpenProjects可能有多个，你很难判断用户当前用的是哪一个Project
 
 UGS.ini是个非常有用的文件，还有很多其他非常有用的字段，本文不展开讨论，例如: UGS当前ChangeNumber, SyncResult(是否成功Sync), UGS工程的路径
 
@@ -74,6 +76,18 @@ def FindUGSIni(Home):
         print("Selected UGS.ini: %s" % selected_file)
     return os.path.join(ini_dir, selected_file), selected_file
     ```
+## Encode每次p4指令都建议要设置:  P4CHARSET
+
+如果你在p4脚本中不设置P4CHARSET, 则p4 sync文件的时候，明明命令已经显示sync完毕，你却发现文件实际并没有更新
+
+你在出问题的机器上，手动执行p4 sync, 你会发下类似如下的Error报错:
+
+"Translation of file content failed..." 
+
+解决办法:
+```sh
+p4 set P4CHARSET=utf8
+```
 
 ## UGS是如何下载Precompiled Binaries
 
