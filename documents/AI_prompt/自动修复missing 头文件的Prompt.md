@@ -1,19 +1,31 @@
-分析BuildLog_Win64_Test.txt文件内的cpp编译错误，只关注第一个编译错误，并将其修复。
+## Step 1：目标Error
+分析BuildLog_Win64_Test.txt文件内的cpp编译Error，只关注第一个编译Error，并将其修复。
 
-修复方法限制：每次修复通常最多只能改一个cpp后缀的文件，且只能通过新增include头文件的方式来修复编译错误。假设待修改的Cpp文件是B，要include进来的头文件是A，你的include A绝对不能是这个B文件里的第一个include宏。
+如果1分钟内尚未锁定目标的编译error，就不用Step 2/3，请直接果断地结束吧。
 
-特殊情况可以放宽：如果头文件必须是B文件里的第一个include宏，那么可以考虑在最多一个头文件里加前置声明，每个提交最多修改一个头文件。
+## Step 2： 修复方案
+修复方法限制：只改一个cpp后缀的文件，且只能通过新增include头文件的方式来修复编译错误。假设待修改的Cpp文件是B，要include进来的头文件是A，你的include A绝对不能是这个B文件里的第一个include宏。
 
-能间接引用A头文件也可以：可根据报错信息里的符号，分析同Module其他引用此符号的文件是如何include的，总之include的代码正斜杠/越少越好。
+Fallback方案：如果A头文件必须是B文件里的第一个include宏，那么优先考虑在头文件里加前置声明以绕过这个问题。如果你必须在某一个header文件(设定为C头文件)里加include A头文件，那么你必须仔细检查，确定A头文件不会依赖C头文件。
 
-新增include的行的限制：每行不要包括反斜杠\；正斜杠/的数量最多不要超过3个，可以没有。优先参考B文件的同Module内的cpp/h引用方式; 同Module内如果多处引用A，则优先参考正斜杠/最少的include处。
+每个提交最多修改一个头文件 + 最多一个cpp文件，必须严格遵守，不能放宽。
+修改优先级：最优是B文件里加include，次优是加前置声明，最差是C文件里加include。除了上述三种修改，你不能有其他类型的代码修改。
 
+可以间接引用A头文件：根据报错信息里的符号，分析同Module其他引用此符号的文件是如何include的，总之include的代码正斜杠/越少越好。
+
+新增include的行的限制：不要包括反斜杠\；正斜杠/的数量不要超过3个，可以没有。优先参考B文件的同Module内的cpp/h引用方式; 同Module内如果多处引用A，则优先参考正斜杠/最少的include处。
+
+满足以下任意条件则跳过Step3，不做任何修改，直接果断地结束。
+1. 无法按上述限制来修复.
+2. 已经累计6分钟了,方案尚未确定.
+
+## Step3: 创建Pending CL并修复
 p4修改描述的限制: 开头必须是：[@dozhang]
 结尾（里面$开头是当前流水线变量，注意必须替换为实际Value）是: https://devops.woa.com/console/pipeline/${{ci.project_id}}/${{ci.pipeline_id}}/detail/${{ci.build_id}}/executeDetail
 
-如果需要添加注释，注释的限制是：Engine目录的代码， 用 maple @dozhang；其他目录的代码，则用@dozhang。
+可以不加注释，如果需要注释：Engine目录的代码， 用 maple @dozhang；其他目录的代码，则用@dozhang。必须是English，不能有中文。
 
-编译Error修复后，通过p4命令行（参考下面的模板A）新建一个Pending的ChangeList，简称CL，这个CL号要作为本插件的输出变量，输出的文件在工作目录的`pending_cl.txt`, 格式是纯数字, 不要有任何空格。
+通过p4 Cmd（参考下面的模板A，不要用powershell）新建一个Pending的ChangeList，简称CL，这个CL输出的文件在工作目录的`pending_cl.txt`, 格式是纯数字。
 
 模板A Begin
 @echo off
@@ -27,7 +39,9 @@ for /f "tokens=2" %%C in ('p4 change -i ^< cl.txt') do set CL=%%C
 
 del cl.txt
 
-p4 edit -c %CL% <替换为你修改的cpp文件路径>
+p4 edit -c %CL% <替换为你要修改的cpp/h文件路径>
+
+<执行你的修改方案>
 
 echo %CL% > pending_cl.txt
 
