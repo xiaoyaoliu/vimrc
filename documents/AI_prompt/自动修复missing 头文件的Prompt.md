@@ -29,8 +29,6 @@ p4修改描述的限制: 开头必须是：[@dozhang]
 
 通过p4 Cmd（参考下面的模板A，不要用powershell）新建一个Pending的ChangeList，简称CL，这个CL输出的文件在工作目录的`pending_cl.txt`, 格式是纯数字。
 
-注意：产物报告文件的不要超过300字节
-
 模板A Begin
 @echo off
 
