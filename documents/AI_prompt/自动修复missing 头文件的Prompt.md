@@ -2,9 +2,9 @@
 分析BuildLog_Win64_Test.txt文件内的cpp编译Error，只关注第一个编译Error，并将其修复。
 
 满足以下任意条件则就不用执行后续所有Step，请直接果断地结束退出：
-1. Log的末尾几行包含关键字：Build exceeded timeout
-2. 你千万不要尝试自己编译，当你想自己编译或静态语法分析来找Error的时候，你就立即终止退出
-3. 你只能在BuildLog_Win64_Test.txt寻找Error，你试图想从Intermediate目录或其他地方寻找Error时，请立即终止退出
+1. 你千万不要尝试自己编译，当你想自己编译或静态语法分析来找Error的时候，你就立即终止退出
+2. 你只能在BuildLog_Win64_Test.txt寻找Error，你试图想从Intermediate目录或其他地方寻找Error时，请立即终止退出
+3. 你没找到Error，Log的末尾几行包含关键字：Build exceeded timeout，请你立即终止退出
 
 ## Step 2： 修复方案
 修复方法限制：只改一个cpp后缀的文件，且只能通过新增include头文件的方式来修复编译错误。假设待修改的Cpp文件是B，要include进来的头文件是A，你的include A绝对不能是这个B文件里的第一个include宏。
@@ -26,6 +26,8 @@ p4修改描述的限制: 开头必须是：[@dozhang]
 结尾（里面$开头是当前流水线变量，注意必须替换为实际Value）是: https://devops.woa.com/console/pipeline/${{ci.project_id}}/${{ci.pipeline_id}}/detail/${{ci.build_id}}/executeDetail
 
 可以不加注释，如果需要注释：Engine目录的代码， 用 maple @dozhang；其他目录的代码，则用@dozhang。必须是English，不能有中文。
+
+编辑文件时候，必须使用编码: utf-8 (no bom)
 
 通过p4 Cmd（参考下面的模板A，不要用powershell）新建一个Pending的ChangeList，简称CL，这个CL输出的文件在工作目录的`pending_cl.txt`, 格式是纯数字。
 
