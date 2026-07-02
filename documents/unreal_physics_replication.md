@@ -190,3 +190,15 @@ void UPrimitiveComponent::SetRigidBodyReplicatedTarget(FRigidBodyState& UpdatedS
 }
 
 ```
+
+## 物理同步后，客户端看到的刚体位置正常，旋转看起来卡顿，总跳变
+
+bug发生的时序： 
+1. ApplyRigidBodyState函数将UPhysicsSettings::Get()->PhysicErrorCorrection传入Client
+2.  FPhysicsReplicationAsync::DefaultReplication_DEPRECATED函数里使用FRigidBodyErrorCorrection::AngleLerp直接对角度赋值：Current * (1.0f - AngleLerp) + Target * AngleLerp
+
+有人将AngleLerp的配置改为了0.4，导致了逐帧跳变；最终将其改为0就好了。
+
+因为这个需求同步的是一个球，所以旋转和服务器不一致也没啥问题。
+
+其实就算不是一个球，关闭旋转插值(AngleLerp)问题也不大，最终客户端也可以通过角速度来拟合到目标旋转。
