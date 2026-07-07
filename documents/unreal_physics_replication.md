@@ -202,3 +202,41 @@ bug发生的时序：
 因为这个需求同步的是一个球，所以旋转和服务器不一致也没啥问题。
 
 其实就算不是一个球，关闭旋转插值(AngleLerp)问题也不大，最终客户端也可以通过角速度来拟合到目标旋转。
+
+## 开启物理同步后，每隔一段时间客户端都会抖动一下
+
+`PhysicsEngine\PhysicsReplication.cpp`里有很多gm，可以Runtime实时调整来排查bug
+
+例如:
+````cpp
+关闭物理同步
+p.SkipPhysicsReplication 1
+
+打开Hard Snap的Log
+p.LogPhysicsReplicationHardSnaps 1
+
+关闭 Always Hard Snap
+p.PredictiveInterpolation.AlwaysHardSnap 0
+
+
+```
+`FPhysicsReplication::ApplyRigidBodyState`里触发bHardSnap主要两个条件
+
+```cpp
+		const bool bHardSnap =
+			LinDiffSize > MaxLinearHardSnapDistance ||
+			PhysicsTarget.AccumulatedErrorSeconds > ErrorAccumulationSeconds ||
+			CharacterMovementCVars::AlwaysHardSnap;
+```
+此bug主要是AccumulatedErrorSeconds这个分支导致的
+
+ErrorAccumulationDistanceSq 默认值是15， ErrorAccumulationSimilarity默认值100， ErrorAccumulationSeconds默认值0.5秒
+
+大概就是: 如果累计0.5秒，误差都没有收敛，则触发HardSnap
+
+ErrorAccumulationDistanceSq越小，ErrorAccumulationSimilarity越大，越不容易触发Hard Snap
+
+DefaultReplication_DEPRECATED里，本来就会通过实际误差来矫正速度，从而收敛到目标。
+
+所以HardSnap收敛的方式太粗暴，我们不太需要.
+因此就将ErrorAccumulationDistanceSq改为1， ErrorAccumulationSimilarity改为10000，从而规避SnapShot
