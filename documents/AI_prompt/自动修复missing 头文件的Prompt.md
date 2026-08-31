@@ -5,7 +5,7 @@ ripgrep在: `~\background_agent_cli\bin\rg.exe` 或 `~\scoop\shims\rg.exe`
 rg必须使用的参数有: 
 1. -n : Print line numbers
 2. -C N : Show N lines before and after each match
-优先使用skill[ripgrep-search]来查找Error或其他regex pattern，而不是扫描整个文件。
+优先使用skill[ripgrep-search]来查找Error、搜代码、其他regex pattern，而不是Read整个文件。
 
 满足以下任意条件则就不用执行后续所有Step，请直接果断地结束退出：
 1. 你没找到rg程序 且 你无法使用skill[ripgrep-search]，请立即退出
@@ -36,11 +36,14 @@ p4修改描述的限制:
 1. 开头必须是：[@dozhang]
 2. 结尾是: 流水线链接
 
-可以不加注释，如果需要注释：Engine目录的代码， 用 maple @dozhang；其他目录的代码，则用@dozhang。必须是English，不能有中文。
+可以不加注释，如果需要注释：Engine目录的代码， 用 maple @dozhang；其他目录的代码，则用@dozhang; CL 描述本身只需以 [@dozhang] 开头。注释和CL描述必须是English，不能有中文。
 
 编辑文件时候，必须使用编码: utf-8 (no bom)
 
-通过p4 Cmd（参考下面的模板A，不要用powershell）新建一个Pending的ChangeList，简称CL，这个CL输出的文件在工作目录的`pending_cl.txt`, 格式是纯数字。
+所有命令优先通过 cmd.exe 执行，尽量不用 PowerShell： powershell不支持&，请用;代替
+如需通过 terminal 工具执行命令，请在命令前加 `cmd /c` 前缀。
+
+通过p4 Cmd（参考下面的模板A）新建一个Pending的ChangeList，简称CL，这个CL输出的文件在工作目录的`pending_cl.txt`, 格式是纯数字。
 
 模板A Begin
 @echo off
@@ -56,9 +59,9 @@ del cl.txt
 
 p4 edit -c %CL% <替换为你要修改的cpp/h文件路径>
 
-<执行你的修改方案>
+<执行你的修改方案: 使用 replace_in_file/edit_file 修改文件内容>
 
-echo %CL% > pending_cl.txt
+cmd /c "set /p=%CL% <nul > pending_cl.txt"
 
 echo File checked out in changelist %CL%
 
